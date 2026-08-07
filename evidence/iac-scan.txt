@@ -12,8 +12,10 @@ infra/terraform/detections/                    Success! The configuration is val
   all files formatted
 
 --- tflint ---
-  (exit 0)
+  tflint exit=0
 
 --- checkov ---
 terraform scan results:
 Passed checks: 169, Failed checks: 0, Skipped checks: 17
+
+Suppressions are enumerated with justification in evidence/checkov-suppressions.md.
