@@ -1,0 +1,177 @@
+================================================================================
+ DATABASE PRIVILEGE PROOF — role: mcp_readonly
+================================================================================
+ Every refusal below is issued by PostgreSQL, not by application code. This is
+ the defence-in-depth invariant: even with total compromise of the MCP server
+ process, the agent identity cannot write, cannot read raw PII, and cannot run
+ unbounded queries.
+================================================================================
+
+--- 1. READS THAT SHOULD SUCCEED ------------------------------------
+
+### Non-sensitive table is readable
+SQL      : SELECT count(*) FROM pharmacy.products;
+Expect   : ALLOW
+Result   : ALLOWED ✔
+Engine   : 5 
+
+### Masked customer view is readable
+SQL      : SELECT personnummer_masked, email_masked FROM pharmacy.v_customers_masked ORDER BY id LIMIT 2;
+Expect   : ALLOW
+Result   : ALLOWED ✔
+Engine   : 329804e11458|90b4cb12fd5f@example.com ec168e6ac853|914d696fdc26@example.com 
+
+--- 2. RAW PII IS ABSENT, NOT MERELY GUARDED ------------------------
+
+### Base customers table
+SQL      : SELECT personnummer FROM pharmacy.customers LIMIT 1;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for table customers 
+
+### Base prescriptions table (raw)
+SQL      : SELECT prescriber_hsa_id FROM pharmacy.prescriptions LIMIT 1;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for table prescriptions 
+
+--- 3. WRITES ARE IMPOSSIBLE ----------------------------------------
+
+### INSERT
+SQL      : INSERT INTO pharmacy.orders (customer_id,status,total_sek) VALUES (1,'x',1);
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute INSERT in a read-only transaction 
+
+### UPDATE
+SQL      : UPDATE pharmacy.orders SET status='hacked';
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute UPDATE in a read-only transaction 
+
+### DELETE
+SQL      : DELETE FROM pharmacy.orders;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute DELETE in a read-only transaction 
+
+### TRUNCATE
+SQL      : TRUNCATE pharmacy.orders;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute TRUNCATE TABLE in a read-only transaction 
+
+### DROP TABLE
+SQL      : DROP TABLE pharmacy.orders;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute DROP TABLE in a read-only transaction 
+
+### CREATE TABLE
+SQL      : CREATE TABLE pharmacy.evil (id int);
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute CREATE TABLE in a read-only transaction 
+
+### ALTER TABLE
+SQL      : ALTER TABLE pharmacy.orders ADD COLUMN evil text;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute ALTER TABLE in a read-only transaction 
+
+### CTE-wrapped write (parser bypass attempt)
+SQL      : WITH w AS (INSERT INTO pharmacy.orders (customer_id,status,total_sek) VALUES (1,'x',1) RETURNING id) SELECT * FROM w;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute SELECT in a read-only transaction 
+
+--- 4. FILESYSTEM / COMMAND EXECUTION PRIMITIVES --------------------
+
+### COPY TO PROGRAM
+SQL      : COPY (SELECT 1) TO PROGRAM 'id';
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied to COPY to or from an external program DETAIL:  Only roles with privileges of the "pg_execute_server_program" role may COPY to or from an external program. HINT:  Anyone can COPY to stdout or from stdin. psql's \copy command also works for anyone. 
+
+### COPY FROM file
+SQL      : COPY pharmacy.orders FROM '/etc/passwd';
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied to COPY from a file DETAIL:  Only roles with privileges of the "pg_read_server_files" role may COPY from a file. HINT:  Anyone can COPY to stdout or from stdin. psql's \copy command also works for anyone. 
+
+### pg_read_file
+SQL      : SELECT pg_read_file('/etc/passwd');
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for function pg_read_file 
+
+### pg_ls_dir
+SQL      : SELECT pg_ls_dir('/');
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for function pg_ls_dir 
+
+--- 5. PRIVILEGE ESCALATION -----------------------------------------
+
+### SET ROLE postgres
+SQL      : SET ROLE postgres;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied to set role "postgres" 
+
+### Create a new role
+SQL      : CREATE ROLE eviluser LOGIN;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  cannot execute CREATE ROLE in a read-only transaction 
+
+### Read password hashes
+SQL      : SELECT rolname, rolpassword FROM pg_authid;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for table pg_authid 
+
+### Withheld column: prescriber_hsa_id
+SQL      : SELECT prescriber_hsa_id FROM pharmacy.prescriptions LIMIT 1;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for table prescriptions 
+
+### Withheld column: consent_analytics
+SQL      : SELECT consent_analytics FROM pharmacy.prescriptions LIMIT 1;
+Expect   : DENY
+Result   : REFUSED BY ENGINE ✔
+Engine   : ERROR:  permission denied for table prescriptions 
+
+--- 6. ROW-LEVEL SECURITY: CONSENT AS AN ENGINE-ENFORCED FILTER -----
+
+Regression guard. An earlier revision of this schema had the consent
+policy present in DDL but INERT at runtime: the masked view executed as
+its owner, the owner is a superuser, and superusers bypass RLS. All four
+rows were visible. The fix was security_invoker=true on the view plus
+COLUMN-level grants on the base table. This block pins that fix.
+
+Rows in base table            : 4
+Rows with consent_analytics   : 2
+Rows visible to mcp_readonly  : 2
+Result   : RLS ENFORCED — non-consented rows unreachable ✔
+
+Rows the agent can actually see:
+1|Sertraline 50mg|2026-01-01
+2|Amoxicillin 500mg|2026-02-01
+
+The agent cannot widen this by omitting a WHERE clause: the filter is
+applied by the engine before the query is evaluated.
+
+--- 7. RESOURCE BOUNDS ----------------------------------------------
+
+statement_timeout / read-only defaults pinned to the role:
+statement_timeout=5s
+idle_in_transaction_session_timeout=10s
+default_transaction_read_only=on
+search_path=pharmacy
+log_statement=none
+
+================================================================================
+ RESULT: all controls held. 0 failures.
+================================================================================

@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Node / CDK
+node_modules/
+cdk.out/
+*.tsbuildinfo
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+.terraform.lock.hcl
+crash.log
+
+# Secrets & credentials — nothing in these shapes ever gets committed
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+credentials
+*.tfvars
+!example.tfvars
+
+# Local artifacts
+.DS_Store
+*.db
+*.sqlite3
+audit-*.jsonl
