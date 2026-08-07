@@ -1,0 +1,73 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "GuardDutyRead",
+      "Effect": "Allow",
+      "Action": [
+        "guardduty:ListDetectors",
+        "guardduty:ListFindings",
+        "guardduty:GetFindings"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "SecurityHubRead",
+      "Effect": "Allow",
+      "Action": [
+        "securityhub:GetFindings"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "IamReadMetadataOnly",
+      "Effect": "Allow",
+      "Action": [
+        "iam:ListRoles",
+        "iam:ListAttachedRolePolicies"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "S3ConfigurationOnly",
+      "Effect": "Allow",
+      "Action": [
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketPublicAccessBlock"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "KmsMetadataOnly",
+      "Effect": "Allow",
+      "Action": [
+        "kms:ListKeys",
+        "kms:DescribeKey",
+        "kms:GetKeyRotationStatus"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ConfigRead",
+      "Effect": "Allow",
+      "Action": [
+        "config:DescribeConfigRules",
+        "config:DescribeComplianceByConfigRule"
+      ],
+      "Resource": "*"
+    },
+    {
+      "Sid": "DenyEverythingThatReadsData",
+      "Effect": "Deny",
+      "Action": [
+        "secretsmanager:*",
+        "ssm:GetParameter*",
+        "kms:Decrypt",
+        "s3:GetObject",
+        "rds-data:*",
+        "dynamodb:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
