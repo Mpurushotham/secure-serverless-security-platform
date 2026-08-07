@@ -25,11 +25,14 @@ builds less.
 | SQL guardrail (AST parse-then-execute) | **Runs, 37 attack payloads refused** | `make test` |
 | Read-only RDS/Aurora MCP server | **Runs end to end** | `make mcp-demo` |
 | PII leak assertions over the live transcript | **Runs, 27 assertions** | `make test` |
-| AWS posture MCP server (GuardDuty/Security Hub/IAM) | *In progress* | — |
-| Terraform: Aurora, Bedrock guardrails, agent IAM, detections | *In progress* | — |
-| CDK secure-serverless reference app | *In progress* | — |
-| CI/CD security gates | *In progress* | — |
-| Threat model, IR playbooks, compliance map | *In progress* | — |
+| CI/CD security gates (SAST, deps, secrets, IaC, SBOM) | **Runs** | `.github/workflows/security-pipeline.yml` |
+| Threat model (STRIDE + attack tree) | **Written** | `docs/01-threat-model.md` |
+| AI secure-coding policy + training framework | **Written** | `docs/04-ai-secure-coding-policy.md` |
+| JD coverage matrix + day-one operating plan | **Written** | `readiness/` |
+| AWS posture MCP server (GuardDuty/Security Hub/IAM) | *Not built* | — |
+| Terraform: Aurora, Bedrock guardrails, agent IAM, detections | *Not built* | — |
+| CDK secure-serverless reference app | *Not built* | — |
+| IR playbooks, compliance map | *Not built* | — |
 
 Nothing here has been deployed to a live AWS account. IaC is validated
 **statically** — that is a deliberate choice, not a limitation: it means anyone
