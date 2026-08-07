@@ -4,8 +4,8 @@ Every `checkov:skip` in `infra/`, with the reasoning that justifies it.
 
 An undocumented suppression is a disabled control that nobody decided to
 disable. This file exists so each one can be re-argued at review time rather
-than inherited — and so a reviewer can disagree with a specific line instead
-of with a clean scan result.
+than inherited — and so a reviewer can disagree with a specific line instead of
+with a clean scan result.
 
 Suppressions fall into two classes, and the distinction matters:
 
@@ -14,7 +14,8 @@ Suppressions fall into two classes, and the distinction matters:
   effect). Nothing is being accepted.
 - **Deliberate deviation** — the check is correct about the general case and we
   are choosing otherwise, with a reason. These are risk acceptances and should
-  be revisited if the context changes.
+  be revisited when the context changes.
+
 
 **17 suppressions across 3 files.**
 
@@ -40,22 +41,24 @@ Suppressions fall into two classes, and the distinction matters:
 
 ## Deliberate deviations worth re-reading periodically
 
-These are risk acceptances, not false positives:
+These are risk acceptances, not false positives.
 
 - **`CKV2_AWS_27` (query logging off)** — logging every statement against Art. 9
   data would create a second copy of that data in a store with weaker access
-  controls. A security benchmark and a privacy obligation genuinely conflict
-  here; we resolved it toward privacy and compensated with pgaudit DDL/role
-  logging plus slow-query logging.
-- **`CKV_AWS_338` (90-day log retention, not 1 year)** — same tension. Prompt
-  logs may contain personal data; GDPR Art. 5(1)(e) requires storage limitation.
+  controls than the table it came from. A security benchmark and a privacy
+  obligation genuinely conflict here; we resolved it toward privacy and
+  compensated with pgaudit DDL/role logging plus slow-query logging.
+- **`CKV_AWS_338` (90-day log retention, not one year)** — the same tension.
+  Prompt logs may contain personal data, and GDPR Art. 5(1)(e) requires storage
+  limitation. Long-term retention holds detections, not raw prompts.
 - **`CKV_AWS_144` (no cross-region replication)** — data residency. Replicating
-  Art. 9 data to a second region must be an explicit decision, never a module
-  default.
+  Art. 9 data to a second region must be an explicit decision, never inherited
+  from a module default.
 - **`CKV2_AWS_57` (no automatic salt rotation)** — rotating a deterministic
-  mask's salt breaks every historical join. Rotation is an incident-response
-  action with a re-masking plan, not a scheduled job.
+  mask's salt changes every masked value and breaks joins against previously
+  exported analytics. Rotation is an incident-response action with a re-masking
+  plan (see `docs/01-threat-model.md`, branch 2a), not a scheduled job.
 - **`CKV2_AWS_8` (no AWS Backup plan)** — the weakest justification in this file
-  and the one most likely to be right to fix. Automated backups, a mandatory
-  final snapshot, and deletion protection are in place; cross-account backup
-  isolation is a genuine gap.
+  and the one most likely to be worth fixing. Automated backups, a mandatory
+  final snapshot, and deletion protection are all in place, but cross-account
+  backup isolation is a real gap rather than a false positive.

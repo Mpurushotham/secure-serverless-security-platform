@@ -20,6 +20,10 @@ echo "--- tflint ---"
 command -v tflint >/dev/null && { tflint --recursive --format compact 2>&1 | head -20; echo "  tflint exit=$?"; } || echo "  (not installed)"
 echo
 echo "--- checkov ---"
-.venv/bin/python -m checkov -d infra/ --compact --quiet -o cli 2>&1 | grep -E '^Passed|^Failed|terraform scan'
+if [ -x .venv/bin/checkov ]; then
+  .venv/bin/checkov -d infra/ --compact --quiet -o cli 2>&1 | grep -E '^Passed|^Failed|terraform scan'
+else
+  echo "  (checkov not installed)"
+fi
 echo
 echo "Suppressions are enumerated with justification in evidence/checkov-suppressions.md."

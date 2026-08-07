@@ -2,6 +2,7 @@
 SHELL := /bin/bash
 
 PY        := .venv/bin/python
+CHECKOV   := .venv/bin/checkov
 PG_NAME   := ssp-pg
 PG_PORT   := 55432
 PG_IMAGE  := postgres:17-alpine
@@ -80,7 +81,7 @@ validate: ## Validate all IaC statically — no AWS account required
 	  { echo "  run 'terraform fmt -recursive infra/'"; exit 1; }
 	-@command -v tflint >/dev/null && tflint --recursive --format compact || \
 	  echo "  (tflint not installed — skipped)"
-	@$(PY) -m checkov -d infra/ --compact --quiet -o cli 2>&1 | \
+	@test -x $(CHECKOV) && $(CHECKOV) -d infra/ --compact --quiet -o cli 2>&1 | \
 	  grep -E '^Passed|^Failed|terraform scan' || echo "  (checkov not installed — skipped)"
 	@echo "✔ IaC validation complete"
 
