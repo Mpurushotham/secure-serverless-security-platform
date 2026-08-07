@@ -3,7 +3,7 @@
 Not a generic 30/60/90. A plan for taking the driver's seat as the first
 dedicated security lead in an engineering organisation that already ships fast.
 
-**The governing constraint:** Apotea's Tech department is explicitly proud of being
+**The governing constraint:** APT's Tech department is explicitly proud of being
 flat, agile, and low-bureaucracy. A security lead who arrives with a control
 framework and a change-approval board will be routed around within a quarter — not
 defied, just quietly bypassed. Everything below assumes influence has to be earned

@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS order_items (
 
 INSERT INTO customers (personnummer, full_name, email, phone, street, postal_code, city)
 VALUES
-  ('19850101-0000', 'Astrid Lindqvist',  'astrid@example.com',  '+46700000001', 'Sveavägen 1',  '11157', 'Stockholm'),
+  ('19850101-0000', 'Astrid Lindqvist',  'astrid@example.com',  '+46700000001', 'Vasagatan 12', '11120', 'Stockholm'),
   ('19900215-0000', 'Björn Karlsson',    'bjorn@example.com',   '+46700000002', 'Kungsgatan 4', '41119', 'Göteborg'),
   ('19771103-0000', 'Cecilia Nyström',   'cecilia@example.com', '+46700000003', 'Storgatan 9',  '21142', 'Malmö'),
   ('20010730-0000', 'Dmitri Andersson',  'dmitri@example.com',  '+46700000004', 'Drottninggatan 22', '11151', 'Stockholm')

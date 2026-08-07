@@ -17,5 +17,6 @@ infra/terraform/detections/                    Success! The configuration is val
 --- checkov ---
 terraform scan results:
 Passed checks: 169, Failed checks: 0, Skipped checks: 17
+Passed checks: 83, Failed checks: 5, Skipped checks: 0
 
 Suppressions are enumerated with justification in evidence/checkov-suppressions.md.

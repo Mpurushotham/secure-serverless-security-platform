@@ -1,7 +1,7 @@
 # JD coverage matrix
 
 One row per requirement in the Lead Security Engineer posting (Core Technology,
-Apotea, Stockholm). This is the repository's acceptance test: **a requirement with
+APT, Stockholm). This is the repository's acceptance test: **a requirement with
 an empty Evidence column means the work is not finished.**
 
 ## How to read the confidence column
@@ -35,7 +35,7 @@ an empty Evidence column means the work is not finished.**
 
 | Requirement | Evidence | Confidence | Closing action |
 |---|---|---|---|
-| Design and implement secure AWS serverless and data-driven systems | `infra/cdk/` reference app; `infra/terraform/modules/aurora-secure` | Workable | Serverless *at Apotea's traffic profile* is the unknown, not serverless. |
+| Design and implement secure AWS serverless and data-driven systems | `infra/cdk/` reference app; `infra/terraform/modules/aurora-secure` | Workable | Serverless *at APT's traffic profile* is the unknown, not serverless. |
 | Lead IAM practices — least privilege, zero trust | `sql/01-roles.sql` (NOINHERIT, column grants, RLS); `terraform/modules/agent-data-access` (permission boundary, session tags) | **Strong** | — |
 | Vulnerability management, penetration testing, patching | `readiness/05-vulnerability-management.md`; `scripts/vuln_sla.py` enforces the SLA matrix in CI | Workable | **Pen testing is the weak half.** I can run and triage scanners; commissioning and scoping a pen test, and arguing findings with a vendor, is thinner. |
 | Secure DevSecOps pipelines and IaC security | `.github/workflows/security-pipeline.yml` — gates this repo's own code; a passing bypass fails the build | **Strong** | — |
@@ -95,7 +95,7 @@ actually do, because a gap without a plan is just a weakness.
    tree written before it is needed rather than during.
 
 2. **EDR at fleet scale.** Endpoint is my thinnest area. *Plan:* treat selection as
-   a structured evaluation against Apotea's actual endpoint estate rather than
+   a structured evaluation against APT's actual endpoint estate rather than
    arriving with a vendor preference.
 
 3. **Swedish pharmacy regulation.** Läkemedelsverket, the pharmacy register, and
@@ -103,7 +103,7 @@ actually do, because a gap without a plan is just a weakness.
    before the technical interview. The panel lives in these rules and will notice
    both bluffing and preparation.
 
-4. **Go and .NET.** Apotea's backend is Go and .NET; my working languages are
+4. **Go and .NET.** APT's backend is Go and .NET; my working languages are
    Python and TypeScript. *Plan:* be straightforward that I would be reviewing Go
    before writing it in month one. For a security lead, reading code critically
    matters more than shipping features in it — but do not pretend the gap is not

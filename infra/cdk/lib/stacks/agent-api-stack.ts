@@ -1,7 +1,7 @@
 /**
  * The serverless workload the MCP agent reads from.
  *
- * This is Apotea's stated architecture in miniature: API Gateway in front of
+ * This is APT's stated architecture in miniature: API Gateway in front of
  * VPC-attached Lambdas talking to Aurora, with the agent's data path treated as
  * a separate, more constrained principal than the application's own.
  *

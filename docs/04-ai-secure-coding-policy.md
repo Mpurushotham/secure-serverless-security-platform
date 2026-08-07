@@ -2,14 +2,14 @@
 
 > *"Develop secure practices for coding with AI assistants, ensuring generated code
 > meets security standards, avoids data leakage, and aligns with regulations."*
-> — Lead Security Engineer job posting, Apotea
+> — Lead Security Engineer job posting (APT)
 
 This is the policy that requirement asks for. It is deliberately short and
 enforceable: a fourteen-page AI policy nobody reads protects nothing, and every
 rule below either maps to a control in this repository or is honestly labelled as
 depending on people.
 
-**Scope:** any AI assistant with access to Apotea source code, infrastructure
+**Scope:** any AI assistant with access to APT source code, infrastructure
 definitions, or production data — IDE assistants, CLI agents, autonomous agents,
 and anything reachable over MCP.
 

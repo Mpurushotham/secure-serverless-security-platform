@@ -6,21 +6,21 @@
   no type errors
 
 --- security invariant tests ---
-      ✓ no NAT gateway — the Lambdas have no route to the internet (709 ms)
-      ✓ every Lambda is VPC-attached (56 ms)
+      ✓ no NAT gateway — the Lambdas have no route to the internet (683 ms)
+      ✓ every Lambda is VPC-attached (49 ms)
       ✓ VPC flow logs are enabled (48 ms)
-      ✓ rds-db:connect is scoped to one database user, not a wildcard (43 ms)
-      ✓ the agent role explicitly denies snapshot and IAM paths (48 ms)
-      ✓ agent and application do not share an execution role (51 ms)
-      ✓ no log group retains indefinitely (42 ms)
-      ✓ API Gateway does not log request/response bodies (48 ms)
-      ✓ unmasking is disabled in the deployed environment (47 ms)
-      ✓ KMS key rotation is enabled (42 ms)
-      ✓ the endpoint requires IAM authorization (44 ms)
+      ✓ rds-db:connect is scoped to one database user, not a wildcard (50 ms)
+      ✓ the agent role explicitly denies snapshot and IAM paths (45 ms)
+      ✓ agent and application do not share an execution role (47 ms)
+      ✓ no log group retains indefinitely (52 ms)
+      ✓ API Gateway does not log request/response bodies (43 ms)
+      ✓ unmasking is disabled in the deployed environment (46 ms)
+      ✓ KMS key rotation is enabled (46 ms)
+      ✓ the endpoint requires IAM authorization (43 ms)
   Tests:       11 passed, 11 total
 
 --- cdk synth with Aspects + cdk-nag (AwsSolutionsChecks) ---
-  synthesis completed with no errors or warnings
+  no errors or warnings
 
 --- synthesised template ---
   AgentApiStack.template.json: 38 resources

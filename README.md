@@ -38,7 +38,7 @@ builds less.
 | Compliance map (GDPR / ISO 27001 / NIS2) | **Written** | `docs/06-compliance-map.md` |
 | Vulnerability SLA + severity gate | **Runs** | `scripts/vuln_sla.py`, `scripts/severity_gate.py` |
 | Usage guide, architecture, strategy, role analysis | **Written** | `docs/` |
-| Role readiness (JD matrix, day-one plan, drills, metrics) | **Written** | `readiness/` |
+| Role readiness (JD matrix, day-one plan, drills, metrics, outcomes) | **Written** | `readiness/` |
 
 Nothing here has been deployed to a live AWS account. IaC is validated
 **statically** — that is a deliberate choice, not a limitation: it means anyone
@@ -164,7 +164,8 @@ an agent, the tech-stack rationale, and the CI pipeline step by step.
 ## Context
 
 Built as the technical dossier for a **Lead Security Engineer** application
-(Core Technology team, [Apotea](https://karriar.apotea.se), Stockholm) — a role
+(Core Technology team, Stockholm) at a Nordic online pharmacy referred to
+throughout as **APT** — a role
 whose posting asks specifically for *"secure practices for coding with AI
 assistants, ensuring generated code meets security standards, avoids data leakage,
 and aligns with regulations."*
@@ -173,4 +174,6 @@ The pharmacy schema is **entirely synthetic**. Every personnummer is deliberatel
 invalid, every email is on `example.com`, and every prescription is fabricated.
 Seeding a demonstration like this with real data would contradict its own thesis.
 
-Licensed MIT. Not affiliated with or endorsed by Apotea.
+Licensed MIT. **APT is an anonymised placeholder**, not a real organisation's
+name; the hiring company is deliberately not identified anywhere in this
+repository. Not affiliated with or endorsed by any pharmacy operator.

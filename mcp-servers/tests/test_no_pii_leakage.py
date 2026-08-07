@@ -36,8 +36,8 @@ SEEDED_PLAINTEXT = [
     "+46700000001", "+46700000002", "+46700000003", "+46700000004",
     "SE2321000016-1001", "SE2321000016-1002", "SE2321000016-1003",       # prescriber HSA-IDs
     "Lindqvist", "Karlsson", "Nyström", "Andersson",                     # family names
-    "Sveavägen 1", "Kungsgatan 4", "Storgatan 9", "Drottninggatan 22",   # street addresses
-    "11157", "41119", "21142", "11151",                                  # full postal codes
+    "Vasagatan 12", "Kungsgatan 4", "Storgatan 9", "Drottninggatan 22",   # street addresses
+    "11120", "41119", "21142", "11151",                                  # full postal codes
 ]
 
 # Rows 3 and 4 have consent_analytics = false and must never be visible.

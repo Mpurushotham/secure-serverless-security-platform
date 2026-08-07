@@ -55,7 +55,7 @@
 --- REFUSAL: unbounded extraction
     why : Not refused — silently clamped. The caller does not get to opt out of the row cap.
     >>> {"jsonrpc": "2.0", "id": 11, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT * FROM orders LIMIT 100000"}}}
-    <<< {   "row_count": 4,   "rows": [     {       "id": 1,       "customer_id": 1,       "status": "shipped",       "total_sek": "288.00",       "created_at": "2026-08-07 14:49:39.683059+00:00"     },     {       "id": 2,      …
+    <<< {   "row_count": 4,   "rows": [     {       "id": 1,       "customer_id": 1,       "status": "shipped",       "total_sek": "288.00",       "created_at": "2026-08-07 21:07:25.606249+00:00"     },     {       "id": 2,      …
 
 ==============================================================================
  AUDIT TRAIL (stderr — stdout carries protocol frames only)

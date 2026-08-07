@@ -3,7 +3,7 @@
 The domain hardest to evidence in a repository, and the one most likely to
 determine whether the role succeeds.
 
-**Governing constraint:** Apotea's Tech department is explicitly proud of being
+**Governing constraint:** APT's Tech department is explicitly proud of being
 flat, agile and low-bureaucracy. A security function that adds process will be
 routed around — not defied, just quietly bypassed. Everything here assumes
 influence must be earned before authority is usable.
