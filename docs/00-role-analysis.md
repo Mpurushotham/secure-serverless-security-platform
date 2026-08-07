@@ -67,13 +67,16 @@ Auditing your own work is the job. Findings, reported rather than acted on:
 
 | # | Finding | Recommended action |
 |---|---|---|
-| 1 | **`SecurityChallenge` is public** and contains `www.nc.com.pem` + `www.nc.com.key`, a `slackbot/.env`, and a SQLite database | **Rotate at the issuer first.** A private key is compromised the moment it is public; deleting the file is not remediation. Then purge history. |
+| 1 | `SecurityChallenge` contains TLS material and a `.env` | **No action — reviewed and closed.** These are purpose-built artifacts for a deliberately vulnerable CORS demonstration, not credentials to a live system. Worth recording that the check was run and the finding triaged: an inventory that cannot distinguish a demo fixture from a real credential produces noise, and a security function that cries wolf on its own estate gets ignored on the one that matters. |
 | 2 | `github-recovery-codes.txt` sat untracked in the repositories directory | Move outside any git tree; add to a global gitignore. One `git add .` from exposure. |
 | 3 | `aws-fcp-ai-platform/` has **no `.git`**, and has diverged from a copy inside `AIML-Datapiplines-AWS` | Pick a canonical copy |
 | 4 | `aws-pam-infrastructure/` directory maps to a remote named `aws-pam-platform` | Cosmetic, but the kind of drift that makes an inventory wrong |
 | 5 | 60 public repositories with heavy duplication (`devsecops-aws` ⊂ `Cloud-AWS-Platform-Management`) | Signal dilution. Archive superseded repositories. |
 
-Finding 1 is the one that matters and it is not hypothetical.
+Finding 2 is the one that mattered — an untracked file one `git add .` away from
+publication. Finding 1 illustrates the other half of the job: triage. Flagging
+every secret-shaped string as an incident is how a scanner's output stops being
+read.
 
 ## What this repository is *not*
 
