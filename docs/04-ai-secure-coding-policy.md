@@ -2,7 +2,7 @@
 
 > *"Develop secure practices for coding with AI assistants, ensuring generated code
 > meets security standards, avoids data leakage, and aligns with regulations."*
-> — Lead Security Engineer job posting, APT
+> — Lead Security Engineer job posting (APT)
 
 This is the policy that requirement asks for. It is deliberately short and
 enforceable: a fourteen-page AI policy nobody reads protects nothing, and every

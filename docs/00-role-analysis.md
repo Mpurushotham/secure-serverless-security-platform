@@ -5,8 +5,10 @@ is not.
 
 ## The posting
 
-**Lead Security Engineer, Core Technology Team — APT, Stockholm (on-site).**
-Sweden's largest online pharmacy. AWS serverless-first; Go, .NET, Python; an
+**Lead Security Engineer, Core Technology Team — Stockholm (on-site).**
+A large Nordic online pharmacy, referred to throughout as **APT**. The employer
+is deliberately not named: a public repository built around a live application
+should not advertise which one. AWS serverless-first; Go, .NET, Python; an
 explicitly AI-first architecture with agentic platforms interacting natively
 with APIs and data.
 
@@ -89,4 +91,4 @@ default. Controls that work by default beat controls that work when remembered.
 - **Not deployed.** Nothing has touched a live AWS account. IaC is validated statically so anyone can verify it without credentials or spend.
 - **Not a production MCP implementation.** The protocol is hand-written to demonstrate understanding; production should use the official SDK, and the README says so.
 - **Not proof I can run an incident.** It contains playbooks, not scars. `readiness/00-jd-coverage-matrix.md` rates incident command in a regulated Swedish entity as a `Gap`.
-- **Not affiliated with APT.** The pharmacy schema is entirely synthetic — every personnummer is deliberately invalid, every email is on `example.com`. Seeding it with real data would contradict its own thesis.
+- **Not affiliated with APT or any pharmacy operator.** APT is an anonymised placeholder for the hiring organisation, which is deliberately not identified. The pharmacy schema is entirely synthetic — every personnummer is deliberately invalid, every email is on `example.com`. Seeding it with real data would contradict its own thesis.
