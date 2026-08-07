@@ -65,18 +65,23 @@ first run. That is the argument for evidence-generating controls in one example.
 
 Auditing your own work is the job. Findings, reported rather than acted on:
 
-| # | Finding | Recommended action |
+| # | Finding | Status |
 |---|---|---|
-| 1 | `SecurityChallenge` contains TLS material and a `.env` | **No action — reviewed and closed.** These are purpose-built artifacts for a deliberately vulnerable CORS demonstration, not credentials to a live system. Worth recording that the check was run and the finding triaged: an inventory that cannot distinguish a demo fixture from a real credential produces noise, and a security function that cries wolf on its own estate gets ignored on the one that matters. |
-| 2 | `github-recovery-codes.txt` sat untracked in the repositories directory | Move outside any git tree; add to a global gitignore. One `git add .` from exposure. |
-| 3 | `aws-fcp-ai-platform/` has **no `.git`**, and has diverged from a copy inside `AIML-Datapiplines-AWS` | Pick a canonical copy |
-| 4 | `aws-pam-infrastructure/` directory maps to a remote named `aws-pam-platform` | Cosmetic, but the kind of drift that makes an inventory wrong |
-| 5 | 60 public repositories with heavy duplication (`devsecops-aws` ⊂ `Cloud-AWS-Platform-Management`) | Signal dilution. Archive superseded repositories. |
+| 1 | `SecurityChallenge` contains TLS material and a `.env` | **Closed — no action.** Purpose-built fixtures for a deliberately vulnerable CORS demonstration, not credentials to a live system. Recorded because triage is the point: an inventory that cannot distinguish a demo fixture from a real credential produces noise, and a function that cries wolf on its own estate gets ignored on the one that matters. |
+| 2 | `github-recovery-codes.txt` sat untracked in the repositories directory | **Remediated.** Moved outside every git tree to a `700` directory with `600` permissions. A global gitignore now covers `*.pem`, `*.key`, `*recovery-codes*`, `.env`, `*.tfvars` and similar across every repository on the machine, verified with `git check-ignore`. Longer term these belong in a password manager, not a file. |
+| 3 | `aws-fcp-ai-platform/` had **no `.git` at all** — 31 files with no history and no recovery path | **Remediated.** Placed under version control unmodified. It has diverged from a copy inside `AIML-Datapiplines-AWS` (36 files differ), and reconciliation is deferred deliberately: the work is now recoverable, so the decision can be made on its merits rather than under time pressure. |
+| 4 | `aws-pam-infrastructure/` mapped to a remote named `aws-pam-platform` | **Remediated.** Local directory renamed to match. Cosmetic on its own, but name drift is how an asset inventory quietly becomes wrong. |
+| 5 | 60 public repositories with heavy duplication | **Open by decision.** Candidates identified; archiving is a judgement about how a portfolio reads, not a technical fix, so it is the owner's call rather than something to automate. |
 
-Finding 2 is the one that mattered — an untracked file one `git add .` away from
-publication. Finding 1 illustrates the other half of the job: triage. Flagging
-every secret-shaped string as an incident is how a scanner's output stops being
-read.
+Finding 2 was the one that mattered — a file one `git add .` away from
+publication, in a directory that is itself a git repository. Finding 1
+illustrates the other half of the job: triage. Flagging every secret-shaped
+string as an incident is how a scanner's output stops being read.
+
+The remediation worth generalising is the global gitignore rather than the file
+move. Moving one file fixes one file; a machine-wide ignore rule means the next
+`.pem` or `.env` — in a repository that does not exist yet — is covered by
+default. Controls that work by default beat controls that work when remembered.
 
 ## What this repository is *not*
 
