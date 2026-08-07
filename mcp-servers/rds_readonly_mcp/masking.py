@@ -18,10 +18,10 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 
 
-class Sensitivity(str, Enum):
+class Sensitivity(StrEnum):
     # GDPR Art. 9 special category — health, biometrics, etc. Highest bar.
     SPECIAL_CATEGORY = "special_category"
     # Directly identifying: name, national ID, email, phone.

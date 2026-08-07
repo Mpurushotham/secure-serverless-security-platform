@@ -13,7 +13,6 @@ If any case in BYPASS_ATTEMPTS stops raising, CI fails. That is the contract.
 from __future__ import annotations
 
 import pytest
-
 from mcp_core.errors import GuardrailViolation
 from rds_readonly_mcp.guardrails import (
     GuardrailConfig,

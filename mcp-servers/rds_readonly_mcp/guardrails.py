@@ -26,9 +26,8 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import sqlglot
-from sqlglot import exp
-
 from mcp_core.errors import GuardrailViolation
+from sqlglot import exp
 
 DIALECT = "postgres"
 

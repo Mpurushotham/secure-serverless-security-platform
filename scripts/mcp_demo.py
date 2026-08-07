@@ -15,6 +15,7 @@ Usage: scripts/mcp_demo.py [--json-out evidence/mcp-demo-transcript.jsonl]
 from __future__ import annotations
 
 import argparse
+import contextlib
 import json
 import os
 import subprocess
@@ -176,13 +177,14 @@ def main() -> int:
 
             # The client must confirm the handshake before tools unlock.
             if method == "initialize":
-                proc.stdin.write(json.dumps({"jsonrpc": "2.0", "method": "notifications/initialized"}) + "\n")
+                ack = {"jsonrpc": "2.0", "method": "notifications/initialized"}
+                proc.stdin.write(json.dumps(ack) + "\n")
                 proc.stdin.flush()
     finally:
-        try:
+        # The server may already have exited and closed the pipe; that is a
+        # normal end-of-session race, not an error worth surfacing.
+        with contextlib.suppress(BrokenPipeError, ValueError):
             proc.stdin.close()
-        except Exception:
-            pass
         proc.wait(timeout=10)
         audit_lines = [ln for ln in proc.stderr.read().splitlines() if ln.strip().startswith("{")]
 
