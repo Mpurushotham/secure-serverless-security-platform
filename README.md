@@ -1,5 +1,7 @@
 # secure-serverless-security-platform
 
+[![security-pipeline](https://github.com/Mpurushotham/secure-serverless-security-platform/actions/workflows/security-pipeline.yml/badge.svg)](https://github.com/Mpurushotham/secure-serverless-security-platform/actions/workflows/security-pipeline.yml)
+
 **Securing AI agent access to regulated production data on AWS.**
 
 An AI coding agent that can query production is a new class of principal: it holds
