@@ -18,7 +18,7 @@ import argparse
 import contextlib
 import json
 import os
-import subprocess
+import subprocess  # nosec B404
 import sys
 from pathlib import Path
 
@@ -137,7 +137,12 @@ def main() -> int:
     )
     env["MCP_PRINCIPAL"] = "demo-agent"
 
-    proc = subprocess.Popen(
+    # Justification for the B603/S603 suppression on the next line: argv is a
+    # fixed list built from sys.executable and a literal module name. No shell,
+    # no user input, no PATH lookup. This is a test harness launching our own
+    # server. (The marker itself must stay bare — bandit parses any trailing
+    # prose after `# nosec` as further test IDs and warns on every word.)
+    proc = subprocess.Popen(  # noqa: S603  # nosec B603
         [sys.executable, "-m", "rds_readonly_mcp.server"],
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
