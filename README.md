@@ -33,8 +33,9 @@ builds less.
 | JD coverage matrix + day-one operating plan | **Written** | `readiness/` |
 | AWS posture MCP server (GuardDuty/Security Hub/IAM) | *Not built* | — |
 | Terraform: Aurora, Bedrock guardrails, agent IAM, 8 detections | **Validates, checkov 169/0** | `make validate` |
-| CDK secure-serverless reference app | *Not built* | — |
-| IR playbooks, compliance map | *Not built* | — |
+| CDK reference app + enforcing Aspects | **Synths clean, 11 tests** | `make validate` |
+| Incident response playbooks (3) | **Written** | `docs/05-incident-response/` |
+| Compliance map (GDPR/ISO/NIS2) | *Not built* | — |
 
 Nothing here has been deployed to a live AWS account. IaC is validated
 **statically** — that is a deliberate choice, not a limitation: it means anyone
@@ -101,6 +102,7 @@ output, not screenshots.
 | `test-results.txt` | Full suite output |
 | `iac-scan.txt` | terraform validate + fmt + tflint + checkov across all four modules |
 | `checkov-suppressions.md` | Every policy suppression with its justification, split into false positives vs deliberate risk acceptances |
+| `cdk-synth.txt` | CDK type-check, 11 security invariant tests, and a synth that must survive its own Aspects plus cdk-nag |
 
 ### Two findings this repository caught on itself
 
