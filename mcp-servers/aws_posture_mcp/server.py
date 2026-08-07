@@ -196,7 +196,8 @@ def build_server(audit: AuditLog | None = None) -> MCPServer:
             attached = _guard_aws(
                 client.list_attached_role_policies, RoleName=name
             ).get("AttachedPolicies", [])
-            if any(p["PolicyName"] in ("AdministratorAccess", "PowerUserAccess") for p in attached):
+            admin_policies = {"AdministratorAccess", "PowerUserAccess"}
+            if any(p["PolicyName"] in admin_policies for p in attached):
                 admin.append(name)
 
         return {
@@ -204,7 +205,10 @@ def build_server(audit: AuditLog | None = None) -> MCPServer:
             "without_permissions_boundary": {
                 "count": len(no_boundary),
                 "roles": sorted(no_boundary)[:25],
-                "why_it_matters": "A boundary is the only IAM control that survives someone attaching a wider policy later.",
+                "why_it_matters": (
+                    "A boundary is the only IAM control that survives someone "
+                    "attaching a wider policy later."
+                ),
             },
             "with_administrative_policy": {
                 "count": len(admin),

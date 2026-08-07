@@ -87,7 +87,9 @@ def main() -> int:
     parser.add_argument("sarif", nargs="*", type=Path, help="SARIF files to evaluate")
     parser.add_argument("--update-ledger", action="store_true",
                         help="Record newly seen findings (run on main, not on PRs)")
-    parser.add_argument("--report", type=Path, default=REPO_ROOT / "evidence" / "vuln-sla-report.md")
+    parser.add_argument(
+        "--report", type=Path, default=REPO_ROOT / "evidence" / "vuln-sla-report.md"
+    )
     args = parser.parse_args()
 
     ledger: dict[str, str] = load(LEDGER, {})
@@ -149,13 +151,18 @@ def main() -> int:
                   "An expired exception fails the build by design: a risk acceptance that "
                   "renews itself silently is not an acceptance, it is an allowlist.", "",
                   "| Finding | Severity | Expired | Reason |", "|---|---|---|---|"]
-        lines += [f"| `{f}` | {s} | {e} | {x.get('reason','—')} |" for f, s, x, e in expired]
+        lines += [
+            f"| `{f}` | {s} | {e} | {x.get('reason', '—')} |" for f, s, x, e in expired
+        ]
         lines.append("")
     if active:
         lines += ["## Active exceptions", "",
-                  "| Finding | Severity | Expires | Reason | Approved by |", "|---|---|---|---|---|"]
-        lines += [f"| `{f}` | {s} | {e} | {x.get('reason','—')} | {x.get('approved_by','—')} |"
-                  for f, s, x, e in active]
+                  "| Finding | Severity | Expires | Reason | Approved by |",
+                  "|---|---|---|---|---|"]
+        lines += [
+            f"| `{f}` | {s} | {e} | {x.get('reason', '—')} | {x.get('approved_by', '—')} |"
+            for f, s, x, e in active
+        ]
         lines.append("")
     if not breaches and not expired:
         lines += ["## Result", "", "All findings are within their remediation SLA.", ""]
@@ -167,7 +174,10 @@ def main() -> int:
         LEDGER.parent.mkdir(parents=True, exist_ok=True)
         LEDGER.write_text(json.dumps(ledger, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
-    print(f"{len(findings)} findings · {len(breaches)} breaches · {len(expired)} expired exceptions")
+    print(
+        f"{len(findings)} findings · {len(breaches)} breaches · "
+        f"{len(expired)} expired exceptions"
+    )
     try:
         shown = args.report.relative_to(REPO_ROOT)
     except ValueError:

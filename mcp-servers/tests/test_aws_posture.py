@@ -24,6 +24,12 @@ from mcp_core import PROTOCOL_VERSION, AuditLog  # noqa: E402
 
 REGION = "eu-north-1"
 
+# A realistic AccessDenied message: it carries the caller's full ARN, which is
+# exactly what must not reach the model.
+DENIED_MESSAGE = (
+    "arn:aws:sts::123456789012:assumed-role/SECRET-ROLE/x is not authorized"
+)
+
 
 @pytest.fixture(autouse=True)
 def aws_env(monkeypatch: pytest.MonkeyPatch):
@@ -121,9 +127,8 @@ def test_summarise_findings_discards_everything_identifying():
 @moto.mock_aws
 def test_guardduty_detects_enabled_detector():
     boto3.client("guardduty", region_name=REGION).create_detector(Enable=True)
-    parsed = json.loads(
-        call(fresh_server(), "guardduty_summary", {"min_severity": 1})["result"]["content"][0]["text"]
-    )
+    payload = call(fresh_server(), "guardduty_summary", {"min_severity": 1})
+    parsed = json.loads(payload["result"]["content"][0]["text"])
     assert parsed["detectors"] == 1
 
 
@@ -135,9 +140,8 @@ def test_unreadable_detector_is_reported_not_silently_zero():
     worst possible output from a posture tool.
     """
     boto3.client("guardduty", region_name=REGION).create_detector(Enable=True)
-    parsed = json.loads(
-        call(fresh_server(), "guardduty_summary", {"min_severity": 1})["result"]["content"][0]["text"]
-    )
+    payload = call(fresh_server(), "guardduty_summary", {"min_severity": 1})
+    parsed = json.loads(payload["result"]["content"][0]["text"])
     # moto does not implement the findings filter, so this path is exercised
     # for real here: the tool must say so rather than report zero findings.
     assert parsed.get("detectors_unreadable", 0) >= 1
@@ -220,8 +224,7 @@ def test_access_denied_becomes_a_legible_refusal_without_leaking_the_arn():
 
     def denied(*_a, **_k):
         raise ClientError(
-            {"Error": {"Code": "AccessDenied",
-                       "Message": "arn:aws:sts::123456789012:assumed-role/SECRET-ROLE/x is not authorized"}},
+            {"Error": {"Code": "AccessDenied", "Message": DENIED_MESSAGE}},
             "ListDetectors")
 
     monkey = mod.boto3.client
