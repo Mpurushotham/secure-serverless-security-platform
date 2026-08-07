@@ -95,10 +95,13 @@ jobs:
         run: .venv/bin/python -m bandit -q -c pyproject.toml -r mcp-servers scripts
 
       - name: pip-audit (known vulnerable dependencies)
-        # --skip-editable: this project is installed with `-e .` and is not on
-        # PyPI, so --strict otherwise fails on the local package rather than on
-        # any real advisory. We audit our dependencies, not ourselves.
-        run: .venv/bin/python -m pip_audit --strict --skip-editable
+        # --skip-editable, and deliberately NOT --strict: this project is
+        # installed with `-e .` and is not on PyPI. --strict fails the run when
+        # *any* distribution is skipped, so pairing the two is contradictory —
+        # it fails on our own package instead of on a real advisory. Without
+        # --strict, pip-audit still exits non-zero on an actual vulnerability,
+        # which is the property this gate exists for.
+        run: .venv/bin/python -m pip_audit --skip-editable
 
       - name: Ruff (lint + security rules)
         run: .venv/bin/python -m ruff check .
