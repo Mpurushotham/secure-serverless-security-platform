@@ -157,6 +157,21 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with: { sarif_file: checkov.sarif }
 
+      - uses: actions/setup-node@v4
+        with: { node-version: "22", cache: npm, cache-dependency-path: infra/cdk/package-lock.json }
+
+      - name: CDK install, type-check, security invariants, synth
+        working-directory: infra/cdk
+        # `cdk synth` here is a security gate, not a build step: the Aspects in
+        # lib/aspects raise ERRORS on wildcard IAM, missing log retention, and
+        # unattached Lambdas, and cdk-nag adds AwsSolutionsChecks on top. A
+        # regression fails synth rather than producing a warning nobody reads.
+        run: |
+          npm ci
+          npx tsc --noEmit
+          npx jest --ci
+          npx cdk synth --quiet
+
   supply-chain:
     name: SBOM
     runs-on: ubuntu-latest

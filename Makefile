@@ -10,7 +10,7 @@ SQL_DIR   := mcp-servers/rds_readonly_mcp/sql
 RO_PASS   ?= harness-only
 export MCP_DB_DSN ?= postgresql://mcp_readonly:$(RO_PASS)@127.0.0.1:$(PG_PORT)/pharmadb
 
-.PHONY: help setup db-up db-down db-reset test mcp-demo evidence scan validate clean all
+.PHONY: help setup cdk-setup db-up db-down db-reset test mcp-demo evidence scan validate clean all
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -59,6 +59,7 @@ evidence: ## Regenerate every artifact under evidence/
 	$(PY) scripts/mcp_demo.py --json-out evidence/mcp-demo-transcript.jsonl \
 	  > evidence/mcp-demo-session.txt
 	./scripts/iac_evidence.sh > evidence/iac-scan.txt 2>&1
+	-./scripts/cdk_evidence.sh > evidence/cdk-synth.txt 2>&1
 	$(PY) scripts/suppression_register.py
 	@echo "✔ evidence regenerated"
 
@@ -83,7 +84,16 @@ validate: ## Validate all IaC statically — no AWS account required
 	  echo "  (tflint not installed — skipped)"
 	@test -x $(CHECKOV) && $(CHECKOV) -d infra/ --compact --quiet -o cli 2>&1 | \
 	  grep -E '^Passed|^Failed|terraform scan' || echo "  (checkov not installed — skipped)"
+	@echo "  --- CDK ---"
+	@if [ -d infra/cdk/node_modules ]; then \
+	  (cd infra/cdk && npx tsc --noEmit && npx jest --silent 2>&1 | tail -3 && \
+	   npx cdk synth --quiet >/dev/null && echo "  cdk synth: clean (aspects + cdk-nag)"); \
+	else echo "  (cdk deps not installed — run 'make cdk-setup')"; fi
 	@echo "✔ IaC validation complete"
+
+cdk-setup: ## Install CDK dependencies
+	cd infra/cdk && npm install
+	@echo "✔ cdk ready"
 
 all: setup db-up test mcp-demo evidence ## Full pipeline from a clean clone
 
