@@ -27,15 +27,18 @@ builds less.
 | SQL guardrail (AST parse-then-execute) | **Runs, 37 attack payloads refused** | `make test` |
 | Read-only RDS/Aurora MCP server | **Runs end to end** | `make mcp-demo` |
 | PII leak assertions over the live transcript | **Runs, 27 assertions** | `make test` |
+| Terraform: Aurora, Bedrock, agent IAM, 8 detections | **checkov 169/0** | `make validate` |
 | CI/CD security gates (SAST, deps, secrets, IaC, SBOM) | **Runs** | `.github/workflows/security-pipeline.yml` |
 | Threat model (STRIDE + attack tree) | **Written** | `docs/01-threat-model.md` |
 | AI secure-coding policy + training framework | **Written** | `docs/04-ai-secure-coding-policy.md` |
 | JD coverage matrix + day-one operating plan | **Written** | `readiness/` |
-| AWS posture MCP server (GuardDuty/Security Hub/IAM) | *Not built* | — |
-| Terraform: Aurora, Bedrock guardrails, agent IAM, 8 detections | **Validates, checkov 169/0** | `make validate` |
+| AWS posture MCP server (GuardDuty/Security Hub/IAM/S3/KMS/Config) | **Runs, 12 moto tests** | `make test` |
 | CDK reference app + enforcing Aspects | **Synths clean, 11 tests** | `make validate` |
 | Incident response playbooks (3) | **Written** | `docs/05-incident-response/` |
-| Compliance map (GDPR/ISO/NIS2) | *Not built* | — |
+| Compliance map (GDPR / ISO 27001 / NIS2) | **Written** | `docs/06-compliance-map.md` |
+| Vulnerability SLA + severity gate | **Runs** | `scripts/vuln_sla.py`, `scripts/severity_gate.py` |
+| Usage guide, architecture, strategy, role analysis | **Written** | `docs/` |
+| Role readiness (JD matrix, day-one plan, drills, metrics) | **Written** | `readiness/` |
 
 Nothing here has been deployed to a live AWS account. IaC is validated
 **statically** — that is a deliberate choice, not a limitation: it means anyone
@@ -48,7 +51,7 @@ can clone this and verify every claim without credentials or spend.
 ```bash
 make setup      # uv venv + dependencies
 make db-up      # Postgres 17 + schema + roles + masked views
-make test       # 122 tests
+make test       # 134 tests
 make mcp-demo   # live stdio MCP session
 make evidence   # regenerate every artifact in evidence/
 make db-down
@@ -152,6 +155,9 @@ evidence/             regenerable proof artifacts
 docs/                 threat model, AI secure-coding policy, IR, compliance
 readiness/            role readiness: JD coverage, operating plan, drills
 ```
+
+**New here?** `docs/07-usage.md` covers running it, wiring the MCP servers into
+an agent, the tech-stack rationale, and the CI pipeline step by step.
 
 ---
 
