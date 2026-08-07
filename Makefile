@@ -57,6 +57,8 @@ evidence: ## Regenerate every artifact under evidence/
 	$(PY) scripts/bypass_report.py
 	$(PY) scripts/mcp_demo.py --json-out evidence/mcp-demo-transcript.jsonl \
 	  > evidence/mcp-demo-session.txt
+	./scripts/iac_evidence.sh > evidence/iac-scan.txt 2>&1
+	$(PY) scripts/suppression_register.py
 	@echo "✔ evidence regenerated"
 
 scan: ## SAST, dependency audit, and secret scanning
@@ -74,9 +76,12 @@ validate: ## Validate all IaC statically — no AWS account required
 	  terraform -chdir=$$d init -backend=false -input=false >/dev/null; \
 	  terraform -chdir=$$d validate; \
 	done
-	-command -v tflint >/dev/null && tflint --recursive || echo "  (tflint not installed — skipped)"
-	-command -v checkov >/dev/null && checkov -d infra/ --compact -o cli || \
-	  echo "  (checkov not installed — skipped)"
+	@terraform fmt -check -recursive infra/ >/dev/null && echo "  fmt: clean" || \
+	  { echo "  run 'terraform fmt -recursive infra/'"; exit 1; }
+	-@command -v tflint >/dev/null && tflint --recursive --format compact || \
+	  echo "  (tflint not installed — skipped)"
+	@$(PY) -m checkov -d infra/ --compact --quiet -o cli 2>&1 | \
+	  grep -E '^Passed|^Failed|terraform scan' || echo "  (checkov not installed — skipped)"
 	@echo "✔ IaC validation complete"
 
 all: setup db-up test mcp-demo evidence ## Full pipeline from a clean clone

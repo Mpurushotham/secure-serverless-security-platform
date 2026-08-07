@@ -32,7 +32,7 @@ builds less.
 | AI secure-coding policy + training framework | **Written** | `docs/04-ai-secure-coding-policy.md` |
 | JD coverage matrix + day-one operating plan | **Written** | `readiness/` |
 | AWS posture MCP server (GuardDuty/Security Hub/IAM) | *Not built* | — |
-| Terraform: Aurora, Bedrock guardrails, agent IAM, detections | *Not built* | — |
+| Terraform: Aurora, Bedrock guardrails, agent IAM, 8 detections | **Validates, checkov 169/0** | `make validate` |
 | CDK secure-serverless reference app | *Not built* | — |
 | IR playbooks, compliance map | *Not built* | — |
 
@@ -99,6 +99,8 @@ output, not screenshots.
 | `guardrail-bypass-report.md` | 37 documented escape techniques, each refused, each mapped to the control that caught it |
 | `mcp-demo-transcript.jsonl` | A real stdio session returning masked data and refusing four attacks |
 | `test-results.txt` | Full suite output |
+| `iac-scan.txt` | terraform validate + fmt + tflint + checkov across all four modules |
+| `checkov-suppressions.md` | Every policy suppression with its justification, split into false positives vs deliberate risk acceptances |
 
 ### Two findings this repository caught on itself
 

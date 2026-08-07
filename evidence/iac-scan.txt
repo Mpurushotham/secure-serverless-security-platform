@@ -1,0 +1,19 @@
+================================================================================
+ IaC VALIDATION & POLICY SCAN
+================================================================================
+
+--- terraform validate ---
+infra/terraform/modules/agent-data-access/     Success! The configuration is valid.
+infra/terraform/modules/aurora-secure/         Success! The configuration is valid.
+infra/terraform/modules/bedrock-guardrails/    Success! The configuration is valid.
+infra/terraform/detections/                    Success! The configuration is valid.
+
+--- terraform fmt -check ---
+  all files formatted
+
+--- tflint ---
+  (exit 0)
+
+--- checkov ---
+terraform scan results:
+Passed checks: 169, Failed checks: 0, Skipped checks: 17
