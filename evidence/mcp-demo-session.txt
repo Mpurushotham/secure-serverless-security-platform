@@ -1,0 +1,76 @@
+==============================================================================
+ MCP SESSION — rds-readonly-mcp over real stdio
+==============================================================================
+
+--- Handshake
+    why : Capability negotiation. Until this completes, every tool call is refused.
+    >>> {"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2025-06-18", "clientInfo": {"name": "demo-client", "version": "1"}}
+    <<< protocol 2025-06-18 · rds-readonly-mcp
+
+--- Discover tools
+    why : The agent sees only the tools this server advertises.
+    >>> {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}
+    <<< tools: list_relations, describe_relation, run_select, explain_query, sample_rows
+
+--- Classify the data
+    why : Columns arrive pre-labelled with sensitivity and regulatory basis, so the model avoids sensitive columns by construction.
+    >>> {"jsonrpc": "2.0", "id": 3, "method": "tools/call", "params": {"name": "list_relations", "arguments": {}}}
+    <<< {   "allowed_relations": [     {       "relation": "order_items",       "columns": [         {           "name": "id",           "sensitivity": "non_sensitive",           "basis": "no rule matched"         },         {   …
+
+--- Legitimate analytical read
+    why : A normal aggregate. Permitted, and silently given a LIMIT.
+    >>> {"jsonrpc": "2.0", "id": 4, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT status, count(*) AS n FROM orders GR
+    <<< {   "row_count": 3,   "rows": [     {       "status": "shipped",       "n": 2     },     {       "status": "processing",       "n": 1     },     {       "status": "cancelled",       "n": 1     }   ] }
+
+--- Read masked personal data
+    why : Personal data is returned pseudonymised. The plaintext never leaves the database engine for this role.
+    >>> {"jsonrpc": "2.0", "id": 5, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT personnummer_masked, email_masked, p
+    <<< {   "row_count": 4,   "rows": [     {       "personnummer_masked": "329804e11458",       "email_masked": "90b4cb12fd5f@example.com",       "phone_masked": "+46*******01",       "postal_district": "111XX"     },     {     …
+
+--- Health data under consent (GDPR Art. 9)
+    why : Only rows whose data subject consented to analytics are visible. Row-level security applies the filter in the engine.
+    >>> {"jsonrpc": "2.0", "id": 6, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT id, medication, issued_month FROM v_
+    <<< {   "row_count": 2,   "rows": [     {       "id": 1,       "medication": "Sertraline 50mg",       "issued_month": "2026-01-01"     },     {       "id": 2,       "medication": "Amoxicillin 500mg",       "issued_month": "2 …
+
+--- REFUSAL: attempt to write
+    why : Refused at the AST layer, before the database is contacted.
+    >>> {"jsonrpc": "2.0", "id": 7, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "UPDATE orders SET status = 'shipped'"}}}
+    <<< REFUSED — Refused by guardrail [read-only]: only SELECT statements are permitted, got UPDATE
+
+--- REFUSAL: CTE-wrapped write
+    why : The statement starts with WITH and contains a SELECT, so it defeats 'must begin with SELECT' checks. The AST walk catches it.
+    >>> {"jsonrpc": "2.0", "id": 8, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "WITH w AS (DELETE FROM orders RETURNING id)
+    <<< REFUSED — Refused by guardrail [read-only]: DELETE is not permitted in any position
+
+--- REFUSAL: raw PII table
+    why : The base table is not in the allowlist — and the database role has no grant on it either.
+    >>> {"jsonrpc": "2.0", "id": 9, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT personnummer FROM customers"}}}
+    <<< REFUSED — Refused by guardrail [relation-allowlist]: relation 'customers' is not in the read allowlist
+
+--- REFUSAL: command execution
+    why : Schema-qualified to evade bare-name matching. Resolved and refused.
+    >>> {"jsonrpc": "2.0", "id": 10, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT pg_catalog.pg_read_file('/etc/passw
+    <<< REFUSED — Refused by guardrail [function-denylist]: function pg_read_file() is not permitted
+
+--- REFUSAL: unbounded extraction
+    why : Not refused — silently clamped. The caller does not get to opt out of the row cap.
+    >>> {"jsonrpc": "2.0", "id": 11, "method": "tools/call", "params": {"name": "run_select", "arguments": {"sql": "SELECT * FROM orders LIMIT 100000"}}}
+    <<< {   "row_count": 4,   "rows": [     {       "id": 1,       "customer_id": 1,       "status": "shipped",       "total_sek": "288.00",       "created_at": "2026-08-07 14:49:39.683059+00:00"     },     {       "id": 2,      …
+
+==============================================================================
+ AUDIT TRAIL (stderr — stdout carries protocol frames only)
+==============================================================================
+  list_relations  allowed  fp=44136fa355b3678a
+  run_select  allowed  rows=3  fp=a1846c5ae34c34ec
+  run_select  allowed  rows=4  fp=f2b4076469de4d1b
+  run_select  allowed  rows=2  fp=1d941686f48653e5
+  run_select  refused  control=read-only  fp=86110b638855556e
+  run_select  refused  control=read-only  fp=54902dfde6f19e63
+  run_select  refused  control=relation-allowlist  fp=1e232b95b8a9caa0
+  run_select  refused  control=function-denylist  fp=4d8b0dfe565414a2
+  run_select  allowed  rows=4  fp=a0f1ecdfc7f0aee7
+
+==============================================================================
+ 11 exchanges · 4 refusals · audit records: 9
+ No raw personnummer, email, phone, or prescriber ID appears above.
+==============================================================================

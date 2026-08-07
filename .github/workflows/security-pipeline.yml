@@ -1,0 +1,163 @@
+name: security-pipeline
+
+# Gates this repository's own code. Not a template: every job below runs
+# against the sources in this repo, and the guardrail job fails the build if
+# any documented bypass technique starts succeeding.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Dependency advisories land continuously; a pipeline that only runs on
+    # push tells you a package was vulnerable the day you last touched it.
+    - cron: "0 6 * * 1"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  guardrails:
+    name: Guardrails & protocol conformance
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_PASSWORD: devonly
+          POSTGRES_DB: pharmadb
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -U postgres -d pharmadb"
+          --health-interval 5s --health-timeout 5s --health-retries 10
+    env:
+      MCP_DB_DSN: postgresql://mcp_readonly:harness-only@127.0.0.1:5432/pharmadb
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - name: Install
+        run: |
+          uv venv --python 3.11 .venv
+          uv pip install -e ".[dev,rds,aws]"
+
+      - name: Apply database security baseline
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq postgresql-client
+          for f in 00-seed-schema 01-roles 02-masked-views; do
+            PGPASSWORD=devonly psql -h 127.0.0.1 -U postgres -d pharmadb \
+              -v ON_ERROR_STOP=1 -q -f "mcp-servers/rds_readonly_mcp/sql/$f.sql"
+          done
+          PGPASSWORD=devonly psql -h 127.0.0.1 -U postgres -d pharmadb -q \
+            -c "ALTER ROLE mcp_readonly PASSWORD 'harness-only';"
+
+      # The load-bearing job. A passing bypass is a build failure, not a
+      # warning — that is the whole contract of the suite.
+      - name: Protocol conformance, guardrail bypass, leak assertions
+        run: .venv/bin/python -m pytest mcp-servers/tests -q
+
+      - name: Live MCP session
+        run: .venv/bin/python scripts/mcp_demo.py --json-out /tmp/transcript.jsonl
+
+      - name: Regenerate bypass report and fail on any weakened control
+        run: .venv/bin/python scripts/bypass_report.py
+
+      - name: Assert evidence is current
+        # Evidence that drifts from the code is worse than no evidence: it
+        # asserts a property the code no longer has.
+        run: |
+          .venv/bin/python scripts/bypass_report.py
+          if ! git diff --quiet evidence/guardrail-bypass-report.md; then
+            echo "::error::evidence/guardrail-bypass-report.md is stale — run 'make evidence'"
+            git diff evidence/guardrail-bypass-report.md
+            exit 1
+          fi
+
+  sast:
+    name: SAST, dependencies, secrets
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # gitleaks needs history to scan past commits
+      - uses: astral-sh/setup-uv@v5
+      - run: |
+          uv venv --python 3.11 .venv
+          uv pip install -e ".[dev]"
+
+      - name: Bandit (Python SAST)
+        run: .venv/bin/python -m bandit -q -c pyproject.toml -r mcp-servers scripts
+
+      - name: pip-audit (known vulnerable dependencies)
+        run: .venv/bin/python -m pip_audit --strict
+
+      - name: Ruff (lint + security rules)
+        run: .venv/bin/python -m ruff check .
+
+      - name: Semgrep
+        uses: semgrep/semgrep-action@v1
+        with:
+          config: >-
+            p/python
+            p/secrets
+            p/sql-injection
+        continue-on-error: true
+
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  iac:
+    name: IaC security
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      security-events: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "1.9.8" }
+
+      - name: terraform fmt & validate
+        run: |
+          shopt -s nullglob
+          terraform fmt -check -recursive infra/ || {
+            echo "::error::run 'terraform fmt -recursive infra/'"; exit 1; }
+          for d in infra/terraform/modules/*/ infra/terraform/detections/; do
+            [ -d "$d" ] || continue
+            echo "validating $d"
+            terraform -chdir="$d" init -backend=false -input=false >/dev/null
+            terraform -chdir="$d" validate
+          done
+
+      - name: Checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: infra/
+          output_format: cli,sarif
+          output_file_path: console,checkov.sarif
+          soft_fail: false
+        continue-on-error: true
+
+      - name: Upload Checkov SARIF
+        if: always() && hashFiles('checkov.sarif') != ''
+        uses: github/codeql-action/upload-sarif@v3
+        with: { sarif_file: checkov.sarif }
+
+  supply-chain:
+    name: SBOM
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate CycloneDX SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          format: cyclonedx-json
+          artifact-name: sbom.cdx.json

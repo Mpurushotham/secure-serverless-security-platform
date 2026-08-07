@@ -12,7 +12,6 @@ import io
 import json
 
 import pytest
-
 from mcp_core import PROTOCOL_VERSION, AuditLog, GuardrailViolation, MCPServer, StdioTransport
 from mcp_core.errors import (
     INTERNAL_ERROR,
@@ -111,9 +110,8 @@ def test_calls_before_initialize_are_refused(method: str) -> None:
 
 def test_initialize_advertises_protocol_and_server_info() -> None:
     server = build_server(initialized=False)
-    result = json.loads(server.handle_frame(frame("initialize", {"protocolVersion": "1999-01-01"})))[
-        "result"
-    ]
+    raw = server.handle_frame(frame("initialize", {"protocolVersion": "1999-01-01"}))
+    result = json.loads(raw)["result"]
     assert result["protocolVersion"] == PROTOCOL_VERSION
     assert result["serverInfo"]["name"] == "test-server"
     assert "tools" in result["capabilities"]

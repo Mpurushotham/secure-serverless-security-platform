@@ -22,10 +22,9 @@ import sys
 from typing import Any
 
 import psycopg
-from psycopg.rows import dict_row
-
 from mcp_core import AuditLog, MCPServer, StdioTransport
 from mcp_core.errors import GuardrailViolation
+from psycopg.rows import dict_row
 
 from .guardrails import GuardrailConfig, enforce_result_caps, validate_select
 from .masking import classify_columns, summarise
@@ -183,10 +182,30 @@ def build_server(audit: AuditLog | None = None) -> MCPServer:
     )
     def _sample(args: dict) -> dict:
         relation = str(args["relation"]).lower()
-        limit = min(int(args.get("limit", 10)), 100)
-        # Routed through the same validator rather than string-formatted
-        # directly: one code path means one place for the check to live.
-        return _result(_query(validate_select(f"SELECT * FROM {relation} LIMIT {limit}", CONFIG)))
+        limit = min(max(int(args.get("limit", 10)), 1), 100)
+
+        # Identifiers cannot be passed as bind parameters in SQL, so this is
+        # the one place a caller-supplied value is interpolated into a
+        # statement. Two independent checks make that safe, and both are
+        # deliberate rather than defensive noise:
+        #
+        #   1. The relation must be a member of the allowlist — a frozenset of
+        #      literals, so the interpolated value can only ever be one of five
+        #      known-good strings. Membership is checked BEFORE formatting, not
+        #      after, which is what makes the f-string below sound.
+        #   2. The assembled statement still goes through validate_select(),
+        #      so it is parsed and re-checked exactly like caller-supplied SQL.
+        #
+        # This is why the linter's SQL-injection warning is suppressed here and
+        # nowhere else in the file.
+        if relation not in CONFIG.allowed_relations:
+            raise GuardrailViolation(
+                f"relation '{relation}' is not in the read allowlist",
+                control="relation-allowlist",
+            )
+
+        statement = f"SELECT * FROM {relation} LIMIT {limit}"  # noqa: S608  # nosec B608
+        return _result(_query(validate_select(statement, CONFIG)))
 
     return server
 
