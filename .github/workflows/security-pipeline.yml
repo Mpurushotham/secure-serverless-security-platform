@@ -95,7 +95,10 @@ jobs:
         run: .venv/bin/python -m bandit -q -c pyproject.toml -r mcp-servers scripts
 
       - name: pip-audit (known vulnerable dependencies)
-        run: .venv/bin/python -m pip_audit --strict
+        # --skip-editable: this project is installed with `-e .` and is not on
+        # PyPI, so --strict otherwise fails on the local package rather than on
+        # any real advisory. We audit our dependencies, not ourselves.
+        run: .venv/bin/python -m pip_audit --strict --skip-editable
 
       - name: Ruff (lint + security rules)
         run: .venv/bin/python -m ruff check .
