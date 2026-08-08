@@ -104,6 +104,21 @@ NagSuppressions.addStackSuppressions(stack, [
       "is no ingress rule at all. Asserted independently in test/security-invariants.test.ts.",
   },
   {
+    id: "AwsSolutions-SQS3",
+    reason:
+      "No dead-letter queue, deliberately. A DLQ retains the failed event payload, and for this " +
+      "workload a failed event can contain the query or record that caused the failure — a durable " +
+      "copy of regulated data in a queue with weaker access controls than the table it came from. " +
+      "Failures surface via encrypted logs and the D-001/D-005 alarms instead. (checkov CKV_AWS_116 " +
+      "flags the same thing against the synthesised template.)",
+  },
+  {
+    id: "AwsSolutions-APIG4",
+    reason:
+      "Applies to the OPTIONS/CORS path only; the data methods use IAM authorization, asserted in " +
+      "test/security-invariants.test.ts.",
+  },
+  {
     id: "AwsSolutions-L1",
     reason:
       "Runtime is pinned to Python 3.12 deliberately. Tracking 'latest' means an unreviewed " +

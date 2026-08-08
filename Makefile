@@ -82,7 +82,12 @@ validate: ## Validate all IaC statically — no AWS account required
 	  { echo "  run 'terraform fmt -recursive infra/'"; exit 1; }
 	-@command -v tflint >/dev/null && tflint --recursive --format compact || \
 	  echo "  (tflint not installed — skipped)"
-	@test -x $(CHECKOV) && $(CHECKOV) -d infra/ --compact --quiet -o cli 2>&1 | \
+	# cdk.out is EXCLUDED deliberately, not silently. cdk-nag is the authority for the CDK
+	# app and its suppressions carry stated reasons; generated CloudFormation cannot hold a
+	# comment, so a checkov finding there can never be justified in place. Scanning it would
+	# force blanket skips, which is strictly worse. The CDK gate is `cdk synth` + cdk-nag +
+	# the invariant tests, all run separately.
+	@test -x $(CHECKOV) && $(CHECKOV) -d infra/ --skip-path cdk.out --compact --quiet -o cli 2>&1 | \
 	  grep -E '^Passed|^Failed|terraform scan' || echo "  (checkov not installed — skipped)"
 	@echo "  --- CDK ---"
 	@if [ -d infra/cdk/node_modules ]; then \

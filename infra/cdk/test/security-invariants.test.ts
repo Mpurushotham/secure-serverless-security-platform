@@ -104,6 +104,19 @@ describe("data protection", () => {
     });
   });
 
+  test("every log group is KMS-encrypted, not just the obvious ones", () => {
+    // Caught by checkov against the synthesised template: AgentLogs and ApiLogs
+    // were encrypted while FlowLogs and ApiAccessLogs were not — and those two
+    // carry source addresses, caller identity, and request paths.
+    const template = synth();
+    const groups = template.findResources("AWS::Logs::LogGroup");
+    expect(Object.keys(groups).length).toBeGreaterThanOrEqual(4);
+    for (const [name, group] of Object.entries(groups)) {
+      expect(group.Properties?.KmsKeyId).toBeDefined();
+      if (!group.Properties?.KmsKeyId) throw new Error(`${name} is unencrypted`);
+    }
+  });
+
   test("KMS key rotation is enabled", () => {
     synth().hasResourceProperties("AWS::KMS::Key", { EnableKeyRotation: true });
   });

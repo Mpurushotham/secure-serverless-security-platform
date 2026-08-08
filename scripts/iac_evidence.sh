@@ -21,7 +21,7 @@ command -v tflint >/dev/null && { tflint --recursive --format compact 2>&1 | hea
 echo
 echo "--- checkov ---"
 if [ -x .venv/bin/checkov ]; then
-  .venv/bin/checkov -d infra/ --compact --quiet -o cli 2>&1 | grep -E '^Passed|^Failed|terraform scan'
+  .venv/bin/checkov -d infra/ --skip-path cdk.out --compact --quiet -o cli 2>&1 | grep -E '^Passed|^Failed|terraform scan'
 else
   echo "  (checkov not installed)"
 fi

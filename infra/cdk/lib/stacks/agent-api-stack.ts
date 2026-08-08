@@ -46,6 +46,14 @@ export class AgentApiStack extends Stack {
   constructor(scope: Construct, id: string, props: AgentApiStackProps) {
     super(scope, id, props);
 
+    // Declared first: the flow-log group below needs it, and an unencrypted
+    // log group is the finding this ordering exists to avoid.
+    const key = new kms.Key(this, "Key", {
+      enableKeyRotation: true,
+      description: "Encryption for the agent API stack",
+      removalPolicy: RemovalPolicy.RETAIN,
+    });
+
     // --- Network ---------------------------------------------------------
     // Isolated subnets, not private-with-egress. A NAT gateway would give the
     // Lambdas a route to the internet, which is the exfiltration path we are
@@ -66,6 +74,9 @@ export class AgentApiStack extends Stack {
           destination: ec2.FlowLogDestination.toCloudWatchLogs(
             new logs.LogGroup(this, "FlowLogs", {
               retention: props.logRetention,
+              // Flow logs record source and destination addresses — enough to
+              // map the internal estate. Encrypted like every other group here.
+              encryptionKey: key,
               removalPolicy: RemovalPolicy.RETAIN,
             }),
           ),
@@ -81,12 +92,6 @@ export class AgentApiStack extends Stack {
     ] as const) {
       vpc.addInterfaceEndpoint(name, { service, privateDnsEnabled: true });
     }
-
-    const key = new kms.Key(this, "Key", {
-      enableKeyRotation: true,
-      description: "Encryption for the agent API stack",
-      removalPolicy: RemovalPolicy.RETAIN,
-    });
 
     const dbSecret = new secrets.Secret(this, "DbConnection", {
       description: "Aurora connection parameters (no password; IAM auth)",
@@ -218,6 +223,9 @@ export class AgentApiStack extends Stack {
     // --- API ---------------------------------------------------------------
     const accessLogs = new logs.LogGroup(this, "ApiAccessLogs", {
       retention: props.logRetention,
+      // Access logs carry caller identity and request paths. Request *bodies*
+      // are excluded separately via dataTraceEnabled: false.
+      encryptionKey: key,
       removalPolicy: RemovalPolicy.RETAIN,
     });
 

@@ -1,0 +1,54 @@
+{
+  "//": [
+    "IDE-side protections. The threat here is not malice — it is that a developer's",
+    "editor is where secrets get pasted, where AI assistants read context, and where",
+    "generated code lands before any gate sees it.",
+    "",
+    "Checked in deliberately: an IDE control that each developer must configure",
+    "themselves is a control most developers will not have."
+  ],
+
+  "files.exclude": {
+    "**/.env": true,
+    "**/*.pem": true,
+    "**/*.key": true
+  },
+  "search.exclude": {
+    "**/.env*": true,
+    "**/*.pem": true,
+    "**/*.key": true,
+    "**/evidence/*.jsonl": true,
+    "**/.venv": true,
+    "**/node_modules": true,
+    "**/cdk.out": true
+  },
+
+  "//files.watcherExclude": "Keeps secret-shaped files out of the editor's index, which is what most AI assistants read for context.",
+  "files.watcherExclude": {
+    "**/.env*": true,
+    "**/*.pem": true,
+    "**/*.key": true
+  },
+
+  "//telemetry": "Off. Editor telemetry can carry file paths and, in some extensions, snippets.",
+  "telemetry.telemetryLevel": "off",
+  "redhat.telemetry.enabled": false,
+
+  "//trust": "Workspace trust ON. Opening an untrusted repo must not auto-run tasks or extensions.",
+  "security.workspace.trust.enabled": true,
+  "security.workspace.trust.untrustedFiles": "prompt",
+  "security.workspace.trust.banner": "always",
+
+  "//autoexec": "Never auto-run tasks on folder open — a malicious repo's tasks.json is a code-execution primitive.",
+  "task.allowAutomaticTasks": "off",
+
+  "//git": "Refuse to commit as an unknown identity; require signed commits where configured.",
+  "git.enableCommitSigning": true,
+  "git.allowNoVerifyCommit": false,
+  "git.confirmNoVerifyCommit": true,
+
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.testing.pytestEnabled": true,
+  "editor.formatOnSave": true,
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff" }
+}
