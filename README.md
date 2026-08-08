@@ -27,17 +27,23 @@ builds less.
 | SQL guardrail (AST parse-then-execute) | **Runs, 37 attack payloads refused** | `make test` |
 | Read-only RDS/Aurora MCP server | **Runs end to end** | `make mcp-demo` |
 | PII leak assertions over the live transcript | **Runs, 27 assertions** | `make test` |
-| Terraform: Aurora, Bedrock, agent IAM, 8 detections | **checkov 169/0** | `make validate` |
+| Terraform: Aurora, Bedrock, agent IAM, GitHub OIDC, 8 detections | **checkov 199/0** | `make validate` |
 | CI/CD security gates (SAST, deps, secrets, IaC, SBOM) | **Runs** | `.github/workflows/security-pipeline.yml` |
 | Threat model (STRIDE + attack tree) | **Written** | `docs/01-threat-model.md` |
 | AI secure-coding policy + training framework | **Written** | `docs/04-ai-secure-coding-policy.md` |
 | JD coverage matrix + day-one operating plan | **Written** | `readiness/` |
 | AWS posture MCP server (GuardDuty/Security Hub/IAM/S3/KMS/Config) | **Runs, 12 moto tests** | `make test` |
-| CDK reference app + enforcing Aspects | **Synths clean, 11 tests** | `make validate` |
+| CDK reference app + enforcing Aspects | **Synths clean, 12 tests** | `make validate` |
 | Incident response playbooks (3) | **Written** | `docs/05-incident-response/` |
 | Compliance map (GDPR / ISO 27001 / NIS2) | **Written** | `docs/06-compliance-map.md` |
 | Vulnerability SLA + severity gate | **Runs** | `scripts/vuln_sla.py`, `scripts/severity_gate.py` |
 | Usage guide, architecture, strategy, role analysis | **Written** | `docs/` |
+| Serverless reference architecture (VPC, API, EventBridge, data lake, 6 scenarios) | **Written** | `docs/08-…` |
+| AWS security services catalogue + sequencing | **Written** | `docs/09-…` |
+| DevSecOps control catalogue (every gate: tool, purpose, **what it misses**) | **Written** | `docs/10-…` |
+| GitHub org / MDM / endpoint / IDE hardening | **Written** (§2, §4 are design) | `docs/11-…` |
+| GitHub branch rulesets + CODEOWNERS as code | **Applied artifacts** | `.github/rulesets/` |
+| Pre-commit hooks + IDE protections | **Config in repo** | `.pre-commit-config.yaml`, `.vscode/` |
 | Role readiness (JD matrix, day-one plan, drills, metrics, outcomes) | **Written** | `readiness/` |
 
 Nothing here has been deployed to a live AWS account. IaC is validated

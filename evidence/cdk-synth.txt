@@ -6,18 +6,19 @@
   no type errors
 
 --- security invariant tests ---
-      ✓ no NAT gateway — the Lambdas have no route to the internet (683 ms)
-      ✓ every Lambda is VPC-attached (49 ms)
-      ✓ VPC flow logs are enabled (48 ms)
-      ✓ rds-db:connect is scoped to one database user, not a wildcard (50 ms)
-      ✓ the agent role explicitly denies snapshot and IAM paths (45 ms)
-      ✓ agent and application do not share an execution role (47 ms)
-      ✓ no log group retains indefinitely (52 ms)
-      ✓ API Gateway does not log request/response bodies (43 ms)
-      ✓ unmasking is disabled in the deployed environment (46 ms)
+      ✓ no NAT gateway — the Lambdas have no route to the internet (743 ms)
+      ✓ every Lambda is VPC-attached (53 ms)
+      ✓ VPC flow logs are enabled (45 ms)
+      ✓ rds-db:connect is scoped to one database user, not a wildcard (45 ms)
+      ✓ the agent role explicitly denies snapshot and IAM paths (46 ms)
+      ✓ agent and application do not share an execution role (43 ms)
+      ✓ no log group retains indefinitely (47 ms)
+      ✓ API Gateway does not log request/response bodies (46 ms)
+      ✓ unmasking is disabled in the deployed environment (43 ms)
+      ✓ every log group is KMS-encrypted, not just the obvious ones (44 ms)
       ✓ KMS key rotation is enabled (46 ms)
-      ✓ the endpoint requires IAM authorization (43 ms)
-  Tests:       11 passed, 11 total
+      ✓ the endpoint requires IAM authorization (42 ms)
+  Tests:       12 passed, 12 total
 
 --- cdk synth with Aspects + cdk-nag (AwsSolutionsChecks) ---
   no errors or warnings
@@ -34,9 +35,9 @@
       2  AWS::IAM::Policy
       2  AWS::Lambda::Function
       2  AWS::Lambda::Permission
+      1  AWS::KMS::Key
       1  AWS::EC2::VPC
       1  AWS::EC2::FlowLog
-      1  AWS::KMS::Key
       1  AWS::SecretsManager::Secret
       1  AWS::ApiGateway::RestApi
       1  AWS::ApiGateway::Deployment

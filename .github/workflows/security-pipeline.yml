@@ -147,6 +147,10 @@ jobs:
         uses: bridgecrewio/checkov-action@master
         with:
           directory: infra/
+          # cdk.out excluded: cdk-nag is the authority for the CDK app and its
+          # suppressions carry reasons; generated CloudFormation cannot hold a
+          # comment, so a finding there could only ever be blanket-skipped.
+          skip_path: cdk.out
           output_format: cli,sarif
           output_file_path: console,checkov.sarif
           soft_fail: false

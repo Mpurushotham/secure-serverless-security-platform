@@ -1,0 +1,11 @@
+{
+  "//": "Recommended and, more importantly, UNWANTED. An extension runs with the developer's full privileges and can read every open file \u2014 including ones an AI assistant would not be allowed to see. Unvetted extensions are the least-governed software supply chain most organisations have.",
+  "recommendations": [
+    "charliermarsh.ruff",
+    "ms-python.python",
+    "hashicorp.terraform",
+    "github.vscode-github-actions"
+  ],
+  "//unwanted": "Add extensions that upload code to third parties without an enterprise agreement, or that auto-execute repository content, so the prompt does not appear per-developer.",
+  "unwantedRecommendations": []
+}

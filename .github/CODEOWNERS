@@ -1,0 +1,26 @@
+# Ownership routes review to whoever must actually see a change.
+#
+# Paired with `require_code_owner_review` in the ruleset, this is what makes a
+# security review mandatory on security-relevant paths rather than optional and
+# therefore skipped under deadline pressure.
+
+*                                       @Mpurushotham
+
+# Controls that hold when application code fails. A change here is a change to
+# the authorisation model, not to a feature.
+/mcp-servers/rds_readonly_mcp/sql/       @Mpurushotham
+/mcp-servers/rds_readonly_mcp/guardrails.py  @Mpurushotham
+/mcp-servers/mcp_core/                   @Mpurushotham
+
+# Infrastructure and identity.
+/infra/terraform/modules/agent-data-access/  @Mpurushotham
+/infra/terraform/modules/github-oidc/        @Mpurushotham
+/infra/cdk/lib/aspects/                      @Mpurushotham
+
+# The pipeline itself. A change to the gates is a change to every other control.
+/.github/workflows/                      @Mpurushotham
+/.github/rulesets/                        @Mpurushotham
+/.pre-commit-config.yaml                  @Mpurushotham
+
+# Evidence must not be editable without review, or it stops being evidence.
+/evidence/                                @Mpurushotham

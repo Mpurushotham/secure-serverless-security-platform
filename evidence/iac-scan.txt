@@ -6,6 +6,7 @@
 infra/terraform/modules/agent-data-access/     Success! The configuration is valid.
 infra/terraform/modules/aurora-secure/         Success! The configuration is valid.
 infra/terraform/modules/bedrock-guardrails/    Success! The configuration is valid.
+infra/terraform/modules/github-oidc/           Success! The configuration is valid.
 infra/terraform/detections/                    Success! The configuration is valid.
 
 --- terraform fmt -check ---
@@ -16,7 +17,6 @@ infra/terraform/detections/                    Success! The configuration is val
 
 --- checkov ---
 terraform scan results:
-Passed checks: 169, Failed checks: 0, Skipped checks: 17
-Passed checks: 83, Failed checks: 5, Skipped checks: 0
+Passed checks: 199, Failed checks: 0, Skipped checks: 17
 
 Suppressions are enumerated with justification in evidence/checkov-suppressions.md.

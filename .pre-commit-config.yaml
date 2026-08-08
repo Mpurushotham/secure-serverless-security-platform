@@ -1,0 +1,67 @@
+# Developer-workstation controls: the leftmost shift.
+#
+# The economics are the argument. A secret caught here costs thirty seconds. The
+# same secret caught in CI costs a rotation. Caught after push to a public repo,
+# it is an incident with a disclosure timeline — the credential is scraped within
+# seconds and deleting the commit does not un-scrape it.
+#
+# Deliberately NOT the same tool set as CI. Pre-commit hooks that duplicate the
+# pipeline get bypassed with `--no-verify` because they are slow and redundant.
+# These are the fast, high-signal checks only; CI remains the authority.
+#
+#   pre-commit install && pre-commit install --hook-type commit-msg
+
+default_stages: [pre-commit]
+fail_fast: false
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: detect-private-key      # the one that matters most
+      - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=2048]        # a 100MB blob is usually a leaked dump
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+      - id: check-json
+
+  # Secret scanning with a baseline: without one, the first run floods and
+  # everyone learns to pass --no-verify.
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.0
+    hooks:
+      - id: bandit
+        args: [-c, pyproject.toml, -q]
+        additional_dependencies: ["bandit[toml]"]
+
+  # IaC checks run here too because a wildcard IAM policy is cheaper to fix
+  # before it is reviewed than after.
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.96.2
+    hooks:
+      - id: terraform_fmt
+      - id: terraform_validate
+      - id: terraform_checkov
+        args: [--args=--compact, --args=--quiet]
+
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v3.6.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
