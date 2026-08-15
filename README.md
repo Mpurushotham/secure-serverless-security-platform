@@ -48,7 +48,8 @@ builds less.
 | Shared CDK Aspects package — each one proven to *fire*, not just to pass | **Runs, 8 tests** | `cd platform/lib/cdk-security && npx jest` |
 | AWS discovery: 21 read-only collectors, 41 rules, 25-point baseline | **Runs, 106 tests** | `make assess-offline` |
 | **Assessment of a real AWS Organization** — 17 regions, 812 calls, 29 findings | **Executed under a purpose-built read-only role, 0 denied** | `platform/00-discovery/report/assessment.md` |
-| Baseline IaC answering the assessment: SCPs, RCPs, delegated admin, org trail, detection | **Validated statically** | `platform/BASELINE.md` |
+| Baseline IaC answering the assessment: SCPs, RCPs, delegated admin, org trail, detection | **Validated statically, planned live** | `platform/BASELINE.md` |
+| Posture report: 9 metrics computed, 6 declared unmeasurable, delta between snapshots | **Runs, 13 tests** | `make posture` |
 | AWS security platform (`platform/`) — golden path, observability, Slack | **In progress** | `platform/README.md` has the per-domain status |
 | Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |
 

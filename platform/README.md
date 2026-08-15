@@ -23,7 +23,7 @@ updated in the same change that makes something real, never after.
 | `05-detection/` — GuardDuty, Security Hub, Config, Access Analyzer | **Validated statically** — closes LOG-004, DET-001…006 |
 | `11-serverless/` — golden-path API + test pyramid | Not yet built |
 | `13-devsecops/` — reusable workflows, OIDC wiring | Not yet built |
-| `18-reporting/` — posture report + metrics | Not yet built |
+| `18-reporting/` — posture report, metrics, snapshot delta | **Runs, 13 tests** — `make posture`. No overall score, by design |
 | `19-observability/` — Prometheus, Grafana, Alertmanager | Not yet built |
 | `20-notifications/` — Slack app, redaction, IR workflow | Not yet built |
 

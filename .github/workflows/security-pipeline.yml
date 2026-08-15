@@ -115,6 +115,18 @@ jobs:
             exit 1
           fi
 
+      - name: Posture report must regenerate unchanged
+        # Same staleness contract as the assessment and the guardrail evidence.
+        # A posture report that has drifted from the snapshot it claims to
+        # summarise is asserting metrics nothing produced.
+        run: |
+          PYTHONPATH=platform/18-reporting .venv/bin/python -m reporting
+          if ! git diff --quiet platform/18-reporting/posture.md; then
+            echo "::error::posture.md is stale — run 'make posture'"
+            git diff platform/18-reporting/posture.md
+            exit 1
+          fi
+
       - name: Bandit (Python SAST)
         run: |
           .venv/bin/python -m bandit -q -c pyproject.toml \

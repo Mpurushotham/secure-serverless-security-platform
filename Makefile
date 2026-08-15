@@ -17,7 +17,7 @@ SNAPSHOTS := platform/00-discovery/snapshots
 AWS_PROFILE ?= cap-lab
 
 .PHONY: help setup cdk-setup db-up db-down db-reset test mcp-demo evidence scan \
-        validate clean all assess assess-offline report vuln-gate
+        validate clean all assess assess-offline report vuln-gate posture
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -80,6 +80,10 @@ assess-offline: ## Re-render the report from the committed snapshot — no AWS, 
 	@echo "✔ report regenerated from the committed snapshot"
 
 report: assess-offline ## Alias for assess-offline
+
+posture: ## Posture report + metrics + delta vs the previous snapshot (no AWS)
+	PYTHONPATH=platform/18-reporting $(PY) -m reporting
+	@echo "✔ platform/18-reporting/posture.md"
 
 vuln-gate: ## Severity budget + remediation SLA against a fresh checkov SARIF
 	@mkdir -p /tmp/ssp-sarif
