@@ -15,17 +15,32 @@ import {
 
 const app = new App();
 
+// Deployment is a deliberate act: `cdk deploy -c account=… -c region=…`, or
+// SSP_DEPLOY_ACCOUNT in the environment. Nothing in the toolchain sets either,
+// so the default path — the one CI and `make validate` take — stays
+// environment-agnostic and needs no credentials.
+const deployAccount =
+  app.node.tryGetContext("account") ?? process.env.SSP_DEPLOY_ACCOUNT;
+const deployRegion =
+  app.node.tryGetContext("region") ?? process.env.SSP_DEPLOY_REGION ?? "eu-north-1";
+
 const stack = new AgentApiStack(app, "AgentApiStack", {
   logRetention: RetentionDays.THREE_MONTHS,
   clusterResourceId: app.node.tryGetContext("clusterResourceId") ?? "cluster-PLACEHOLDER",
   agentDatabaseUser: "mcp_readonly",
-  // Environment-agnostic unless real credentials are present. A stack pinned to
-  // a concrete account needs an AZ lookup at synth time, which would make
-  // `make validate` require AWS credentials — and the whole point of static
-  // validation is that anyone can clone this and verify it without an account.
-  env: process.env.CDK_DEFAULT_ACCOUNT
-    ? { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION }
-    : undefined,
+  // Environment-agnostic unless someone opts in EXPLICITLY.
+  //
+  // This used to key off CDK_DEFAULT_ACCOUNT, which does not mean what it looks
+  // like it means: the `cdk` CLI populates it from whatever ambient credentials
+  // the shell happens to have. So merely being logged in pinned the stack to a
+  // real account, which triggered an availability-zone lookup at synth time,
+  // which wrote the real account ID into the committed `cdk.context.json`.
+  //
+  // In a public repository that is an account-ID disclosure produced by running
+  // the ordinary build. It happened on the first synth after the workspace
+  // change and was caught in `git diff`, not by a control — which is why the
+  // opt-in is now a variable nothing else sets.
+  env: deployAccount ? { account: deployAccount, region: deployRegion } : undefined,
 });
 
 Tags.of(app).add("DataClass", "gdpr-article-9");

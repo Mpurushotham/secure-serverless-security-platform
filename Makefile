@@ -90,14 +90,15 @@ validate: ## Validate all IaC statically — no AWS account required
 	@test -x $(CHECKOV) && $(CHECKOV) -d infra/ --skip-path cdk.out --compact --quiet -o cli 2>&1 | \
 	  grep -E '^Passed|^Failed|terraform scan' || echo "  (checkov not installed — skipped)"
 	@echo "  --- CDK ---"
-	@if [ -d infra/cdk/node_modules ]; then \
+	@if [ -d node_modules/aws-cdk-lib ]; then \
+	  echo "  shared aspects: $$(cd platform/lib/cdk-security && npx tsc --noEmit && npx jest --silent 2>&1 | grep -E '^Tests:' || echo FAILED)"; \
 	  (cd infra/cdk && npx tsc --noEmit && npx jest --silent 2>&1 | tail -3 && \
 	   npx cdk synth --quiet >/dev/null && echo "  cdk synth: clean (aspects + cdk-nag)"); \
 	else echo "  (cdk deps not installed — run 'make cdk-setup')"; fi
 	@echo "✔ IaC validation complete"
 
-cdk-setup: ## Install CDK dependencies
-	cd infra/cdk && npm install
+cdk-setup: ## Install CDK dependencies (npm workspaces — installs from the repo root)
+	npm install
 	@echo "✔ cdk ready"
 
 all: setup db-up test mcp-demo evidence ## Full pipeline from a clean clone

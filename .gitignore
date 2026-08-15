@@ -36,3 +36,16 @@ credentials
 *.db
 *.sqlite3
 audit-*.jsonl
+
+# Upstream reference repositories — studied, never vendored.
+# See platform/docs/references.md for what was taken from each.
+.reference/
+
+# Discovery: raw snapshots carry real account IDs, ARNs and emails.
+# Only the redacted snapshot under platform/00-discovery/snapshots/ is committed.
+platform/00-discovery/snapshots/raw/
+platform/00-discovery/report/*.local.md
+
+# Observability: local stack state and credentials
+platform/19-observability/**/.env
+platform/19-observability/data/

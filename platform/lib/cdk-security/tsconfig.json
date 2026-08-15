@@ -14,8 +14,7 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "inlineSourceMap": true,
-    "experimentalDecorators": true,
-    "typeRoots": ["./node_modules/@types", "../../node_modules/@types"]
+    "typeRoots": ["../../../node_modules/@types"]
   },
-  "exclude": ["node_modules", "cdk.out"]
+  "exclude": ["node_modules"]
 }

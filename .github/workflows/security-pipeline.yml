@@ -162,19 +162,54 @@ jobs:
         with: { sarif_file: checkov.sarif }
 
       - uses: actions/setup-node@v4
-        with: { node-version: "22", cache: npm, cache-dependency-path: infra/cdk/package-lock.json }
+        with: { node-version: "22", cache: npm, cache-dependency-path: package-lock.json }
 
-      - name: CDK install, type-check, security invariants, synth
+      - name: Install workspaces
+        # npm workspaces: the lockfile and node_modules live at the repo root so
+        # that every CDK app and the shared aspects package resolve to exactly
+        # ONE copy of aws-cdk-lib and constructs. Two copies would make the
+        # aspects' `instanceof` checks silently return false — the controls
+        # would not break, they would evaporate, and synth would stay green.
+        run: npm ci
+
+      - name: Shared aspects — prove each one fires
+        working-directory: platform/lib/cdk-security
+        # These tests build constructs that MUST be rejected and assert the
+        # rejection. They are the regression guard for the packaging hazard
+        # described above: if resolution ever splits, these fail while every
+        # other check stays green.
+        run: |
+          npx tsc --noEmit
+          npx jest --ci
+
+      - name: CDK type-check, security invariants, synth
         working-directory: infra/cdk
         # `cdk synth` here is a security gate, not a build step: the Aspects in
-        # lib/aspects raise ERRORS on wildcard IAM, missing log retention, and
-        # unattached Lambdas, and cdk-nag adds AwsSolutionsChecks on top. A
-        # regression fails synth rather than producing a warning nobody reads.
+        # platform/lib/cdk-security raise ERRORS on wildcard IAM, missing log
+        # retention, and unattached Lambdas, and cdk-nag adds AwsSolutionsChecks
+        # on top. A regression fails synth rather than producing a warning
+        # nobody reads.
         run: |
-          npm ci
           npx tsc --noEmit
           npx jest --ci
           npx cdk synth --quiet
+
+      - name: Synth must not resolve a real account
+        working-directory: infra/cdk
+        # A stack pinned to a concrete account does an availability-zone lookup
+        # at synth time and writes the account ID into cdk.context.json. In a
+        # public repository that is an account-ID disclosure produced by the
+        # ordinary build, and it is invisible unless someone reads the diff.
+        #
+        # The app is environment-agnostic unless SSP_DEPLOY_ACCOUNT or `-c
+        # account=` is set, so this file must come out of synth unchanged.
+        run: |
+          if ! git diff --quiet cdk.context.json; then
+            echo "::error::cdk.context.json changed during synth — the stack resolved a real"
+            echo "::error::environment. Check bin/app.ts: synth must not depend on ambient credentials."
+            git diff cdk.context.json
+            exit 1
+          fi
 
   supply-chain:
     name: SBOM

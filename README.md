@@ -45,6 +45,9 @@ builds less.
 | GitHub branch rulesets + CODEOWNERS as code | **Applied artifacts** | `.github/rulesets/` |
 | Pre-commit hooks + IDE protections | **Config in repo** | `.pre-commit-config.yaml`, `.vscode/` |
 | Role readiness (JD matrix, day-one plan, drills, metrics, outcomes) | **Written** | `readiness/` |
+| Shared CDK Aspects package — each one proven to *fire*, not just to pass | **Runs, 8 tests** | `cd platform/lib/cdk-security && npx jest` |
+| AWS security platform (`platform/`) — discovery, baseline, golden path, observability | **In progress** | `platform/README.md` has the per-domain status |
+| Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |
 
 Nothing here has been deployed to a live AWS account. IaC is validated
 **statically** — that is a deliberate choice, not a limitation: it means anyone
@@ -156,11 +159,19 @@ mcp-servers/
     sql/              roles, RLS, masked views  ← the controls that actually hold
   tests/              conformance · bypass suite · leak assertions
 infra/                Terraform + CDK (static validation only)
+platform/             AWS security platform — org-wide, not agent-specific
+  lib/cdk-security/   synth-time Aspects, shared by every CDK app here
+  docs/               upstream references, responsibility playbooks, case studies
 scripts/              evidence generators
 evidence/             regenerable proof artifacts
 docs/                 threat model, AI secure-coding policy, IR, compliance
 readiness/            role readiness: JD coverage, operating plan, drills
 ```
+
+Node dependencies are an **npm workspace rooted at the repository root** — run `npm ci` there, not
+inside `infra/cdk`. The reason is a security one and is explained in
+`platform/lib/cdk-security/README.md`: two copies of `constructs` would make every Aspect's
+`instanceof` check silently return false, and the controls would evaporate without failing.
 
 **New here?** `docs/07-usage.md` covers running it, wiring the MCP servers into
 an agent, the tech-stack rationale, and the CI pipeline step by step.
