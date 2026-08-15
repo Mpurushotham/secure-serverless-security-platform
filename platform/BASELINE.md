@@ -74,6 +74,32 @@ break-glass role name and the organization ID are interpolated — so a `.json`
 extension makes checkov try to parse `${...}` as a value and fail, which was the
 second source of silent non-scanning.
 
+## Planned against the live organization
+
+`terraform plan` was run against the real organization. Two things came out of
+it that static validation had not:
+
+**The roots had no provider block.** `terraform validate` passes without one —
+so a configuration can clear every static check in CI and still fail at plan
+with *"provider requires explicit configuration"*. These are root
+configurations, not shared modules, so each now declares its provider.
+`providers.tf` in each root exists because of that gap.
+
+**The `check` block fired, correctly, against real infrastructure.** With
+defaults, the plan proposes `8 to add, 0 to change, 0 to destroy` — eight
+delegated administrators — and the check refuses:
+
+> `security_tooling_account_id` is unset, so delegated administration would
+> point at the management account, which is where the services already are.
+> This is finding ORG-001 restated, not fixed.
+
+That is the correct answer. **The blocker is organisational, not technical:
+there is no security-tooling account yet.** Delegating to the management
+account would satisfy the resource and not the finding.
+
+With `delegate_security_services = false` the plan is clean — zero changes —
+which is the honest interim state until an account exists.
+
 ## Applying this
 
 In order, because the dependencies are real:
