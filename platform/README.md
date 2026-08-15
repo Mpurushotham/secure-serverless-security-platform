@@ -18,9 +18,9 @@ updated in the same change that makes something real, never after.
 | `lib/cdk-security/` — shared synth-time Aspects | **Runs** — 8 tests, each proving an Aspect fires |
 | `docs/references.md` — what was studied upstream | **Written** |
 | `00-discovery/` — inventory + live assessment | **Runs against a real AWS Organization** — 21 collectors, 41 rules, 96 tests. See [`00-discovery/report/assessment.md`](00-discovery/report/assessment.md) |
-| `01-organization/` — OUs, SCPs, RCPs, delegated admin | Not yet built |
-| `04-logging/` — org CloudTrail, log archive | Not yet built |
-| `05-detection/` — GuardDuty, Security Hub, Config, Access Analyzer | Not yet built |
+| `01-organization/` — SCPs, RCPs, delegated admin | **Validated statically** — plan-only, closes ORG-001/002/004. See [BASELINE.md](BASELINE.md) |
+| `04-logging/` — org CloudTrail with CMK, Object-Lock archive | **Validated statically** — closes LOG-002, LOG-003 |
+| `05-detection/` — GuardDuty, Security Hub, Config, Access Analyzer | **Validated statically** — closes LOG-004, DET-001…006 |
 | `11-serverless/` — golden-path API + test pyramid | Not yet built |
 | `13-devsecops/` — reusable workflows, OIDC wiring | Not yet built |
 | `18-reporting/` — posture report + metrics | Not yet built |

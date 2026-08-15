@@ -90,14 +90,17 @@ scan: ## SAST, dependency audit, and secret scanning
 	  echo "  (gitleaks not installed — skipped)"
 	@echo "✔ scans complete (see evidence/)"
 
+TF_DIRS := infra/terraform/modules/*/ infra/terraform/detections/ \
+           platform/01-organization/ platform/04-logging/ platform/05-detection/
+
 validate: ## Validate all IaC statically — no AWS account required
-	@set -e; for d in infra/terraform/modules/*/ infra/terraform/detections/; do \
+	@set -e; for d in $(TF_DIRS); do \
 	  [ -d "$$d" ] || continue; echo "  terraform validate $$d"; \
 	  terraform -chdir=$$d init -backend=false -input=false >/dev/null; \
 	  terraform -chdir=$$d validate; \
 	done
-	@terraform fmt -check -recursive infra/ >/dev/null && echo "  fmt: clean" || \
-	  { echo "  run 'terraform fmt -recursive infra/'"; exit 1; }
+	@terraform fmt -check -recursive infra/ platform/ >/dev/null && echo "  fmt: clean" || \
+	  { echo "  run 'terraform fmt -recursive infra/ platform/'"; exit 1; }
 	-@command -v tflint >/dev/null && tflint --recursive --format compact || \
 	  echo "  (tflint not installed — skipped)"
 	# cdk.out is EXCLUDED deliberately, not silently. cdk-nag is the authority for the CDK
@@ -105,8 +108,31 @@ validate: ## Validate all IaC statically — no AWS account required
 	# comment, so a checkov finding there can never be justified in place. Scanning it would
 	# force blanket skips, which is strictly worse. The CDK gate is `cdk synth` + cdk-nag +
 	# the invariant tests, all run separately.
-	@test -x $(CHECKOV) && $(CHECKOV) -d infra/ --skip-path cdk.out --compact --quiet -o cli 2>&1 | \
-	  grep -E '^Passed|^Failed|terraform scan' || echo "  (checkov not installed — skipped)"
+	# One checkov invocation PER ROOT, not one with several -d flags.
+	#
+	# Two reasons, and the second is the important one:
+	#   * A parsing error reports "Passed: 0, Failed: 0" and exits clean, so a file
+	#     nothing scanned looks exactly like a file with nothing wrong.
+	#   * Given multiple -d flags, checkov stops reporting parse errors at all — so the
+	#     gate below only works when each root is scanned separately.
+	#
+	# This is not hypothetical. checkov cannot parse a multi-line parenthesised
+	# `a || b` condition, which Terraform accepts; platform/01-organization/checks.tf
+	# was silently unscanned until the condition was rewritten with anytrue().
+	@test -x $(CHECKOV) || { echo "  (checkov not installed — skipped)"; exit 0; }; \
+	  failed=0; \
+	  for root in infra platform; do \
+	    out=$$($(CHECKOV) -d $$root --skip-path cdk.out --skip-path node_modules \
+	      --compact -o cli 2>&1); \
+	    echo "$$out" | grep -E '^Passed checks' | head -1 | sed "s|^|  $$root: |"; \
+	    if echo "$$out" | grep -q '^Error parsing file'; then \
+	      echo "  ✗ checkov could not parse these files — they were NOT scanned:"; \
+	      echo "$$out" | grep '^Error parsing file' | sed 's/^/      /'; \
+	      failed=1; \
+	    fi; \
+	    if echo "$$out" | grep -qE '^Failed checks: [1-9]'; then failed=1; fi; \
+	  done; \
+	  [ $$failed -eq 0 ] && echo "  checkov: no failures, no unparsed files" || exit 1
 	@echo "  --- CDK ---"
 	@if [ -d node_modules/aws-cdk-lib ]; then \
 	  echo "  shared aspects: $$(cd platform/lib/cdk-security && npx tsc --noEmit && npx jest --silent 2>&1 | grep -E '^Tests:' || echo FAILED)"; \

@@ -21,7 +21,8 @@ SKIP_RE = re.compile(r"checkov:skip=([A-Z0-9_]+):(.*)")
 
 HEADER = """# Checkov suppression register
 
-Every `checkov:skip` in `infra/`, with the reasoning that justifies it.
+Every `checkov:skip` in `infra/` and `platform/`, with the reasoning that
+justifies it.
 
 An undocumented suppression is a disabled control that nobody decided to
 disable. This file exists so each one can be re-argued at review time rather
@@ -67,7 +68,8 @@ These are risk acceptances, not false positives.
 
 def main() -> int:
     rows: list[tuple[str, int, str, str]] = []
-    for path in sorted((REPO_ROOT / "infra").rglob("*.tf")):
+    scanned = [REPO_ROOT / "infra", REPO_ROOT / "platform"]
+    for path in sorted(p for root in scanned for p in root.rglob("*.tf")):
         rel = path.relative_to(REPO_ROOT)
         for lineno, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
             match = SKIP_RE.search(line)

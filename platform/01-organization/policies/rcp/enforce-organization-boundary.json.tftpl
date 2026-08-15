@@ -1,0 +1,31 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "EnforceOrgIdentityPerimeterOnData",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": [
+        "s3:*",
+        "sqs:*",
+        "kms:*",
+        "secretsmanager:*",
+        "sts:AssumeRole",
+        "sts:AssumeRoleWithSAML",
+        "sts:AssumeRoleWithWebIdentity"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringNotEqualsIfExists": {
+          "aws:PrincipalOrgID": "${organization_id}"
+        },
+        "BoolIfExists": {
+          "aws:PrincipalIsAWSService": "false"
+        },
+        "ArnNotLikeIfExists": {
+          "aws:PrincipalServiceName": ${service_principal_exemptions}
+        }
+      }
+    }
+  ]
+}

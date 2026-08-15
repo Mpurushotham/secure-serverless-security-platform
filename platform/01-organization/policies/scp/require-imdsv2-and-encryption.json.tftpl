@@ -1,0 +1,35 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyUnencryptedEbsVolumes",
+      "Effect": "Deny",
+      "Action": "ec2:CreateVolume",
+      "Resource": "*",
+      "Condition": {
+        "Bool": { "ec2:Encrypted": "false" }
+      }
+    },
+    {
+      "Sid": "DenyInstanceLaunchWithoutImdsv2",
+      "Effect": "Deny",
+      "Action": "ec2:RunInstances",
+      "Resource": "arn:aws:ec2:*:*:instance/*",
+      "Condition": {
+        "StringNotEquals": { "ec2:MetadataHttpTokens": "required" }
+      }
+    },
+    {
+      "Sid": "DenyUnencryptedRdsCreation",
+      "Effect": "Deny",
+      "Action": [
+        "rds:CreateDBInstance",
+        "rds:CreateDBCluster"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "Bool": { "rds:StorageEncrypted": "false" }
+      }
+    }
+  ]
+}
