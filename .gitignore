@@ -49,3 +49,6 @@ platform/00-discovery/report/*.local.md
 # Observability: local stack state and credentials
 platform/19-observability/**/.env
 platform/19-observability/data/
+
+# CDK synth output for the golden-path API
+platform/11-serverless/cdk.out/

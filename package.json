@@ -5,7 +5,8 @@
   "description": "npm workspace root. Exists so that every CDK app and the shared Aspects package resolve to exactly ONE copy of aws-cdk-lib and constructs.",
   "workspaces": [
     "platform/lib/cdk-security",
-    "infra/cdk"
+    "infra/cdk",
+    "platform/11-serverless"
   ],
   "scripts": {
     "build": "npm run build --workspaces --if-present",

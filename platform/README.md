@@ -21,7 +21,7 @@ updated in the same change that makes something real, never after.
 | `01-organization/` — SCPs, RCPs, delegated admin | **Validated statically** — plan-only, closes ORG-001/002/004. See [BASELINE.md](BASELINE.md) |
 | `04-logging/` — org CloudTrail with CMK, Object-Lock archive | **Validated statically** — closes LOG-002, LOG-003 |
 | `05-detection/` — GuardDuty, Security Hub, Config, Access Analyzer | **Validated statically** — closes LOG-004, DET-001…006 |
-| `11-serverless/` — golden-path API + test pyramid | Not yet built |
+| `11-serverless/` — golden-path API + test pyramid | **Runs, 52 tests + 18 security-e2e** — synths clean under 6 aspects + cdk-nag |
 | `13-devsecops/` — reusable workflows, OIDC wiring | Not yet built |
 | `18-reporting/` — posture report, metrics, snapshot delta | **Runs, 13 tests** — `make posture`. No overall score, by design |
 | `19-observability/` — Prometheus, Grafana, Alertmanager | Not yet built |

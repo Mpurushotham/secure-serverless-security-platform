@@ -26,6 +26,10 @@ import * as logs from "aws-cdk-lib/aws-logs";
 
 import {
   NoWildcardIamAspect,
+  RequireApiAuthorizerAspect,
+  RequireDeadLetterQueueAspect,
+  RequireReservedConcurrencyAspect,
+  RequireTableCustomerKeyAspect,
   RequireLogRetentionAspect,
   RequirePermissionBoundaryAspect,
   RequireVpcAttachmentAspect,
@@ -158,5 +162,66 @@ describe("aspects are wired and dispatching", () => {
       PermissionsBoundary: boundary,
     });
     expect(role).toBeDefined();
+  });
+});
+
+describe("api and workload aspects fire", () => {
+  test("RequireApiAuthorizerAspect rejects a method with no authorizer", () => {
+    const stack = new Stack(new App(), "NoAuth");
+    const api = new (require("aws-cdk-lib/aws-apigateway").RestApi)(stack, "Api");
+    api.root.addMethod("GET");
+    Aspects.of(stack).add(new RequireApiAuthorizerAspect());
+    expect(errorsFrom(stack).join(" ")).toMatch(/has no authorizer/);
+  });
+
+  test("RequireApiAuthorizerAspect exempts CORS preflight", () => {
+    // OPTIONS is unauthenticated by specification: browsers send it without
+    // credentials, and the preflight response carries no data.
+    const stack = new Stack(new App(), "Preflight");
+    const api = new (require("aws-cdk-lib/aws-apigateway").RestApi)(stack, "Api");
+    api.root.addMethod("OPTIONS");
+    Aspects.of(stack).add(new RequireApiAuthorizerAspect());
+    expect(errorsFrom(stack)).toHaveLength(0);
+  });
+
+  test("RequireReservedConcurrencyAspect rejects an unbounded function", () => {
+    const stack = new Stack(new App(), "Unbounded");
+    new lambda.Function(stack, "F", {
+      runtime: lambda.Runtime.NODEJS_22_X,
+      handler: "index.handler",
+      code: lambda.Code.fromInline("exports.handler = async () => ({});"),
+    });
+    Aspects.of(stack).add(new RequireReservedConcurrencyAspect());
+    expect(errorsFrom(stack).join(" ")).toMatch(/no reserved concurrency/);
+  });
+
+  test("RequireTableCustomerKeyAspect rejects an AWS-owned key", () => {
+    const dynamodb = require("aws-cdk-lib/aws-dynamodb");
+    const stack = new Stack(new App(), "OwnedKey");
+    new dynamodb.Table(stack, "T", {
+      partitionKey: { name: "pk", type: dynamodb.AttributeType.STRING },
+    });
+    Aspects.of(stack).add(new RequireTableCustomerKeyAspect());
+    expect(errorsFrom(stack).join(" ")).toMatch(/customer-managed KMS key/);
+  });
+
+  test("RequireDeadLetterQueueAspect rejects a queue with no DLQ", () => {
+    const sqs = require("aws-cdk-lib/aws-sqs");
+    const stack = new Stack(new App(), "NoDlq");
+    new sqs.Queue(stack, "WorkQueue");
+    Aspects.of(stack).add(new RequireDeadLetterQueueAspect());
+    expect(errorsFrom(stack).join(" ")).toMatch(/no dead-letter queue/);
+  });
+
+  test("RequireDeadLetterQueueAspect exempts the DLQ itself, matching on path", () => {
+    // Regression test. The exemption originally matched on node id, but for an
+    // L2 Queue the CfnQueue id is always "Resource" — so it never matched and
+    // the aspect fired on the very DLQ it was meant to exempt. Caught on the
+    // golden-path API's first synth.
+    const sqs = require("aws-cdk-lib/aws-sqs");
+    const stack = new Stack(new App(), "DlqExempt");
+    new sqs.Queue(stack, "WorkerDlq");
+    Aspects.of(stack).add(new RequireDeadLetterQueueAspect());
+    expect(errorsFrom(stack)).toHaveLength(0);
   });
 });

@@ -20,3 +20,9 @@ export { NoWildcardIamAspect } from "./aspects/no-wildcard-iam";
 export { RequirePermissionBoundaryAspect } from "./aspects/require-permission-boundary";
 export { RequireLogRetentionAspect } from "./aspects/require-log-retention";
 export { RequireVpcAttachmentAspect } from "./aspects/require-vpc-attachment";
+export {
+  RequireApiAuthorizerAspect,
+  RequireDeadLetterQueueAspect,
+  RequireReservedConcurrencyAspect,
+  RequireTableCustomerKeyAspect,
+} from "./aspects/api-and-workload";

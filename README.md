@@ -50,6 +50,8 @@ builds less.
 | **Assessment of a real AWS Organization** — 17 regions, 812 calls, 29 findings | **Executed under a purpose-built read-only role, 0 denied** | `platform/00-discovery/report/assessment.md` |
 | Baseline IaC answering the assessment: SCPs, RCPs, delegated admin, org trail, detection | **Validated statically, planned live** | `platform/BASELINE.md` |
 | Posture report: 9 metrics computed, 6 declared unmeasurable, delta between snapshots | **Runs, 13 tests** | `make posture` |
+| Golden-path serverless API: Cognito → API GW → Lambda → DynamoDB, CMK, WAF | **Synths clean, 52 tests** | `cd platform/11-serverless && npm test` |
+| Security-e2e suite: IDOR, auth bypass, injection, rate limit, header hygiene | **18 tests, needs a deployed stack** | `npm run test:security` |
 | AWS security platform (`platform/`) — golden path, observability, Slack | **In progress** | `platform/README.md` has the per-domain status |
 | Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |
 
