@@ -37,8 +37,8 @@ jobs:
     env:
       MCP_DB_DSN: postgresql://mcp_readonly:harness-only@127.0.0.1:5432/pharmadb
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
       - name: Install
         run: |
           uv venv --python 3.11 .venv
@@ -83,10 +83,10 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0   # gitleaks needs history to scan past commits
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
       - run: |
           uv venv --python 3.11 .venv
           uv pip install -e ".[dev]"
@@ -133,7 +133,7 @@ jobs:
         run: .venv/bin/python -m ruff check .
 
       - name: Semgrep
-        uses: semgrep/semgrep-action@v1
+        uses: semgrep/semgrep-action@713efdd345f3035192eaa63f56867b88e63e4e5d # v1
         with:
           config: >-
             p/python
@@ -142,7 +142,7 @@ jobs:
         continue-on-error: true
 
       - name: gitleaks
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -153,8 +153,8 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
         with: { terraform_version: "1.9.8" }
 
       - name: terraform fmt & validate
@@ -171,7 +171,7 @@ jobs:
           done
 
       - name: Checkov — infra
-        uses: bridgecrewio/checkov-action@master
+        uses: bridgecrewio/checkov-action@1246d92f57abae29d5db5f9aeeed2a9813e52d7d # master
         with:
           directory: infra/
           # cdk.out excluded: cdk-nag is the authority for the CDK app and its
@@ -184,7 +184,7 @@ jobs:
         continue-on-error: true
 
       - name: Checkov — platform
-        uses: bridgecrewio/checkov-action@master
+        uses: bridgecrewio/checkov-action@1246d92f57abae29d5db5f9aeeed2a9813e52d7d # master
         with:
           directory: platform/
           skip_path: node_modules
@@ -219,10 +219,10 @@ jobs:
 
       - name: Upload Checkov SARIF
         if: always() && hashFiles('checkov.sarif') != ''
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@f3712979fa5f215279b101dd0a2e3bdfb4353324 # v3
         with: { sarif_file: checkov.sarif }
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with: { node-version: "22", cache: npm, cache-dependency-path: package-lock.json }
 
       - name: Install workspaces
@@ -272,13 +272,69 @@ jobs:
             exit 1
           fi
 
+  vulnerability-gate:
+    name: Vulnerability budget & SLA
+    runs-on: ubuntu-latest
+    needs: [sast, iac]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
+      - run: |
+          uv venv --python 3.11 .venv
+          uv pip install -e ".[dev]" checkov
+
+      - name: Produce SARIF
+        # Regenerated here rather than passed between jobs as an artifact: one
+        # fewer moving part, and the gate is then self-contained enough to run
+        # locally with the same command.
+        run: |
+          # checkov names the file results_sarif.sarif, not results.sarif.
+          .venv/bin/checkov -d infra --skip-path cdk.out \
+            -o sarif --output-file-path . || true
+          mv results_sarif.sarif checkov.sarif
+          .venv/bin/checkov -d platform --skip-path node_modules \
+            -o sarif --output-file-path . || true
+          mv results_sarif.sarif platform.sarif
+
+      - name: Severity budget — is anything bad enough to block the merge now?
+        # Counts findings per severity against a budget. Zero criticals is a
+        # reasonable bar; zero mediums is not, and a gate set to an unreachable
+        # bar gets switched off within a month, which is strictly worse than a
+        # bar that holds.
+        run: .venv/bin/python scripts/severity_gate.py checkov.sarif platform.sarif
+
+      - name: Remediation SLA — has anything been open too long?
+        # A different question from the budget above, which is why it is a
+        # different script. Ages findings against a checked-in first-seen
+        # ledger, because SARIF has no notion of when a finding appeared: with
+        # no ledger, age resets every run and the check passes forever while
+        # measuring nothing.
+        #
+        # --update-ledger only on main. On a pull request the ledger is read
+        # but not written, so a branch cannot reset the clock on a finding by
+        # being the first thing to observe it.
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            .venv/bin/python scripts/vuln_sla.py checkov.sarif platform.sarif --update-ledger
+          else
+            .venv/bin/python scripts/vuln_sla.py checkov.sarif platform.sarif
+          fi
+
+      - name: Upload SLA report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: vuln-sla-report
+          path: evidence/vuln-sla-report.md
+          if-no-files-found: ignore
+
   supply-chain:
     name: SBOM
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Generate CycloneDX SBOM
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0
         with:
           format: cyclonedx-json
           artifact-name: sbom.cdx.json

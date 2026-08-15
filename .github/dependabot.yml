@@ -1,0 +1,82 @@
+version: 2
+
+# Pinning every action to a commit SHA removes the "a tag moved under me"
+# problem and replaces it with "nothing is ever updated". Dependabot is the
+# other half of that trade: it rewrites the SHA and the trailing version
+# comment, so updates arrive as reviewable pull requests rather than silently
+# or never.
+#
+# Without this file, SHA pinning is strictly worse than tag floating — it
+# freezes known-vulnerable versions in place and makes that invisible.
+
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "ci"
+    labels:
+      - dependencies
+      - security
+
+  - package-ecosystem: pip
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    labels:
+      - dependencies
+    groups:
+      # One PR for the scanners rather than five. They are updated together in
+      # practice, and five separate PRs against the same lockfile just conflict.
+      security-tooling:
+        patterns:
+          - bandit
+          - checkov
+          - pip-audit
+          - ruff
+          - semgrep
+
+  - package-ecosystem: npm
+    # The workspace root: one lockfile covers infra/cdk and
+    # platform/lib/cdk-security, and that is deliberate — see
+    # platform/lib/cdk-security/README.md for why a second copy of
+    # aws-cdk-lib would silently disable every CDK Aspect.
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 10
+    commit-message:
+      prefix: "deps"
+    labels:
+      - dependencies
+    groups:
+      aws-cdk:
+        patterns:
+          - aws-cdk
+          - aws-cdk-lib
+          - cdk-nag
+          - constructs
+
+  - package-ecosystem: terraform
+    directories:
+      - /infra/terraform/modules/*
+      - /infra/terraform/detections
+      - /platform/01-organization
+      - /platform/04-logging
+      - /platform/05-detection
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "deps"
+    labels:
+      - dependencies

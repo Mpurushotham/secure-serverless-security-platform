@@ -17,7 +17,7 @@ SNAPSHOTS := platform/00-discovery/snapshots
 AWS_PROFILE ?= cap-lab
 
 .PHONY: help setup cdk-setup db-up db-down db-reset test mcp-demo evidence scan \
-        validate clean all assess assess-offline report
+        validate clean all assess assess-offline report vuln-gate
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -80,6 +80,17 @@ assess-offline: ## Re-render the report from the committed snapshot — no AWS, 
 	@echo "✔ report regenerated from the committed snapshot"
 
 report: assess-offline ## Alias for assess-offline
+
+vuln-gate: ## Severity budget + remediation SLA against a fresh checkov SARIF
+	@mkdir -p /tmp/ssp-sarif
+	@cd /tmp/ssp-sarif && $(CURDIR)/$(CHECKOV) -d $(CURDIR)/infra --skip-path cdk.out \
+	  -o sarif --output-file-path . >/dev/null 2>&1 || true
+	@cd /tmp/ssp-sarif && mv results_sarif.sarif infra.sarif 2>/dev/null || true
+	@cd /tmp/ssp-sarif && $(CURDIR)/$(CHECKOV) -d $(CURDIR)/platform --skip-path node_modules \
+	  -o sarif --output-file-path . >/dev/null 2>&1 || true
+	@cd /tmp/ssp-sarif && mv results_sarif.sarif platform.sarif 2>/dev/null || true
+	$(PY) scripts/severity_gate.py /tmp/ssp-sarif/*.sarif
+	$(PY) scripts/vuln_sla.py /tmp/ssp-sarif/*.sarif
 
 scan: ## SAST, dependency audit, and secret scanning
 	-$(PY) -m bandit -q -c pyproject.toml -r mcp-servers -f txt -o evidence/bandit.txt

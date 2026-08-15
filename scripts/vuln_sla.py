@@ -82,6 +82,23 @@ def load(path: Path, default):
         return default
 
 
+def is_suppressed(result: dict) -> bool:
+    """Whether a SARIF result carries an in-source suppression.
+
+    Suppressed findings are excluded from both this SLA and the severity budget
+    in severity_gate.py. They are not unmanaged: `scripts/suppression_register.py`
+    reads every `checkov:skip` in the repository, refuses any without a written
+    justification, and renders them to evidence/checkov-suppressions.md for
+    re-argument at review time.
+
+    Counting them here as well would charge the same accepted risk twice — the
+    build would fail on a suppression that a reviewer had already approved, and
+    the usual response to that is to widen the budget until it stops happening,
+    which disables the gate for real findings too.
+    """
+    return bool(result.get("suppressions"))
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("sarif", nargs="*", type=Path, help="SARIF files to evaluate")
@@ -104,6 +121,11 @@ def main() -> int:
         doc = load(path, {})
         for run in doc.get("runs", []):
             for result in run.get("results", []):
+                # See is_suppressed(): an accepted risk should not also age
+                # against a remediation SLA it is not going to be remediated
+                # under.
+                if is_suppressed(result):
+                    continue
                 findings[finding_id(result)] = normalise_severity(result)
 
     breaches, expired, active = [], [], []
