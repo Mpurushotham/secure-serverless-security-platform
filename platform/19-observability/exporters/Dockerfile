@@ -16,4 +16,15 @@ COPY --from=build /build /app
 ENV PYTHONPATH=/app
 USER nonroot
 EXPOSE 9877
+
+# Exec form with python, because distroless has no shell and no curl — the
+# usual `CMD curl -f ...` would silently never run.
+#
+# It probes /healthz rather than /metrics on purpose: /metrics returns 200 with
+# a stale payload if the refresh thread has died, so using it as a liveness
+# probe would report healthy for a container serving three-day-old posture data.
+# Staleness is surfaced as a metric and alerted on separately; this answers only
+# "is the process serving".
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3   CMD ["python", "-c", "import urllib.request,sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:9877/healthz', timeout=4).status == 200 else 1)"]
+
 ENTRYPOINT ["python", "-m", "security_posture.exporter"]
