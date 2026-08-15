@@ -52,6 +52,8 @@ builds less.
 | Posture report: 9 metrics computed, 6 declared unmeasurable, delta between snapshots | **Runs, 13 tests** | `make posture` |
 | Golden-path serverless API: Cognito → API GW → Lambda → DynamoDB, CMK, WAF | **Synths clean, 52 tests** | `cd platform/11-serverless && npm test` |
 | Security-e2e suite: IDOR, auth bypass, injection, rate limit, header hygiene | **18 tests, needs a deployed stack** | `npm run test:security` |
+| Observability: posture exporter, 12 alert rules, Grafana dashboard | **Runs** | `make rules-test`, `make obs-up` |
+| Slack redaction layer — alerts carry a pointer, never a payload | **Runs, 25 tests** | `pytest platform/20-notifications` |
 | AWS security platform (`platform/`) — golden path, observability, Slack | **In progress** | `platform/README.md` has the per-domain status |
 | Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |
 

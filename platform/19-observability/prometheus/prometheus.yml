@@ -1,0 +1,25 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+rule_files:
+  - /etc/prometheus/rules/*.yml
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ["alertmanager:9093"]
+
+scrape_configs:
+  - job_name: security-posture
+    # 300s, not the global 30s: the underlying data refreshes every five
+    # minutes and scraping faster only resamples the same snapshot. The
+    # exporter serves from cache either way, so this is about series cardinality
+    # rather than load.
+    scrape_interval: 300s
+    static_configs:
+      - targets: ["security-posture-exporter:9877"]
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]

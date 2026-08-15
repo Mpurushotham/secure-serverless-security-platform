@@ -43,11 +43,17 @@ testpaths = [
   "mcp-servers/tests",
   "platform/00-discovery/tests",
   "platform/18-reporting/tests",
+  "platform/20-notifications/tests",
 ]
 # The discovery package lives under a numbered directory, which is not a legal
 # Python identifier — hence the inner `discovery/` package and this path entry
 # rather than an editable install.
-pythonpath = ["mcp-servers", "platform/00-discovery", "platform/18-reporting"]
+pythonpath = [
+  "mcp-servers",
+  "platform/00-discovery",
+  "platform/18-reporting",
+  "platform/20-notifications",
+]
 markers = [
   "integration: requires a live Postgres container (make db-up)",
 ]
@@ -65,6 +71,8 @@ per-file-ignores = { "mcp-servers/tests/*" = [
 ], "platform/00-discovery/tests/*" = [
   "S101",
 ], "platform/18-reporting/tests/*" = [
+  "S101",
+], "platform/20-notifications/tests/*" = [
   "S101",
 ], "platform/00-discovery/discovery/collectors/*" = [
   # Collectors are deliberately flat data-shaping code. Splitting a single

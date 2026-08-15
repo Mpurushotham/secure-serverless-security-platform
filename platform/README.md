@@ -25,8 +25,8 @@ updated in the same change that makes something real, never after.
 | `docs/responsibilities/` — 16 responsibilities → path, evidence, verify command | **Written** — 4 rows honestly marked unevidenced |
 | `13-devsecops/` — reusable workflows, OIDC wiring | **Partly done** — gates wired, actions SHA-pinned, dependabot. OIDC roles pending a deploy decision |
 | `18-reporting/` — posture report, metrics, snapshot delta | **Runs, 13 tests** — `make posture`. No overall score, by design |
-| `19-observability/` — Prometheus, Grafana, Alertmanager | Not built — data source now exists in `18-reporting` |
-| `20-notifications/` — Slack app, redaction, IR workflow | Not built — depends on 19 |
+| `19-observability/` — Prometheus, Grafana, Alertmanager | **Runs** — `make obs-up`; 12 alert rules with promtool unit tests |
+| `20-notifications/` — Slack redaction layer + app manifest | **Runs, 25 tests** — interactive handler designed, not built |
 
 ## Rules this directory holds itself to
 

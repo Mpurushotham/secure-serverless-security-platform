@@ -17,7 +17,7 @@ SNAPSHOTS := platform/00-discovery/snapshots
 AWS_PROFILE ?= cap-lab
 
 .PHONY: help setup cdk-setup db-up db-down db-reset test mcp-demo evidence scan \
-        validate clean all assess assess-offline report vuln-gate posture
+        validate clean all assess assess-offline report vuln-gate posture obs-up obs-down rules-test
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -95,6 +95,23 @@ vuln-gate: ## Severity budget + remediation SLA against a fresh checkov SARIF
 	@cd /tmp/ssp-sarif && mv results_sarif.sarif platform.sarif 2>/dev/null || true
 	$(PY) scripts/severity_gate.py /tmp/ssp-sarif/*.sarif
 	$(PY) scripts/vuln_sla.py /tmp/ssp-sarif/*.sarif
+
+OBS := platform/19-observability
+
+rules-test: ## promtool: alert rules parse AND fire (a rule that cannot fire is not a control)
+	promtool check rules $(OBS)/prometheus/rules/posture.yml
+	promtool test rules $(OBS)/prometheus/rules/posture_test.yml
+
+obs-up: ## Prometheus + Alertmanager + Grafana + the posture exporter (no AWS needed)
+	@test -f $(OBS)/compose/.env || { \
+	  echo "  create $(OBS)/compose/.env from .env.example first —"; \
+	  echo "  compose refuses to start rather than defaulting Grafana to admin/admin"; exit 1; }
+	docker compose -f $(OBS)/compose/docker-compose.yml up -d --build
+	@echo "✔ Grafana http://127.0.0.1:3000 · Prometheus http://127.0.0.1:9090"
+
+obs-down: ## Stop the observability stack
+	docker compose -f $(OBS)/compose/docker-compose.yml down
+	@echo "✔ stack stopped"
 
 scan: ## SAST, dependency audit, and secret scanning
 	-$(PY) -m bandit -q -c pyproject.toml -r mcp-servers -f txt -o evidence/bandit.txt
