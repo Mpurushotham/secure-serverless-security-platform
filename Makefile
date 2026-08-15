@@ -90,7 +90,14 @@ vuln-gate: ## Severity budget + remediation SLA against a fresh checkov SARIF
 	@cd /tmp/ssp-sarif && $(CURDIR)/$(CHECKOV) -d $(CURDIR)/infra --skip-path cdk.out \
 	  -o sarif --output-file-path . >/dev/null 2>&1 || true
 	@cd /tmp/ssp-sarif && mv results_sarif.sarif infra.sarif 2>/dev/null || true
-	@cd /tmp/ssp-sarif && $(CURDIR)/$(CHECKOV) -d $(CURDIR)/platform --skip-path node_modules \
+	# cdk.out excluded here for the same reason `validate` excludes it: cdk-nag is
+	# the authority for the CDK apps and its suppressions carry written reasons,
+	# while generated CloudFormation cannot hold a comment — so a finding there
+	# could only ever be blanket-skipped. CI never saw this because cdk.out is
+	# gitignored; a local run does, and the two gates disagreeing is worse than
+	# either answer.
+	@cd /tmp/ssp-sarif && $(CURDIR)/$(CHECKOV) -d $(CURDIR)/platform \
+	  --skip-path node_modules --skip-path cdk.out \
 	  -o sarif --output-file-path . >/dev/null 2>&1 || true
 	@cd /tmp/ssp-sarif && mv results_sarif.sarif platform.sarif 2>/dev/null || true
 	$(PY) scripts/severity_gate.py /tmp/ssp-sarif/*.sarif
