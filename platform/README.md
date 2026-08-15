@@ -22,10 +22,11 @@ updated in the same change that makes something real, never after.
 | `04-logging/` — org CloudTrail with CMK, Object-Lock archive | **Validated statically** — closes LOG-002, LOG-003 |
 | `05-detection/` — GuardDuty, Security Hub, Config, Access Analyzer | **Validated statically** — closes LOG-004, DET-001…006 |
 | `11-serverless/` — golden-path API + test pyramid | **Runs, 52 tests + 18 security-e2e** — synths clean under 6 aspects + cdk-nag |
-| `13-devsecops/` — reusable workflows, OIDC wiring | Not yet built |
+| `docs/responsibilities/` — 16 responsibilities → path, evidence, verify command | **Written** — 4 rows honestly marked unevidenced |
+| `13-devsecops/` — reusable workflows, OIDC wiring | **Partly done** — gates wired, actions SHA-pinned, dependabot. OIDC roles pending a deploy decision |
 | `18-reporting/` — posture report, metrics, snapshot delta | **Runs, 13 tests** — `make posture`. No overall score, by design |
-| `19-observability/` — Prometheus, Grafana, Alertmanager | Not yet built |
-| `20-notifications/` — Slack app, redaction, IR workflow | Not yet built |
+| `19-observability/` — Prometheus, Grafana, Alertmanager | Not built — data source now exists in `18-reporting` |
+| `20-notifications/` — Slack app, redaction, IR workflow | Not built — depends on 19 |
 
 ## Rules this directory holds itself to
 
