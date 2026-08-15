@@ -62,9 +62,24 @@ class TestHonesty:
 
     def test_an_over_privileged_assessor_is_declared(self) -> None:
         s = load()
-        s["assessed_principal"] = "arn:aws:sts::acct_x:assumed-role/cap-platform-admin/x"
+        # The flag, not the ARN. The runner derives it from the unredacted
+        # principal before redaction rewrites the role name — re-deriving it
+        # from the redacted string is exactly the bug that made this caveat
+        # disappear once already.
+        s["assessor_is_privileged"] = True
         body = render(s, evaluate(s))
         assert "over-privileged" in body
+
+    def test_a_least_privileged_assessor_gets_no_caveat(self) -> None:
+        """The committed assessment was run under SecurityDiscoveryReadOnly.
+
+        The fixture is that run, so the caveat must be absent — and it must be
+        absent because the flag says so, not because the string 'admin' happens
+        not to appear in a redacted ARN.
+        """
+        s = load()
+        assert s.get("assessor_is_privileged") is False
+        assert "over-privileged" not in render(s, evaluate(s))
 
     def test_region_scope_is_stated(self) -> None:
         body = render(load(), evaluate(load()))

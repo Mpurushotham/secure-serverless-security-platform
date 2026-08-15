@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-15T12:13:29Z",
-  "duration_seconds": 90.0,
+  "generated_at": "2026-08-15T12:08:22Z",
+  "duration_seconds": 91.4,
   "assessed_account": "acct_78e004",
   "assessed_principal": "arn:aws:sts::acct_78e004:assumed-role/role_05e984/botocore-session-1786795701",
   "assessor_is_privileged": false,
@@ -2319,85 +2319,6 @@
       },
       "note": "Sourced from the repository, not from AWS"
     },
-    "secrets": {
-      "domain": "data",
-      "checklist": [
-        17
-      ],
-      "status": "observed",
-      "data": {
-        "secrets": [],
-        "parameters": [
-          {
-            "name": "param_6f1ab2",
-            "region": "eu-north-1",
-            "type": "StringList",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_1c4fa1",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_96fbb1",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_54f879",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_6bd3e7",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_ca0e2b",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_704c6a",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_39e61f",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_3e7e9d",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          }
-        ],
-        "secrets_total": 0,
-        "secrets_without_rotation": [],
-        "parameters_total": 9,
-        "plaintext_parameters_with_secret_names": []
-      }
-    },
     "config": {
       "domain": "logging",
       "checklist": [
@@ -2566,34 +2487,83 @@
         "coverage": "0/17"
       }
     },
-    "security_groups": {
-      "domain": "infrastructure",
+    "secrets": {
+      "domain": "data",
       "checklist": [
-        15
+        17
       ],
       "status": "observed",
       "data": {
-        "total_groups": 22,
-        "internet_open_rules": [
+        "secrets": [],
+        "parameters": [
           {
-            "group_id": "sg_c675cf",
-            "group_name": "sg_0c4114",
+            "name": "param_6f1ab2",
+            "region": "eu-north-1",
+            "type": "StringList",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_1c4fa1",
             "region": "us-east-1",
-            "vpc_id": "vpc_c12e1e",
-            "protocol": "tcp",
-            "from_port": 443,
-            "to_port": 443,
-            "open_to": [
-              "0.0.0.0/0"
-            ],
-            "all_ports": false,
-            "sensitive_ports_exposed": []
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_96fbb1",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_54f879",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_6bd3e7",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_ca0e2b",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_704c6a",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_39e61f",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_3e7e9d",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
           }
         ],
-        "groups_open_to_internet": [
-          "sg_c675cf"
-        ],
-        "groups_exposing_sensitive_ports": []
+        "secrets_total": 0,
+        "secrets_without_rotation": [],
+        "parameters_total": 9,
+        "plaintext_parameters_with_secret_names": []
       }
     },
     "identity_center": {
@@ -2633,6 +2603,36 @@
           "PowerUserAccess",
           "AdministratorAccess"
         ]
+      }
+    },
+    "security_groups": {
+      "domain": "infrastructure",
+      "checklist": [
+        15
+      ],
+      "status": "observed",
+      "data": {
+        "total_groups": 22,
+        "internet_open_rules": [
+          {
+            "group_id": "sg_c675cf",
+            "group_name": "sg_0c4114",
+            "region": "us-east-1",
+            "vpc_id": "vpc_c12e1e",
+            "protocol": "tcp",
+            "from_port": 443,
+            "to_port": 443,
+            "open_to": [
+              "0.0.0.0/0"
+            ],
+            "all_ports": false,
+            "sensitive_ports_exposed": []
+          }
+        ],
+        "groups_open_to_internet": [
+          "sg_c675cf"
+        ],
+        "groups_exposing_sensitive_ports": []
       }
     },
     "vulnerability_services": {
@@ -2973,362 +2973,6 @@
           "api_3f2806/api-deploy-stage"
         ],
         "without_waf": []
-      }
-    },
-    "vpc": {
-      "domain": "infrastructure",
-      "checklist": [
-        14
-      ],
-      "status": "observed",
-      "data": {
-        "vpcs": [
-          {
-            "vpc_id": "vpc_c11a9b",
-            "region": "ap-northeast-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_d658ac",
-              "subnet_f06b86",
-              "subnet_639d75"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_98cc4f",
-            "region": "ap-northeast-2",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 4,
-            "public_subnets": [
-              "subnet_c33d88",
-              "subnet_c1ddc9",
-              "subnet_a31df7",
-              "subnet_c426d8"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_48c3b4",
-            "region": "ap-northeast-3",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_594714",
-              "subnet_fc1ef8",
-              "subnet_16eae4"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_fc75a8",
-            "region": "ap-south-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_53eaa4",
-              "subnet_301035",
-              "subnet_f019e8"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_c00621",
-            "region": "ap-southeast-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_0a7c41",
-              "subnet_10c633",
-              "subnet_d9608f"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_288aba",
-            "region": "ap-southeast-2",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_487dce",
-              "subnet_457c62",
-              "subnet_bae005"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_0a2744",
-            "region": "ca-central-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_40ef04",
-              "subnet_9f70dd",
-              "subnet_17f820"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_32d49c",
-            "region": "eu-central-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_db50eb",
-              "subnet_7cf9fc",
-              "subnet_5e610b"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_b36013",
-            "region": "eu-north-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_ea3431",
-              "subnet_4a8482",
-              "subnet_8842b3"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_e92a4c",
-            "region": "eu-west-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_ac17c8",
-              "subnet_707f86",
-              "subnet_69368a"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_51f941",
-            "region": "eu-west-2",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_abf20e",
-              "subnet_48937c",
-              "subnet_a00df5"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_620e78",
-            "region": "eu-west-3",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_f36e3a",
-              "subnet_2c4533",
-              "subnet_779f56"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_1bada7",
-            "region": "sa-east-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_11c284",
-              "subnet_ccc112",
-              "subnet_64b86f"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_c12e1e",
-            "region": "us-east-1",
-            "cidr": "10.10.0.0/16",
-            "is_default": false,
-            "flow_logs_enabled": true,
-            "subnet_count": 6,
-            "public_subnets": [],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 2,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_6672fb",
-            "region": "us-east-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 6,
-            "public_subnets": [
-              "subnet_5697d9",
-              "subnet_c02dfe",
-              "subnet_40caf8",
-              "subnet_6ca4a2",
-              "subnet_c4b6dd",
-              "subnet_f06edf"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_fb0f9d",
-            "region": "us-east-2",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_8ca7e5",
-              "subnet_4b5a9a",
-              "subnet_c329b5"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_274626",
-            "region": "us-west-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 2,
-            "public_subnets": [
-              "subnet_6b4861",
-              "subnet_8fedd3"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          },
-          {
-            "vpc_id": "vpc_af0bb7",
-            "region": "us-west-2",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 4,
-            "public_subnets": [
-              "subnet_42135f",
-              "subnet_56f2f0",
-              "subnet_8faa56",
-              "subnet_5829c6"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
-          }
-        ],
-        "total": 18,
-        "without_flow_logs": [
-          "ap-northeast-1/vpc_c11a9b",
-          "ap-northeast-2/vpc_98cc4f",
-          "ap-northeast-3/vpc_48c3b4",
-          "ap-south-1/vpc_fc75a8",
-          "ap-southeast-1/vpc_c00621",
-          "ap-southeast-2/vpc_288aba",
-          "ca-central-1/vpc_0a2744",
-          "eu-central-1/vpc_32d49c",
-          "eu-north-1/vpc_b36013",
-          "eu-west-1/vpc_e92a4c",
-          "eu-west-2/vpc_51f941",
-          "eu-west-3/vpc_620e78",
-          "sa-east-1/vpc_1bada7",
-          "us-east-1/vpc_6672fb",
-          "us-east-2/vpc_fb0f9d",
-          "us-west-1/vpc_274626",
-          "us-west-2/vpc_af0bb7"
-        ],
-        "default_vpcs": [
-          "ap-northeast-1/vpc_c11a9b",
-          "ap-northeast-2/vpc_98cc4f",
-          "ap-northeast-3/vpc_48c3b4",
-          "ap-south-1/vpc_fc75a8",
-          "ap-southeast-1/vpc_c00621",
-          "ap-southeast-2/vpc_288aba",
-          "ca-central-1/vpc_0a2744",
-          "eu-central-1/vpc_32d49c",
-          "eu-north-1/vpc_b36013",
-          "eu-west-1/vpc_e92a4c",
-          "eu-west-2/vpc_51f941",
-          "eu-west-3/vpc_620e78",
-          "sa-east-1/vpc_1bada7",
-          "us-east-1/vpc_6672fb",
-          "us-east-2/vpc_fb0f9d",
-          "us-west-1/vpc_274626",
-          "us-west-2/vpc_af0bb7"
-        ]
       }
     },
     "organizations": {
@@ -3898,6 +3542,362 @@
         ]
       }
     },
+    "vpc": {
+      "domain": "infrastructure",
+      "checklist": [
+        14
+      ],
+      "status": "observed",
+      "data": {
+        "vpcs": [
+          {
+            "vpc_id": "vpc_c11a9b",
+            "region": "ap-northeast-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_d658ac",
+              "subnet_f06b86",
+              "subnet_639d75"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_98cc4f",
+            "region": "ap-northeast-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 4,
+            "public_subnets": [
+              "subnet_c33d88",
+              "subnet_a31df7",
+              "subnet_c1ddc9",
+              "subnet_c426d8"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_48c3b4",
+            "region": "ap-northeast-3",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_594714",
+              "subnet_fc1ef8",
+              "subnet_16eae4"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_fc75a8",
+            "region": "ap-south-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_53eaa4",
+              "subnet_301035",
+              "subnet_f019e8"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_c00621",
+            "region": "ap-southeast-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_0a7c41",
+              "subnet_10c633",
+              "subnet_d9608f"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_288aba",
+            "region": "ap-southeast-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_487dce",
+              "subnet_457c62",
+              "subnet_bae005"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_0a2744",
+            "region": "ca-central-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_40ef04",
+              "subnet_9f70dd",
+              "subnet_17f820"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_32d49c",
+            "region": "eu-central-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_db50eb",
+              "subnet_7cf9fc",
+              "subnet_5e610b"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_b36013",
+            "region": "eu-north-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_ea3431",
+              "subnet_4a8482",
+              "subnet_8842b3"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_e92a4c",
+            "region": "eu-west-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_ac17c8",
+              "subnet_707f86",
+              "subnet_69368a"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_51f941",
+            "region": "eu-west-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_abf20e",
+              "subnet_48937c",
+              "subnet_a00df5"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_620e78",
+            "region": "eu-west-3",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_f36e3a",
+              "subnet_2c4533",
+              "subnet_779f56"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_1bada7",
+            "region": "sa-east-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_11c284",
+              "subnet_ccc112",
+              "subnet_64b86f"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_c12e1e",
+            "region": "us-east-1",
+            "cidr": "10.10.0.0/16",
+            "is_default": false,
+            "flow_logs_enabled": true,
+            "subnet_count": 6,
+            "public_subnets": [],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 2,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_6672fb",
+            "region": "us-east-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 6,
+            "public_subnets": [
+              "subnet_5697d9",
+              "subnet_c02dfe",
+              "subnet_40caf8",
+              "subnet_6ca4a2",
+              "subnet_c4b6dd",
+              "subnet_f06edf"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_fb0f9d",
+            "region": "us-east-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_8ca7e5",
+              "subnet_4b5a9a",
+              "subnet_c329b5"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_274626",
+            "region": "us-west-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 2,
+            "public_subnets": [
+              "subnet_6b4861",
+              "subnet_8fedd3"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_af0bb7",
+            "region": "us-west-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 4,
+            "public_subnets": [
+              "subnet_42135f",
+              "subnet_56f2f0",
+              "subnet_8faa56",
+              "subnet_5829c6"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          }
+        ],
+        "total": 18,
+        "without_flow_logs": [
+          "ap-northeast-1/vpc_c11a9b",
+          "ap-northeast-2/vpc_98cc4f",
+          "ap-northeast-3/vpc_48c3b4",
+          "ap-south-1/vpc_fc75a8",
+          "ap-southeast-1/vpc_c00621",
+          "ap-southeast-2/vpc_288aba",
+          "ca-central-1/vpc_0a2744",
+          "eu-central-1/vpc_32d49c",
+          "eu-north-1/vpc_b36013",
+          "eu-west-1/vpc_e92a4c",
+          "eu-west-2/vpc_51f941",
+          "eu-west-3/vpc_620e78",
+          "sa-east-1/vpc_1bada7",
+          "us-east-1/vpc_6672fb",
+          "us-east-2/vpc_fb0f9d",
+          "us-west-1/vpc_274626",
+          "us-west-2/vpc_af0bb7"
+        ],
+        "default_vpcs": [
+          "ap-northeast-1/vpc_c11a9b",
+          "ap-northeast-2/vpc_98cc4f",
+          "ap-northeast-3/vpc_48c3b4",
+          "ap-south-1/vpc_fc75a8",
+          "ap-southeast-1/vpc_c00621",
+          "ap-southeast-2/vpc_288aba",
+          "ca-central-1/vpc_0a2744",
+          "eu-central-1/vpc_32d49c",
+          "eu-north-1/vpc_b36013",
+          "eu-west-1/vpc_e92a4c",
+          "eu-west-2/vpc_51f941",
+          "eu-west-3/vpc_620e78",
+          "sa-east-1/vpc_1bada7",
+          "us-east-1/vpc_6672fb",
+          "us-east-2/vpc_fb0f9d",
+          "us-west-1/vpc_274626",
+          "us-west-2/vpc_af0bb7"
+        ]
+      }
+    },
     "exposure": {
       "domain": "infrastructure",
       "checklist": [
@@ -3929,11 +3929,29 @@
   "api_calls": {
     "total": 812,
     "by_outcome": {
-      "absent": 28,
+      "absent": 12,
+      "denied": 16,
       "ok": 783,
       "unsupported": 1
     },
-    "denied": [],
+    "denied": [
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session"
+    ],
     "errors": []
   }
 }

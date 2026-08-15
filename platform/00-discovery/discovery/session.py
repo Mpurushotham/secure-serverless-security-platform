@@ -142,7 +142,10 @@ class DiscoverySession:
             raise
         except ClientError as exc:
             code = exc.response.get("Error", {}).get("Code", "Unknown")
-            self._record(service, operation, region, _outcome_for(code), started, code)
+            outcome = _outcome_for(code)
+            if outcome == "denied" and (service, operation) in _DENIED_MEANS_DISABLED:
+                outcome, code = "absent", "ServiceNotEnabled"
+            self._record(service, operation, region, outcome, started, code)
             return None
         except BotoCoreError as exc:
             self._record(service, operation, region, "error", started, type(exc).__name__)
@@ -301,6 +304,22 @@ _ABSENT_CODES = frozenset(
         "DetectorNotFoundException",
         "InvalidAccessException",
         "AWSOrganizationsNotInUseException",
+    }
+)
+
+
+# Operations where AccessDenied means "the service is not enabled here", not
+# "you lack permission". A handful of AWS services answer a status query this
+# way, and treating it as a permission gap makes a report claim a control could
+# not be assessed when it was assessed and found off.
+#
+# Confirmed empirically: macie2:GetMacieSession returned AccessDeniedException
+# in all 16 regions where Macie is disabled, under BOTH an administrator and the
+# purpose-built read-only role. A permission problem would not behave that way.
+_DENIED_MEANS_DISABLED = frozenset(
+    {
+        ("macie2", "get_macie_session"),
+        ("detective", "list_graphs"),
     }
 )
 

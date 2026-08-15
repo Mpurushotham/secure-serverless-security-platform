@@ -1,15 +1,184 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-15T11:20:57Z",
-  "duration_seconds": 33.0,
+  "generated_at": "2026-08-15T12:13:29Z",
+  "duration_seconds": 90.0,
   "assessed_account": "acct_78e004",
-  "assessed_principal": "arn:aws:sts::acct_78e004:assumed-role/role_8cb8f5/botocore-session-1786791392",
-  "assessor_is_privileged": true,
+  "assessed_principal": "arn:aws:sts::acct_78e004:assumed-role/role_05e984/botocore-session-1786795701",
+  "assessor_is_privileged": false,
   "regions_scanned": [
+    "ap-northeast-1",
+    "ap-northeast-2",
+    "ap-northeast-3",
+    "ap-south-1",
+    "ap-southeast-1",
+    "ap-southeast-2",
+    "ca-central-1",
+    "eu-central-1",
+    "eu-north-1",
+    "eu-west-1",
+    "eu-west-2",
+    "eu-west-3",
+    "sa-east-1",
     "us-east-1",
-    "eu-north-1"
+    "us-east-2",
+    "us-west-1",
+    "us-west-2"
   ],
   "collectors": {
+    "s3": {
+      "domain": "data",
+      "checklist": [
+        13
+      ],
+      "status": "observed",
+      "data": {
+        "buckets": [
+          {
+            "name": "bucket_a08bc0",
+            "region": "us-east-1",
+            "created": "2026-07-27T18:39:58Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "AES256"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          },
+          {
+            "name": "bucket_0a4fc1",
+            "region": "us-east-1",
+            "created": "2026-07-27T18:40:00Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "AES256"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": true
+          },
+          {
+            "name": "bucket_cd97b8",
+            "region": "us-east-1",
+            "created": "2026-07-27T18:41:23Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "AES256"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": true
+          },
+          {
+            "name": "bucket_46d669",
+            "region": "us-east-1",
+            "created": "2026-07-29T17:57:15Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "aws:kms"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          },
+          {
+            "name": "bucket_5e8292",
+            "region": "us-east-1",
+            "created": "2026-07-29T17:57:25Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "aws:kms"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          },
+          {
+            "name": "bucket_e4423a",
+            "region": "us-east-1",
+            "created": "2026-07-29T17:57:20Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "aws:kms"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          }
+        ],
+        "total": 6,
+        "account_public_access_block": {
+          "block_public_acls": true,
+          "block_public_policy": true,
+          "ignore_public_acls": true,
+          "restrict_public_buckets": true
+        },
+        "account_fully_blocked": true,
+        "buckets_not_fully_blocked": [],
+        "buckets_unencrypted": [],
+        "buckets_public_by_policy": []
+      }
+    },
+    "kms": {
+      "domain": "data",
+      "checklist": [
+        12
+      ],
+      "status": "observed",
+      "data": {
+        "customer_managed_keys": [],
+        "total": 0,
+        "without_rotation": []
+      }
+    },
     "cloudtrail": {
       "domain": "logging",
       "checklist": [
@@ -45,6 +214,45 @@
       "status": "observed",
       "data": {
         "by_region": {
+          "ap-northeast-1": {
+            "enabled": false
+          },
+          "ap-northeast-2": {
+            "enabled": false
+          },
+          "ap-northeast-3": {
+            "enabled": false
+          },
+          "ap-south-1": {
+            "enabled": false
+          },
+          "ap-southeast-1": {
+            "enabled": false
+          },
+          "ap-southeast-2": {
+            "enabled": false
+          },
+          "ca-central-1": {
+            "enabled": false
+          },
+          "eu-central-1": {
+            "enabled": false
+          },
+          "eu-north-1": {
+            "enabled": false
+          },
+          "eu-west-1": {
+            "enabled": false
+          },
+          "eu-west-2": {
+            "enabled": false
+          },
+          "eu-west-3": {
+            "enabled": false
+          },
+          "sa-east-1": {
+            "enabled": false
+          },
           "us-east-1": {
             "enabled": true,
             "analyzers": [
@@ -56,224 +264,24 @@
               }
             ]
           },
-          "eu-north-1": {
+          "us-east-2": {
+            "enabled": false
+          },
+          "us-west-1": {
+            "enabled": false
+          },
+          "us-west-2": {
             "enabled": false
           }
         },
         "regions_enabled": [
           "us-east-1"
         ],
-        "coverage": "1/2",
+        "coverage": "1/17",
         "analyzer_types_present": [
           "ACCOUNT_UNUSED_ACCESS"
         ],
         "has_unused_access_analyzer": true
-      }
-    },
-    "kms": {
-      "domain": "data",
-      "checklist": [
-        12
-      ],
-      "status": "observed",
-      "data": {
-        "customer_managed_keys": [],
-        "total": 0,
-        "without_rotation": []
-      }
-    },
-    "guardduty": {
-      "domain": "logging",
-      "checklist": [
-        9
-      ],
-      "status": "observed",
-      "data": {
-        "by_region": {
-          "us-east-1": {
-            "enabled": true,
-            "finding_publishing_frequency": "SIX_HOURS",
-            "features": {
-              "CLOUD_TRAIL": "ENABLED",
-              "DNS_LOGS": "ENABLED",
-              "FLOW_LOGS": "ENABLED",
-              "S3_DATA_EVENTS": "DISABLED",
-              "EKS_AUDIT_LOGS": "DISABLED",
-              "EBS_MALWARE_PROTECTION": "DISABLED",
-              "RDS_LOGIN_EVENTS": "DISABLED",
-              "AI_PROTECTION": "DISABLED",
-              "AI_ANALYST": "DISABLED",
-              "EKS_RUNTIME_MONITORING": "DISABLED",
-              "LAMBDA_NETWORK_LOGS": "DISABLED",
-              "RUNTIME_MONITORING": "DISABLED"
-            },
-            "features_disabled": [
-              "AI_ANALYST",
-              "AI_PROTECTION",
-              "EBS_MALWARE_PROTECTION",
-              "EKS_AUDIT_LOGS",
-              "EKS_RUNTIME_MONITORING",
-              "LAMBDA_NETWORK_LOGS",
-              "RDS_LOGIN_EVENTS",
-              "RUNTIME_MONITORING",
-              "S3_DATA_EVENTS"
-            ]
-          },
-          "eu-north-1": {
-            "enabled": true,
-            "finding_publishing_frequency": "SIX_HOURS",
-            "features": {
-              "CLOUD_TRAIL": "ENABLED",
-              "DNS_LOGS": "ENABLED",
-              "FLOW_LOGS": "ENABLED",
-              "S3_DATA_EVENTS": "ENABLED",
-              "EKS_AUDIT_LOGS": "ENABLED",
-              "EBS_MALWARE_PROTECTION": "ENABLED",
-              "RDS_LOGIN_EVENTS": "ENABLED",
-              "AI_PROTECTION": "DISABLED",
-              "AI_ANALYST": "DISABLED",
-              "EKS_RUNTIME_MONITORING": "DISABLED",
-              "LAMBDA_NETWORK_LOGS": "ENABLED",
-              "RUNTIME_MONITORING": "DISABLED"
-            },
-            "features_disabled": [
-              "AI_ANALYST",
-              "AI_PROTECTION",
-              "EKS_RUNTIME_MONITORING",
-              "RUNTIME_MONITORING"
-            ]
-          }
-        },
-        "regions_enabled": [
-          "eu-north-1",
-          "us-east-1"
-        ],
-        "regions_not_enabled": [],
-        "coverage": "2/2"
-      }
-    },
-    "secrets": {
-      "domain": "data",
-      "checklist": [
-        17
-      ],
-      "status": "observed",
-      "data": {
-        "secrets": [],
-        "parameters": [
-          {
-            "name": "param_1c4fa1",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_96fbb1",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_54f879",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_6bd3e7",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_ca0e2b",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_704c6a",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_39e61f",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_3e7e9d",
-            "region": "us-east-1",
-            "type": "String",
-            "kms_key_id": null,
-            "tier": "Standard"
-          },
-          {
-            "name": "param_6f1ab2",
-            "region": "eu-north-1",
-            "type": "StringList",
-            "kms_key_id": null,
-            "tier": "Standard"
-          }
-        ],
-        "secrets_total": 0,
-        "secrets_without_rotation": [],
-        "parameters_total": 9,
-        "plaintext_parameters_with_secret_names": []
-      }
-    },
-    "securityhub": {
-      "domain": "logging",
-      "checklist": [
-        10
-      ],
-      "status": "observed",
-      "data": {
-        "by_region": {
-          "us-east-1": {
-            "enabled": true,
-            "auto_enable_controls": true,
-            "standards": [
-              {
-                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
-                "status": "INCOMPLETE"
-              },
-              {
-                "arn": "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
-                "status": "INCOMPLETE"
-              }
-            ]
-          },
-          "eu-north-1": {
-            "enabled": true,
-            "auto_enable_controls": true,
-            "standards": [
-              {
-                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
-                "status": "READY"
-              },
-              {
-                "arn": "arn:aws:securityhub:eu-north-1::standards/aws-foundational-security-best-practices/v/1.0.0",
-                "status": "READY"
-              }
-            ]
-          }
-        },
-        "regions_enabled": [
-          "eu-north-1",
-          "us-east-1"
-        ],
-        "regions_not_enabled": [],
-        "coverage": "2/2"
       }
     },
     "root_controls": {
@@ -293,264 +301,6 @@
         "root_credentials_management_enabled": null,
         "root_sessions_enabled": null
       }
-    },
-    "config": {
-      "domain": "logging",
-      "checklist": [
-        11
-      ],
-      "status": "observed",
-      "data": {
-        "by_region": {
-          "us-east-1": {
-            "enabled": false,
-            "recording": false,
-            "records_all_resources": false,
-            "includes_global_resources": false,
-            "delivery_channels": 0,
-            "rule_count": 0
-          },
-          "eu-north-1": {
-            "enabled": false,
-            "recording": false,
-            "records_all_resources": false,
-            "includes_global_resources": false,
-            "delivery_channels": 0,
-            "rule_count": 343
-          }
-        },
-        "regions_recording": [],
-        "regions_not_recording": [
-          "eu-north-1",
-          "us-east-1"
-        ],
-        "coverage": "0/2"
-      }
-    },
-    "security_groups": {
-      "domain": "infrastructure",
-      "checklist": [
-        15
-      ],
-      "status": "observed",
-      "data": {
-        "total_groups": 7,
-        "internet_open_rules": [
-          {
-            "group_id": "sg_c675cf",
-            "group_name": "sg_0c4114",
-            "region": "us-east-1",
-            "vpc_id": "vpc_c12e1e",
-            "protocol": "tcp",
-            "from_port": 443,
-            "to_port": 443,
-            "open_to": [
-              "0.0.0.0/0"
-            ],
-            "all_ports": false,
-            "sensitive_ports_exposed": []
-          }
-        ],
-        "groups_open_to_internet": [
-          "sg_c675cf"
-        ],
-        "groups_exposing_sensitive_ports": []
-      }
-    },
-    "cicd": {
-      "domain": "code",
-      "checklist": [
-        18
-      ],
-      "status": "observed",
-      "data": {
-        "source": "repo",
-        "workflows": [
-          {
-            "file": "security-pipeline.yml",
-            "name": "security-pipeline",
-            "triggers": [
-              "pull_request",
-              "push",
-              "schedule"
-            ],
-            "top_level_permissions": {
-              "contents": "read"
-            },
-            "job_count": 4,
-            "job_names": [
-              "guardrails",
-              "iac",
-              "sast",
-              "supply-chain"
-            ],
-            "uses_aws_oidc": false,
-            "requests_id_token": false,
-            "actions": [
-              "actions/checkout@v4",
-              "actions/setup-node@v4",
-              "anchore/sbom-action@v0",
-              "astral-sh/setup-uv@v5",
-              "bridgecrewio/checkov-action@master",
-              "github/codeql-action/upload-sarif@v3",
-              "gitleaks/gitleaks-action@v2",
-              "hashicorp/setup-terraform@v3",
-              "semgrep/semgrep-action@v1"
-            ],
-            "actions_not_sha_pinned": [
-              "actions/checkout@v4",
-              "actions/setup-node@v4",
-              "anchore/sbom-action@v0",
-              "astral-sh/setup-uv@v5",
-              "bridgecrewio/checkov-action@master",
-              "github/codeql-action/upload-sarif@v3",
-              "gitleaks/gitleaks-action@v2",
-              "hashicorp/setup-terraform@v3",
-              "semgrep/semgrep-action@v1"
-            ]
-          }
-        ],
-        "workflow_count": 1,
-        "any_uses_aws_oidc": false,
-        "total_actions_not_sha_pinned": [
-          "actions/checkout@v4",
-          "actions/setup-node@v4",
-          "anchore/sbom-action@v0",
-          "astral-sh/setup-uv@v5",
-          "bridgecrewio/checkov-action@master",
-          "github/codeql-action/upload-sarif@v3",
-          "gitleaks/gitleaks-action@v2",
-          "hashicorp/setup-terraform@v3",
-          "semgrep/semgrep-action@v1"
-        ],
-        "has_codeowners": true,
-        "has_dependabot": false,
-        "has_branch_rulesets": true,
-        "has_pre_commit": true
-      },
-      "note": "Sourced from the repository, not from AWS"
-    },
-    "vulnerability_services": {
-      "domain": "code",
-      "checklist": [
-        20
-      ],
-      "status": "observed",
-      "data": {
-        "inspector": {
-          "us-east-1": {
-            "status": "DISABLED",
-            "resources": {
-              "ec2": "DISABLED",
-              "ecr": "DISABLED",
-              "lambda": "DISABLED",
-              "lambdaCode": "DISABLED"
-            }
-          },
-          "eu-north-1": {
-            "status": "ENABLED",
-            "resources": {
-              "ec2": "ENABLED",
-              "ecr": "ENABLED",
-              "lambda": "ENABLED",
-              "lambdaCode": "DISABLED"
-            }
-          }
-        },
-        "macie": {
-          "us-east-1": {
-            "status": "DISABLED"
-          },
-          "eu-north-1": {
-            "status": "ENABLED"
-          }
-        },
-        "inspector_regions_enabled": [
-          "eu-north-1"
-        ],
-        "macie_regions_enabled": [
-          "eu-north-1"
-        ]
-      }
-    },
-    "iac": {
-      "domain": "code",
-      "checklist": [
-        19
-      ],
-      "status": "observed",
-      "data": {
-        "source": "repo",
-        "terraform_modules": [
-          {
-            "path": "infra/terraform/detections",
-            "files": [
-              "main.tf",
-              "outputs.tf",
-              "variables.tf"
-            ],
-            "resource_count": 17,
-            "has_variables": true,
-            "has_outputs": true,
-            "checkov_suppressions": 0
-          },
-          {
-            "path": "infra/terraform/modules/agent-data-access",
-            "files": [
-              "main.tf",
-              "outputs.tf",
-              "variables.tf"
-            ],
-            "resource_count": 4,
-            "has_variables": true,
-            "has_outputs": true,
-            "checkov_suppressions": 4
-          },
-          {
-            "path": "infra/terraform/modules/aurora-secure",
-            "files": [
-              "main.tf",
-              "outputs.tf",
-              "variables.tf"
-            ],
-            "resource_count": 12,
-            "has_variables": true,
-            "has_outputs": true,
-            "checkov_suppressions": 6
-          },
-          {
-            "path": "infra/terraform/modules/bedrock-guardrails",
-            "files": [
-              "main.tf",
-              "outputs.tf",
-              "variables.tf"
-            ],
-            "resource_count": 18,
-            "has_variables": true,
-            "has_outputs": true,
-            "checkov_suppressions": 7
-          },
-          {
-            "path": "infra/terraform/modules/github-oidc",
-            "files": [
-              "main.tf",
-              "outputs.tf",
-              "variables.tf"
-            ],
-            "resource_count": 4,
-            "has_variables": true,
-            "has_outputs": true,
-            "checkov_suppressions": 0
-          }
-        ],
-        "terraform_module_count": 5,
-        "cdk_apps": [
-          "infra/cdk"
-        ],
-        "total_checkov_suppressions": 17,
-        "has_cloudformation": true
-      },
-      "note": "Sourced from the repository, not from AWS"
     },
     "third_party": {
       "domain": "identity",
@@ -639,260 +389,737 @@
         ]
       }
     },
-    "vpc": {
-      "domain": "infrastructure",
+    "guardduty": {
+      "domain": "logging",
       "checklist": [
-        14
+        9
       ],
       "status": "observed",
       "data": {
-        "vpcs": [
-          {
-            "vpc_id": "vpc_c12e1e",
-            "region": "us-east-1",
-            "cidr": "10.10.0.0/16",
-            "is_default": false,
-            "flow_logs_enabled": true,
-            "subnet_count": 6,
-            "public_subnets": [],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 2,
-            "peering_connections": 0
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
           },
-          {
-            "vpc_id": "vpc_6672fb",
-            "region": "us-east-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 6,
-            "public_subnets": [
-              "subnet_5697d9",
-              "subnet_c02dfe",
-              "subnet_40caf8",
-              "subnet_6ca4a2",
-              "subnet_c4b6dd",
-              "subnet_f06edf"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
+          "ap-northeast-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
           },
-          {
-            "vpc_id": "vpc_b36013",
-            "region": "eu-north-1",
-            "cidr": "172.31.0.0/16",
-            "is_default": true,
-            "flow_logs_enabled": false,
-            "subnet_count": 3,
-            "public_subnets": [
-              "subnet_ea3431",
-              "subnet_4a8482",
-              "subnet_8842b3"
-            ],
-            "nat_gateways": 0,
-            "internet_gateways": 1,
-            "vpc_endpoints": 0,
-            "peering_connections": 0
+          "ap-northeast-3": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-south-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-southeast-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-southeast-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ca-central-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-central-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-north-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "ENABLED",
+              "EKS_AUDIT_LOGS": "ENABLED",
+              "EBS_MALWARE_PROTECTION": "ENABLED",
+              "RDS_LOGIN_EVENTS": "ENABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "ENABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EKS_RUNTIME_MONITORING",
+              "RUNTIME_MONITORING"
+            ]
+          },
+          "eu-west-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-west-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-west-3": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "sa-east-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-east-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-east-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-west-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-west-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
           }
+        },
+        "regions_enabled": [
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ap-south-1",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ca-central-1",
+          "eu-central-1",
+          "eu-north-1",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "sa-east-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
         ],
-        "total": 3,
-        "without_flow_logs": [
-          "us-east-1/vpc_6672fb",
-          "eu-north-1/vpc_b36013"
-        ],
-        "default_vpcs": [
-          "us-east-1/vpc_6672fb",
-          "eu-north-1/vpc_b36013"
-        ]
+        "regions_not_enabled": [],
+        "coverage": "17/17"
       }
     },
-    "lambda": {
-      "domain": "code",
+    "securityhub": {
+      "domain": "logging",
       "checklist": [
-        16
+        10
       ],
       "status": "observed",
       "data": {
-        "functions": [
-          {
-            "name": "fn_09b95f",
-            "region": "us-east-1",
-            "runtime": "python3.14",
-            "runtime_deprecated": false,
-            "role": "arn:aws:iam::acct_78e004:role/service-role/role_a84397",
-            "vpc_attached": false,
-            "tracing": "PassThrough",
-            "kms_key_arn": null,
-            "reserved_concurrency": null,
-            "architectures": [
-              "x86_64"
-            ],
-            "timeout": 3,
-            "env_var_names": [],
-            "env_vars_look_secret": [],
-            "env_encrypted_with_cmk": false
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:ap-northeast-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
           },
-          {
-            "name": "fn_ed6014",
-            "region": "us-east-1",
-            "runtime": "python3.14",
-            "runtime_deprecated": false,
-            "role": "arn:aws:iam::acct_78e004:role/service-role/role_469bc6",
-            "vpc_attached": false,
-            "tracing": "PassThrough",
-            "kms_key_arn": null,
-            "reserved_concurrency": null,
-            "architectures": [
-              "x86_64"
-            ],
-            "timeout": 3,
-            "env_var_names": [],
-            "env_vars_look_secret": [],
-            "env_encrypted_with_cmk": false
+          "ap-northeast-2": {
+            "enabled": false
           },
-          {
-            "name": "fn_fc84c8",
-            "region": "us-east-1",
-            "runtime": "python3.12",
-            "runtime_deprecated": false,
-            "role": "arn:aws:iam::acct_78e004:role/role_4ce2e0",
-            "vpc_attached": false,
-            "tracing": "Active",
-            "kms_key_arn": null,
-            "reserved_concurrency": 5,
-            "architectures": [
-              "arm64"
-            ],
-            "timeout": 10,
-            "env_var_names": [
-              "TABLE_NAME",
-              "ENVIRONMENT"
-            ],
-            "env_vars_look_secret": [],
-            "env_encrypted_with_cmk": false
-          }
-        ],
-        "total": 3,
-        "deprecated_runtimes": [],
-        "without_tracing": [
-          "fn_09b95f",
-          "fn_ed6014"
-        ],
-        "with_secret_shaped_env_vars": [],
-        "shared_execution_roles": {}
-      }
-    },
-    "identity_center": {
-      "domain": "identity",
-      "checklist": [
-        6
-      ],
-      "status": "observed",
-      "data": {
-        "enabled": true,
-        "region": "eu-north-1",
-        "instance_arn": "arn:aws:sso:::instance/ssoins-6508f3eeb926c4ad",
-        "identity_store_id": "d-c3676338e7",
-        "permission_sets": [
-          {
-            "name": "PowerUserAccess",
-            "session_duration": "PT1H",
-            "managed_policies": [
-              "PowerUserAccess"
-            ],
-            "has_permission_boundary": false,
-            "grants_admin": true
+          "ap-northeast-3": {
+            "enabled": false
           },
-          {
-            "name": "AdministratorAccess",
-            "session_duration": "PT12H",
-            "managed_policies": [
-              "AdministratorAccess"
-            ],
-            "has_permission_boundary": false,
-            "grants_admin": true
-          }
-        ],
-        "user_count": 1,
-        "group_count": 1,
-        "admin_permission_sets": [
-          "PowerUserAccess",
-          "AdministratorAccess"
-        ]
-      }
-    },
-    "api_gateway": {
-      "domain": "code",
-      "checklist": [
-        16
-      ],
-      "status": "observed",
-      "data": {
-        "stages": [
-          {
-            "api_id": "brpe2epz86",
-            "name": "api_3f2806",
-            "region": "us-east-1",
-            "protocol": "HTTP",
-            "stage": "$default",
-            "authorizers": [],
-            "has_authorizer": false,
-            "web_acl_arn": null,
-            "access_logging": true,
-            "auto_deploy": true
+          "ap-south-1": {
+            "enabled": false
           },
-          {
-            "api_id": "brpe2epz86",
-            "name": "api_3f2806",
-            "region": "us-east-1",
-            "protocol": "HTTP",
-            "stage": "api-deploy-stage",
-            "authorizers": [],
-            "has_authorizer": false,
-            "web_acl_arn": null,
-            "access_logging": false,
-            "auto_deploy": false
+          "ap-southeast-1": {
+            "enabled": false
+          },
+          "ap-southeast-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:ap-southeast-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "ca-central-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:ca-central-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-central-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-central-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-north-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "READY"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-north-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "READY"
+              }
+            ]
+          },
+          "eu-west-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-west-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-west-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-west-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-west-3": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-west-3::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "sa-east-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:sa-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-east-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-east-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-east-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-west-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-west-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-west-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
           }
+        },
+        "regions_enabled": [
+          "ap-northeast-1",
+          "ap-southeast-2",
+          "ca-central-1",
+          "eu-central-1",
+          "eu-north-1",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "sa-east-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
         ],
-        "total": 2,
-        "without_authorizer": [
-          "api_3f2806/$default",
-          "api_3f2806/api-deploy-stage"
+        "regions_not_enabled": [
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ap-south-1",
+          "ap-southeast-1"
         ],
-        "without_access_logging": [
-          "api_3f2806/api-deploy-stage"
-        ],
-        "without_waf": []
-      }
-    },
-    "exposure": {
-      "domain": "infrastructure",
-      "checklist": [
-        3
-      ],
-      "status": "observed",
-      "data": {
-        "load_balancers": [],
-        "elastic_ips": [],
-        "public_instances": [],
-        "public_databases": [],
-        "api_gateways": [
-          {
-            "id": "brpe2epz86",
-            "name": "api_3f2806",
-            "region": "us-east-1",
-            "protocol": "HTTP",
-            "endpoint": "https://brpe2epz86.execute-api.us-east-1.amazonaws.com"
-          }
-        ],
-        "lambda_function_urls": [],
-        "cloudfront_distributions": [],
-        "total_internet_facing": 1,
-        "unauthenticated_function_urls": [],
-        "cloudfront_without_waf": []
+        "coverage": "13/17"
       }
     },
     "iam": {
@@ -906,7 +1133,7 @@
         "account_summary": {
           "GroupPolicySizeQuota": 5120,
           "InstanceProfilesQuota": 1000,
-          "Policies": 6,
+          "Policies": 7,
           "GroupsPerUserQuota": 10,
           "InstanceProfiles": 0,
           "AttachedPoliciesPerUserQuota": 10,
@@ -927,9 +1154,9 @@
           "ServerCertificatesQuota": 20,
           "MFADevices": 2,
           "UserPolicySizeQuota": 2048,
-          "PolicyVersionsInUse": 29,
+          "PolicyVersionsInUse": 30,
           "ServerCertificates": 0,
-          "Roles": 30,
+          "Roles": 31,
           "RolesQuota": 1000,
           "SigningCertificatesPerUserQuota": 2,
           "MFADevicesInUse": 2,
@@ -1845,6 +2072,36 @@
             }
           },
           {
+            "name": "role_05e984",
+            "arn": "arn:aws:iam::acct_78e004:role/role_05e984",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-08-15T12:06:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "role_05e984"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [
+                "acct_78e004"
+              ],
+              "same_account_trust": true,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
             "name": "role_bcf90c",
             "arn": "arn:aws:iam::acct_78e004:role/service-role/role_bcf90c",
             "path": "/service-role/",
@@ -1901,155 +2158,1177 @@
         },
         "totals": {
           "users": 1,
-          "roles": 30,
+          "roles": 31,
           "users_with_admin": 1,
           "roles_with_admin": 4,
           "users_with_access_keys": 1,
           "roles_trusting_external_accounts": 0,
-          "roles_without_permission_boundary": 30
+          "roles_without_permission_boundary": 31
         }
       }
     },
-    "s3": {
-      "domain": "data",
+    "cicd": {
+      "domain": "code",
       "checklist": [
-        13
+        18
       ],
       "status": "observed",
       "data": {
-        "buckets": [
+        "source": "repo",
+        "workflows": [
           {
-            "name": "bucket_a08bc0",
-            "region": "us-east-1",
-            "created": "2026-07-27T18:39:58Z",
-            "public_access_block": {
-              "block_public_acls": true,
-              "block_public_policy": true,
-              "ignore_public_acls": true,
-              "restrict_public_buckets": true
-            },
-            "fully_blocked": true,
-            "policy_is_public": false,
-            "encryption_algorithms": [
-              "AES256"
+            "file": "security-pipeline.yml",
+            "name": "security-pipeline",
+            "triggers": [
+              "pull_request",
+              "push",
+              "schedule"
             ],
-            "bucket_key_enabled": true,
-            "versioning": "Enabled",
-            "mfa_delete": "Disabled",
-            "access_logging": false
-          },
-          {
-            "name": "bucket_0a4fc1",
-            "region": "us-east-1",
-            "created": "2026-07-27T18:40:00Z",
-            "public_access_block": {
-              "block_public_acls": true,
-              "block_public_policy": true,
-              "ignore_public_acls": true,
-              "restrict_public_buckets": true
+            "top_level_permissions": {
+              "contents": "read"
             },
-            "fully_blocked": true,
-            "policy_is_public": false,
-            "encryption_algorithms": [
-              "AES256"
+            "job_count": 4,
+            "job_names": [
+              "guardrails",
+              "iac",
+              "sast",
+              "supply-chain"
             ],
-            "bucket_key_enabled": true,
-            "versioning": "Enabled",
-            "mfa_delete": "Disabled",
-            "access_logging": true
-          },
-          {
-            "name": "bucket_cd97b8",
-            "region": "us-east-1",
-            "created": "2026-07-27T18:41:23Z",
-            "public_access_block": {
-              "block_public_acls": true,
-              "block_public_policy": true,
-              "ignore_public_acls": true,
-              "restrict_public_buckets": true
-            },
-            "fully_blocked": true,
-            "policy_is_public": false,
-            "encryption_algorithms": [
-              "AES256"
+            "uses_aws_oidc": false,
+            "requests_id_token": false,
+            "actions": [
+              "actions/checkout@v4",
+              "actions/setup-node@v4",
+              "anchore/sbom-action@v0",
+              "astral-sh/setup-uv@v5",
+              "bridgecrewio/checkov-action@master",
+              "github/codeql-action/upload-sarif@v3",
+              "gitleaks/gitleaks-action@v2",
+              "hashicorp/setup-terraform@v3",
+              "semgrep/semgrep-action@v1"
             ],
-            "bucket_key_enabled": true,
-            "versioning": "Enabled",
-            "mfa_delete": "Disabled",
-            "access_logging": true
-          },
-          {
-            "name": "bucket_46d669",
-            "region": "us-east-1",
-            "created": "2026-07-29T17:57:15Z",
-            "public_access_block": {
-              "block_public_acls": true,
-              "block_public_policy": true,
-              "ignore_public_acls": true,
-              "restrict_public_buckets": true
-            },
-            "fully_blocked": true,
-            "policy_is_public": false,
-            "encryption_algorithms": [
-              "aws:kms"
-            ],
-            "bucket_key_enabled": true,
-            "versioning": "Enabled",
-            "mfa_delete": "Disabled",
-            "access_logging": false
-          },
-          {
-            "name": "bucket_5e8292",
-            "region": "us-east-1",
-            "created": "2026-07-29T17:57:25Z",
-            "public_access_block": {
-              "block_public_acls": true,
-              "block_public_policy": true,
-              "ignore_public_acls": true,
-              "restrict_public_buckets": true
-            },
-            "fully_blocked": true,
-            "policy_is_public": false,
-            "encryption_algorithms": [
-              "aws:kms"
-            ],
-            "bucket_key_enabled": true,
-            "versioning": "Enabled",
-            "mfa_delete": "Disabled",
-            "access_logging": false
-          },
-          {
-            "name": "bucket_e4423a",
-            "region": "us-east-1",
-            "created": "2026-07-29T17:57:20Z",
-            "public_access_block": {
-              "block_public_acls": true,
-              "block_public_policy": true,
-              "ignore_public_acls": true,
-              "restrict_public_buckets": true
-            },
-            "fully_blocked": true,
-            "policy_is_public": false,
-            "encryption_algorithms": [
-              "aws:kms"
-            ],
-            "bucket_key_enabled": true,
-            "versioning": "Enabled",
-            "mfa_delete": "Disabled",
-            "access_logging": false
+            "actions_not_sha_pinned": [
+              "actions/checkout@v4",
+              "actions/setup-node@v4",
+              "anchore/sbom-action@v0",
+              "astral-sh/setup-uv@v5",
+              "bridgecrewio/checkov-action@master",
+              "github/codeql-action/upload-sarif@v3",
+              "gitleaks/gitleaks-action@v2",
+              "hashicorp/setup-terraform@v3",
+              "semgrep/semgrep-action@v1"
+            ]
           }
         ],
-        "total": 6,
-        "account_public_access_block": {
-          "block_public_acls": true,
-          "block_public_policy": true,
-          "ignore_public_acls": true,
-          "restrict_public_buckets": true
+        "workflow_count": 1,
+        "any_uses_aws_oidc": false,
+        "total_actions_not_sha_pinned": [
+          "actions/checkout@v4",
+          "actions/setup-node@v4",
+          "anchore/sbom-action@v0",
+          "astral-sh/setup-uv@v5",
+          "bridgecrewio/checkov-action@master",
+          "github/codeql-action/upload-sarif@v3",
+          "gitleaks/gitleaks-action@v2",
+          "hashicorp/setup-terraform@v3",
+          "semgrep/semgrep-action@v1"
+        ],
+        "has_codeowners": true,
+        "has_dependabot": false,
+        "has_branch_rulesets": true,
+        "has_pre_commit": true
+      },
+      "note": "Sourced from the repository, not from AWS"
+    },
+    "iac": {
+      "domain": "code",
+      "checklist": [
+        19
+      ],
+      "status": "observed",
+      "data": {
+        "source": "repo",
+        "terraform_modules": [
+          {
+            "path": "infra/terraform/detections",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 17,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 0
+          },
+          {
+            "path": "infra/terraform/modules/agent-data-access",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 4,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 4
+          },
+          {
+            "path": "infra/terraform/modules/aurora-secure",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 12,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 6
+          },
+          {
+            "path": "infra/terraform/modules/bedrock-guardrails",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 18,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 7
+          },
+          {
+            "path": "infra/terraform/modules/github-oidc",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 4,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 0
+          }
+        ],
+        "terraform_module_count": 5,
+        "cdk_apps": [
+          "infra/cdk"
+        ],
+        "total_checkov_suppressions": 17,
+        "has_cloudformation": true
+      },
+      "note": "Sourced from the repository, not from AWS"
+    },
+    "secrets": {
+      "domain": "data",
+      "checklist": [
+        17
+      ],
+      "status": "observed",
+      "data": {
+        "secrets": [],
+        "parameters": [
+          {
+            "name": "param_6f1ab2",
+            "region": "eu-north-1",
+            "type": "StringList",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_1c4fa1",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_96fbb1",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_54f879",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_6bd3e7",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_ca0e2b",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_704c6a",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_39e61f",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_3e7e9d",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          }
+        ],
+        "secrets_total": 0,
+        "secrets_without_rotation": [],
+        "parameters_total": 9,
+        "plaintext_parameters_with_secret_names": []
+      }
+    },
+    "config": {
+      "domain": "logging",
+      "checklist": [
+        11
+      ],
+      "status": "observed",
+      "data": {
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-northeast-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-northeast-3": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-south-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-southeast-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-southeast-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ca-central-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-central-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-north-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 343
+          },
+          "eu-west-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-west-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-west-3": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "sa-east-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-east-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-east-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-west-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-west-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          }
         },
-        "account_fully_blocked": true,
-        "buckets_not_fully_blocked": [],
-        "buckets_unencrypted": [],
-        "buckets_public_by_policy": []
+        "regions_recording": [],
+        "regions_not_recording": [
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ap-south-1",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ca-central-1",
+          "eu-central-1",
+          "eu-north-1",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "sa-east-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
+        ],
+        "coverage": "0/17"
+      }
+    },
+    "security_groups": {
+      "domain": "infrastructure",
+      "checklist": [
+        15
+      ],
+      "status": "observed",
+      "data": {
+        "total_groups": 22,
+        "internet_open_rules": [
+          {
+            "group_id": "sg_c675cf",
+            "group_name": "sg_0c4114",
+            "region": "us-east-1",
+            "vpc_id": "vpc_c12e1e",
+            "protocol": "tcp",
+            "from_port": 443,
+            "to_port": 443,
+            "open_to": [
+              "0.0.0.0/0"
+            ],
+            "all_ports": false,
+            "sensitive_ports_exposed": []
+          }
+        ],
+        "groups_open_to_internet": [
+          "sg_c675cf"
+        ],
+        "groups_exposing_sensitive_ports": []
+      }
+    },
+    "identity_center": {
+      "domain": "identity",
+      "checklist": [
+        6
+      ],
+      "status": "observed",
+      "data": {
+        "enabled": true,
+        "region": "eu-north-1",
+        "instance_arn": "arn:aws:sso:::instance/ssoins-6508f3eeb926c4ad",
+        "identity_store_id": "d-c3676338e7",
+        "permission_sets": [
+          {
+            "name": "PowerUserAccess",
+            "session_duration": "PT1H",
+            "managed_policies": [
+              "PowerUserAccess"
+            ],
+            "has_permission_boundary": false,
+            "grants_admin": true
+          },
+          {
+            "name": "AdministratorAccess",
+            "session_duration": "PT12H",
+            "managed_policies": [
+              "AdministratorAccess"
+            ],
+            "has_permission_boundary": false,
+            "grants_admin": true
+          }
+        ],
+        "user_count": 1,
+        "group_count": 1,
+        "admin_permission_sets": [
+          "PowerUserAccess",
+          "AdministratorAccess"
+        ]
+      }
+    },
+    "vulnerability_services": {
+      "domain": "code",
+      "checklist": [
+        20
+      ],
+      "status": "observed",
+      "data": {
+        "inspector": {
+          "ap-northeast-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-northeast-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-northeast-3": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-south-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-southeast-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-southeast-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ca-central-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-central-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-north-1": {
+            "status": "ENABLED",
+            "resources": {
+              "ec2": "ENABLED",
+              "ecr": "ENABLED",
+              "lambda": "ENABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-west-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-west-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-west-3": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "sa-east-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-east-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-east-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-west-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-west-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          }
+        },
+        "macie": {
+          "ap-northeast-1": {
+            "status": "DISABLED"
+          },
+          "ap-northeast-2": {
+            "status": "DISABLED"
+          },
+          "ap-northeast-3": {
+            "status": "DISABLED"
+          },
+          "ap-south-1": {
+            "status": "DISABLED"
+          },
+          "ap-southeast-1": {
+            "status": "DISABLED"
+          },
+          "ap-southeast-2": {
+            "status": "DISABLED"
+          },
+          "ca-central-1": {
+            "status": "DISABLED"
+          },
+          "eu-central-1": {
+            "status": "DISABLED"
+          },
+          "eu-north-1": {
+            "status": "ENABLED"
+          },
+          "eu-west-1": {
+            "status": "DISABLED"
+          },
+          "eu-west-2": {
+            "status": "DISABLED"
+          },
+          "eu-west-3": {
+            "status": "DISABLED"
+          },
+          "sa-east-1": {
+            "status": "DISABLED"
+          },
+          "us-east-1": {
+            "status": "DISABLED"
+          },
+          "us-east-2": {
+            "status": "DISABLED"
+          },
+          "us-west-1": {
+            "status": "DISABLED"
+          },
+          "us-west-2": {
+            "status": "DISABLED"
+          }
+        },
+        "inspector_regions_enabled": [
+          "eu-north-1"
+        ],
+        "macie_regions_enabled": [
+          "eu-north-1"
+        ]
+      }
+    },
+    "lambda": {
+      "domain": "code",
+      "checklist": [
+        16
+      ],
+      "status": "observed",
+      "data": {
+        "functions": [
+          {
+            "name": "fn_09b95f",
+            "region": "us-east-1",
+            "runtime": "python3.14",
+            "runtime_deprecated": false,
+            "role": "arn:aws:iam::acct_78e004:role/service-role/role_a84397",
+            "vpc_attached": false,
+            "tracing": "PassThrough",
+            "kms_key_arn": null,
+            "reserved_concurrency": null,
+            "architectures": [
+              "x86_64"
+            ],
+            "timeout": 3,
+            "env_var_names": [],
+            "env_vars_look_secret": [],
+            "env_encrypted_with_cmk": false
+          },
+          {
+            "name": "fn_ed6014",
+            "region": "us-east-1",
+            "runtime": "python3.14",
+            "runtime_deprecated": false,
+            "role": "arn:aws:iam::acct_78e004:role/service-role/role_469bc6",
+            "vpc_attached": false,
+            "tracing": "PassThrough",
+            "kms_key_arn": null,
+            "reserved_concurrency": null,
+            "architectures": [
+              "x86_64"
+            ],
+            "timeout": 3,
+            "env_var_names": [],
+            "env_vars_look_secret": [],
+            "env_encrypted_with_cmk": false
+          },
+          {
+            "name": "fn_fc84c8",
+            "region": "us-east-1",
+            "runtime": "python3.12",
+            "runtime_deprecated": false,
+            "role": "arn:aws:iam::acct_78e004:role/role_4ce2e0",
+            "vpc_attached": false,
+            "tracing": "Active",
+            "kms_key_arn": null,
+            "reserved_concurrency": 5,
+            "architectures": [
+              "arm64"
+            ],
+            "timeout": 10,
+            "env_var_names": [],
+            "env_vars_look_secret": [],
+            "env_encrypted_with_cmk": false
+          }
+        ],
+        "total": 3,
+        "deprecated_runtimes": [],
+        "without_tracing": [
+          "fn_09b95f",
+          "fn_ed6014"
+        ],
+        "with_secret_shaped_env_vars": [],
+        "shared_execution_roles": {}
+      }
+    },
+    "api_gateway": {
+      "domain": "code",
+      "checklist": [
+        16
+      ],
+      "status": "observed",
+      "data": {
+        "stages": [
+          {
+            "api_id": "brpe2epz86",
+            "name": "api_3f2806",
+            "region": "us-east-1",
+            "protocol": "HTTP",
+            "stage": "$default",
+            "authorizers": [],
+            "has_authorizer": false,
+            "web_acl_arn": null,
+            "access_logging": true,
+            "auto_deploy": true
+          },
+          {
+            "api_id": "brpe2epz86",
+            "name": "api_3f2806",
+            "region": "us-east-1",
+            "protocol": "HTTP",
+            "stage": "api-deploy-stage",
+            "authorizers": [],
+            "has_authorizer": false,
+            "web_acl_arn": null,
+            "access_logging": false,
+            "auto_deploy": false
+          }
+        ],
+        "total": 2,
+        "without_authorizer": [
+          "api_3f2806/$default",
+          "api_3f2806/api-deploy-stage"
+        ],
+        "without_access_logging": [
+          "api_3f2806/api-deploy-stage"
+        ],
+        "without_waf": []
+      }
+    },
+    "vpc": {
+      "domain": "infrastructure",
+      "checklist": [
+        14
+      ],
+      "status": "observed",
+      "data": {
+        "vpcs": [
+          {
+            "vpc_id": "vpc_c11a9b",
+            "region": "ap-northeast-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_d658ac",
+              "subnet_f06b86",
+              "subnet_639d75"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_98cc4f",
+            "region": "ap-northeast-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 4,
+            "public_subnets": [
+              "subnet_c33d88",
+              "subnet_c1ddc9",
+              "subnet_a31df7",
+              "subnet_c426d8"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_48c3b4",
+            "region": "ap-northeast-3",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_594714",
+              "subnet_fc1ef8",
+              "subnet_16eae4"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_fc75a8",
+            "region": "ap-south-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_53eaa4",
+              "subnet_301035",
+              "subnet_f019e8"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_c00621",
+            "region": "ap-southeast-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_0a7c41",
+              "subnet_10c633",
+              "subnet_d9608f"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_288aba",
+            "region": "ap-southeast-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_487dce",
+              "subnet_457c62",
+              "subnet_bae005"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_0a2744",
+            "region": "ca-central-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_40ef04",
+              "subnet_9f70dd",
+              "subnet_17f820"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_32d49c",
+            "region": "eu-central-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_db50eb",
+              "subnet_7cf9fc",
+              "subnet_5e610b"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_b36013",
+            "region": "eu-north-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_ea3431",
+              "subnet_4a8482",
+              "subnet_8842b3"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_e92a4c",
+            "region": "eu-west-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_ac17c8",
+              "subnet_707f86",
+              "subnet_69368a"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_51f941",
+            "region": "eu-west-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_abf20e",
+              "subnet_48937c",
+              "subnet_a00df5"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_620e78",
+            "region": "eu-west-3",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_f36e3a",
+              "subnet_2c4533",
+              "subnet_779f56"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_1bada7",
+            "region": "sa-east-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_11c284",
+              "subnet_ccc112",
+              "subnet_64b86f"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_c12e1e",
+            "region": "us-east-1",
+            "cidr": "10.10.0.0/16",
+            "is_default": false,
+            "flow_logs_enabled": true,
+            "subnet_count": 6,
+            "public_subnets": [],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 2,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_6672fb",
+            "region": "us-east-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 6,
+            "public_subnets": [
+              "subnet_5697d9",
+              "subnet_c02dfe",
+              "subnet_40caf8",
+              "subnet_6ca4a2",
+              "subnet_c4b6dd",
+              "subnet_f06edf"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_fb0f9d",
+            "region": "us-east-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_8ca7e5",
+              "subnet_4b5a9a",
+              "subnet_c329b5"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_274626",
+            "region": "us-west-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 2,
+            "public_subnets": [
+              "subnet_6b4861",
+              "subnet_8fedd3"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_af0bb7",
+            "region": "us-west-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 4,
+            "public_subnets": [
+              "subnet_42135f",
+              "subnet_56f2f0",
+              "subnet_8faa56",
+              "subnet_5829c6"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          }
+        ],
+        "total": 18,
+        "without_flow_logs": [
+          "ap-northeast-1/vpc_c11a9b",
+          "ap-northeast-2/vpc_98cc4f",
+          "ap-northeast-3/vpc_48c3b4",
+          "ap-south-1/vpc_fc75a8",
+          "ap-southeast-1/vpc_c00621",
+          "ap-southeast-2/vpc_288aba",
+          "ca-central-1/vpc_0a2744",
+          "eu-central-1/vpc_32d49c",
+          "eu-north-1/vpc_b36013",
+          "eu-west-1/vpc_e92a4c",
+          "eu-west-2/vpc_51f941",
+          "eu-west-3/vpc_620e78",
+          "sa-east-1/vpc_1bada7",
+          "us-east-1/vpc_6672fb",
+          "us-east-2/vpc_fb0f9d",
+          "us-west-1/vpc_274626",
+          "us-west-2/vpc_af0bb7"
+        ],
+        "default_vpcs": [
+          "ap-northeast-1/vpc_c11a9b",
+          "ap-northeast-2/vpc_98cc4f",
+          "ap-northeast-3/vpc_48c3b4",
+          "ap-south-1/vpc_fc75a8",
+          "ap-southeast-1/vpc_c00621",
+          "ap-southeast-2/vpc_288aba",
+          "ca-central-1/vpc_0a2744",
+          "eu-central-1/vpc_32d49c",
+          "eu-north-1/vpc_b36013",
+          "eu-west-1/vpc_e92a4c",
+          "eu-west-2/vpc_51f941",
+          "eu-west-3/vpc_620e78",
+          "sa-east-1/vpc_1bada7",
+          "us-east-1/vpc_6672fb",
+          "us-east-2/vpc_fb0f9d",
+          "us-west-1/vpc_274626",
+          "us-west-2/vpc_af0bb7"
+        ]
       }
     },
     "organizations": {
@@ -2618,19 +3897,43 @@
           "securityhub.amazonaws.com"
         ]
       }
+    },
+    "exposure": {
+      "domain": "infrastructure",
+      "checklist": [
+        3
+      ],
+      "status": "observed",
+      "data": {
+        "load_balancers": [],
+        "elastic_ips": [],
+        "public_instances": [],
+        "public_databases": [],
+        "api_gateways": [
+          {
+            "id": "brpe2epz86",
+            "name": "api_3f2806",
+            "region": "us-east-1",
+            "protocol": "HTTP",
+            "endpoint": "https://brpe2epz86.execute-api.us-east-1.amazonaws.com"
+          }
+        ],
+        "lambda_function_urls": [],
+        "cloudfront_distributions": [],
+        "total_internet_facing": 1,
+        "unauthenticated_function_urls": [],
+        "cloudfront_without_waf": []
+      }
     }
   },
   "api_calls": {
-    "total": 311,
+    "total": 812,
     "by_outcome": {
-      "absent": 8,
-      "denied": 1,
-      "ok": 301,
+      "absent": 28,
+      "ok": 783,
       "unsupported": 1
     },
-    "denied": [
-      "macie2:get_macie_session"
-    ],
+    "denied": [],
     "errors": []
   }
 }

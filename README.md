@@ -46,8 +46,8 @@ builds less.
 | Pre-commit hooks + IDE protections | **Config in repo** | `.pre-commit-config.yaml`, `.vscode/` |
 | Role readiness (JD matrix, day-one plan, drills, metrics, outcomes) | **Written** | `readiness/` |
 | Shared CDK Aspects package — each one proven to *fire*, not just to pass | **Runs, 8 tests** | `cd platform/lib/cdk-security && npx jest` |
-| AWS discovery: 21 read-only collectors, 41 rules, 25-point baseline | **Runs, 96 tests** | `make assess-offline` |
-| **Assessment of a real AWS Organization** — 2 accounts, 14 OUs, 29 findings | **Executed** | `platform/00-discovery/report/assessment.md` |
+| AWS discovery: 21 read-only collectors, 41 rules, 25-point baseline | **Runs, 106 tests** | `make assess-offline` |
+| **Assessment of a real AWS Organization** — 17 regions, 812 calls, 29 findings | **Executed under a purpose-built read-only role, 0 denied** | `platform/00-discovery/report/assessment.md` |
 | Baseline IaC answering the assessment: SCPs, RCPs, delegated admin, org trail, detection | **Validated statically** | `platform/BASELINE.md` |
 | AWS security platform (`platform/`) — golden path, observability, Slack | **In progress** | `platform/README.md` has the per-domain status |
 | Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |

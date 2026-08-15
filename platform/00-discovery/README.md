@@ -30,6 +30,12 @@ Under an admin credential, IAM will happily allow `s3:GetObject`. The guard is w
 collector bug from reading customer data during an assessment that was only meant to look at
 configuration.
 
+**The policy is proven, not merely written.** The committed assessment was run under a role
+carrying nothing but `discovery-readonly.json`, across all 17 enabled regions: **812 API calls,
+zero denied**, and findings identical to the earlier administrator run. A policy validated only by
+a linter is one nobody has tried to work under; this one has been, and the report's provenance
+table names the role it ran as.
+
 The guard applies two tests, and an operation must pass both:
 
 1. **Structural** — the operation name must begin with a read-only verb. `PutBucketPolicy` fails
@@ -58,7 +64,11 @@ Every API call is recorded as `ok`, `absent`, `denied`, `unsupported`, or `error
 is how an assessment ends up claiming a control is missing when it was only ever invisible:
 
 - **absent** — the thing is not configured. A Lambda with no function URL answers
-  `ResourceNotFoundException`. That is an answer, not a failure.
+  `ResourceNotFoundException`. That is an answer, not a failure. A few services
+  answer `AccessDeniedException` when they are simply not enabled —
+  `macie2:GetMacieSession` does this in every region where Macie is off — so
+  those specific operations are reclassified rather than reported as a
+  permission gap the reader would go looking for.
 - **denied** — the assessing identity could not look. Reported as `not-permitted`, never as absent.
 - **unsupported** — the service or API does not exist here. Includes APIs missing from the
   installed botocore, so an older SDK degrades rather than crashes.
@@ -75,9 +85,17 @@ Stable matters: `acct_4f2a91` is the same account throughout the document, so a 
 followed from the account table to the role that caused it, and the diff between two snapshots
 shows real change rather than noise.
 
-Resource **names** are not redacted. A report where every bucket is `bucket_a91f2c` is unreadable,
-and a name is not a credential. If that trade-off is wrong for a given estate, the redactor is one
-file.
+Account-chosen **names** — accounts, OUs, IAM users and roles, buckets, functions, secrets, custom
+policies — are pseudonymised too. AWS-chosen names are not: a finding reading *"attached policy
+`pol_3f21ab`"* says nothing, so `AdministratorAccess` and friends survive verbatim.
+
+Ordinary words are also left alone, and that is a correctness requirement rather than a
+convenience. An earlier version matched names by plain substring, so OUs called `audit` and
+`security` were rewritten inside `auditmanager.amazonaws.com` and `securityhub.amazonaws.com` —
+which emptied a list and silently deleted four findings while the report still rendered as
+complete. Matching is now anchored on word boundaries, and rules are evaluated against the **raw**
+snapshot with only the finding text redacted, so redaction cannot reach the conclusions. The runner
+asserts raw and redacted agree and aborts if they do not.
 
 This is pseudonymisation to keep identifiers out of a public index. It is not a control against
 someone who already knows the account ID — the salt is derived from it.
@@ -97,7 +115,7 @@ discovery/
 iam/                   the policy this should run under
 snapshots/             redacted (committed) and raw (gitignored)
 report/                assessment.md
-tests/                 96 tests
+tests/                 106 tests
 ```
 
 ## Why rules are Python and not YAML

@@ -2,23 +2,19 @@
 
 | | |
 |---|---|
-| Generated | 2026-08-15T11:20:57Z |
+| Generated | 2026-08-15T12:13:29Z |
 | Account | `acct_78e004` |
-| Assessing principal | `arn:aws:sts::acct_78e004:assumed-role/role_8cb8f5/botocore-session-1786791392` |
-| Regions scanned | 2 — us-east-1, eu-north-1 |
+| Assessing principal | `arn:aws:sts::acct_78e004:assumed-role/role_05e984/botocore-session-1786795701` |
+| Regions scanned | 17 — ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2 |
 | Collectors | 21 |
-| AWS API calls | 311 (8 absent, 1 denied, 301 ok, 1 unsupported) |
-| Duration | 33.0s |
+| AWS API calls | 812 (28 absent, 783 ok, 1 unsupported) |
+| Duration | 90.0s |
 
 ## Scope and limits
 
 Every call made by this assessment is a `Describe*` / `List*` / `Get*` control-plane operation. No object, secret value, parameter value or table row was read; a runtime guard refuses those operations before they reach AWS. The full call log is in the snapshot this report was rendered from.
 
-**The assessing identity is over-privileged for its own task.** This ran as `arn:aws:sts::acct_78e004:assumed-role/role_8cb8f5/botocore-session-1786791392`, an administrator. The read-only policy in `platform/00-discovery/iam/discovery-readonly.json` is what it *should* run under, and until it has, that policy is unproven — it may be missing permissions, or granting more than it needs. Re-running under a purpose-built role is the test.
-
-**1 API call(s) were denied** and the corresponding controls could not be assessed: macie2:get_macie_session. These are reported as `not-permitted`, never as absent.
-
-Regional services were assessed in **2 region(s)**. Findings say nothing about regions outside that set — and an unmonitored region is where an attacker would prefer to operate.
+Regional services were assessed in **17 region(s)**. Findings say nothing about regions outside that set — and an unmonitored region is where an attacker would prefer to operate.
 
 ## Summary
 
@@ -175,7 +171,7 @@ Root MFA is a virtual (software) device. For the one identity that can undo ever
 
 **AWS Config is not recording** — 🟠 High · logging · checklist 11
 
-AWS Config is not recording in 2 of 2 scanned regions (eu-north-1, us-east-1). Rules are defined where nothing is recorded, so they evaluate nothing: eu-north-1 (343 rules defined).
+AWS Config is not recording in 17 of 17 scanned regions (ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1 (+12 more)). Rules are defined where nothing is recorded, so they evaluate nothing: eu-north-1 (343 rules defined).
 
 **Remediation.** Enable the configuration recorder in every region in scope, including global resource types, before relying on any Config rule or conformance pack.
 
@@ -243,7 +239,7 @@ No customer-managed KMS keys exist; everything encrypted relies on AWS-managed k
 
 **GuardDuty protection plans disabled and uneven across regions** — 🟡 Medium · logging · checklist 9
 
-GuardDuty is enabled but with protection plans switched off, unevenly across regions — us-east-1: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); eu-north-1: AI_ANALYST, AI_PROTECTION, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING. Coverage that differs by region is coverage nobody can reason about.
+GuardDuty is enabled but with protection plans switched off, unevenly across regions — ap-northeast-1: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); ap-northeast-2: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); ap-northeast-3: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); ap-south-1: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); ap-southeast-1: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); ap-southeast-2: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); ca-central-1: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); eu-central-1: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); eu-north-1: AI_ANALYST, AI_PROTECTION, EKS_RUNTIME_MONITORING, RUNTIME_MONITORING; eu-west-1: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); eu-west-2: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); eu-west-3: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); sa-east-1: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); us-east-1: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); us-east-2: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more); us-west-1: AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS, EKS_RUNTIME_MONITORING (+4 more); us-west-2: AI_ANALYST, AI_PROTECTION, EBS_MALWARE_PROTECTION, EKS_AUDIT_LOGS (+5 more). Coverage that differs by region is coverage nobody can reason about.
 
 **Remediation.** Enable the same protection plans in every region, or record a written decision for each exclusion.
 
@@ -251,7 +247,7 @@ GuardDuty is enabled but with protection plans switched off, unevenly across reg
 
 **Security Hub standards are not READY** — 🟡 Medium · logging · checklist 10
 
-Security Hub standards are not in a READY state: us-east-1: cis-aws-foundations-benchmark, us-east-1: aws-foundational-security-best-practices. Controls that have not finished initialising are not evaluating anything.
+Security Hub standards are not in a READY state: ap-northeast-1: cis-aws-foundations-benchmark, ap-northeast-1: aws-foundational-security-best-practices, ap-southeast-2: cis-aws-foundations-benchmark, ap-southeast-2: aws-foundational-security-best-practices, ca-central-1: cis-aws-foundations-benchmark (+19 more). Controls that have not finished initialising are not evaluating anything.
 
 **Remediation.** Investigate why initialisation has not completed; a standard that is not READY is evaluating nothing.
 
@@ -259,7 +255,7 @@ Security Hub standards are not in a READY state: us-east-1: cis-aws-foundations-
 
 **IAM Access Analyzer missing in some regions** — 🟡 Medium · identity · checklist 4
 
-IAM Access Analyzer is absent in 1 scanned region(s): eu-north-1.
+IAM Access Analyzer is absent in 16 scanned region(s): ap-northeast-1, ap-northeast-2, ap-northeast-3, ap-south-1, ap-southeast-1 (+11 more).
 
 **Remediation.** Create an analyzer in every region in scope; findings are regional.
 
@@ -267,7 +263,7 @@ IAM Access Analyzer is absent in 1 scanned region(s): eu-north-1.
 
 **No role has a permissions boundary** — 🟡 Medium · identity · checklist 4
 
-None of the 14 customer-managed roles has a permissions boundary. A boundary is the only IAM control that survives someone attaching a wider policy later.
+None of the 15 customer-managed roles has a permissions boundary. A boundary is the only IAM control that survives someone attaching a wider policy later.
 
 **Remediation.** Define a boundary policy and require it on role creation, enforced by SCP condition and by the CDK aspect in platform/lib/cdk-security.
 
@@ -307,7 +303,7 @@ No trail records data events: trail_69b599. Management events show that a role w
 
 **VPCs without flow logs** — 🟡 Medium · infrastructure · checklist 14
 
-2 VPC(s) have no flow logs: us-east-1/vpc_6672fb, eu-north-1/vpc_b36013. Network-level evidence does not exist retroactively — it is either being recorded now or it is not available during the incident.
+17 VPC(s) have no flow logs: ap-northeast-1/vpc_c11a9b, ap-northeast-2/vpc_98cc4f, ap-northeast-3/vpc_48c3b4, ap-south-1/vpc_fc75a8, ap-southeast-1/vpc_c00621 (+12 more). Network-level evidence does not exist retroactively — it is either being recorded now or it is not available during the incident.
 
 **Remediation.** Enable flow logs to a central destination for every VPC carrying workload traffic.
 
@@ -339,7 +335,7 @@ No Dependabot configuration is present, so dependency and action updates are not
 
 **Outdated CIS benchmark version enabled** — ⚪ Low · logging · checklist 10
 
-An outdated CIS AWS Foundations Benchmark version is enabled: us-east-1: CIS 1.2.0, eu-north-1: CIS 1.2.0. Later versions add controls for services that did not exist when 1.2 was written.
+An outdated CIS AWS Foundations Benchmark version is enabled: ap-northeast-1: CIS 1.2.0, ap-southeast-2: CIS 1.2.0, ca-central-1: CIS 1.2.0, eu-central-1: CIS 1.2.0, eu-north-1: CIS 1.2.0 (+8 more). Later versions add controls for services that did not exist when 1.2 was written.
 
 **Remediation.** Enable CIS AWS Foundations Benchmark v3.0 or later alongside AWS FSBP.
 
@@ -347,7 +343,7 @@ An outdated CIS AWS Foundations Benchmark version is enabled: us-east-1: CIS 1.2
 
 **Default VPCs present** — ⚪ Low · infrastructure · checklist 14
 
-2 default VPC(s) are present: us-east-1/vpc_6672fb, eu-north-1/vpc_b36013. A default VPC ships with an internet gateway, public subnets and a permissive default security group in every region, whether or not anyone intends to use it.
+17 default VPC(s) are present: ap-northeast-1/vpc_c11a9b, ap-northeast-2/vpc_98cc4f, ap-northeast-3/vpc_48c3b4, ap-south-1/vpc_fc75a8, ap-southeast-1/vpc_c00621 (+12 more). A default VPC ships with an internet gateway, public subnets and a permissive default security group in every region, whether or not anyone intends to use it.
 
 **Remediation.** Delete unused default VPCs, or record why they are retained. Enforce with a Config rule so they do not reappear in a newly enabled region.
 
