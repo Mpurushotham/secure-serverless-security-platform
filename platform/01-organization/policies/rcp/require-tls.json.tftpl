@@ -1,0 +1,20 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "DenyPlaintextTransport",
+      "Effect": "Deny",
+      "Principal": "*",
+      "Action": [
+        "s3:*",
+        "sqs:*",
+        "secretsmanager:*",
+        "kms:*"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "BoolIfExists": { "aws:SecureTransport": "false" }
+      }
+    }
+  ]
+}

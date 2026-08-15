@@ -11,11 +11,15 @@ dependencies = []
 [project.optional-dependencies]
 rds = ["psycopg[binary]>=3.2", "sqlglot>=25.0"]
 aws = ["boto3>=1.35"]
+# Read-only AWS discovery. PyYAML is for parsing this repository's own workflow
+# files (checklist item 18), not for anything AWS returns.
+discovery = ["boto3>=1.35", "PyYAML>=6.0"]
 dev = [
   "pytest>=8.0",
   "pytest-cov>=5.0",
   "moto[guardduty,securityhub,iam,s3,kms,config]>=5.0",
   "boto3>=1.35",
+  "PyYAML>=6.0",
   "psycopg[binary]>=3.2",
   "sqlglot>=25.0",
   "ruff>=0.6",
@@ -35,8 +39,21 @@ where = ["mcp-servers"]
 include = ["mcp_core*", "rds_readonly_mcp*", "aws_posture_mcp*"]
 
 [tool.pytest.ini_options]
-testpaths = ["mcp-servers/tests"]
-pythonpath = ["mcp-servers"]
+testpaths = [
+  "mcp-servers/tests",
+  "platform/00-discovery/tests",
+  "platform/18-reporting/tests",
+  "platform/20-notifications/tests",
+]
+# The discovery package lives under a numbered directory, which is not a legal
+# Python identifier — hence the inner `discovery/` package and this path entry
+# rather than an editable install.
+pythonpath = [
+  "mcp-servers",
+  "platform/00-discovery",
+  "platform/18-reporting",
+  "platform/20-notifications",
+]
 markers = [
   "integration: requires a live Postgres container (make db-up)",
 ]
@@ -48,7 +65,21 @@ target-version = "py311"
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "S", "UP"]
 # S101 (assert) is fine in tests; asserts are not a control here.
-per-file-ignores = { "mcp-servers/tests/*" = ["S101", "S608"] }
+per-file-ignores = { "mcp-servers/tests/*" = [
+  "S101",
+  "S608",
+], "platform/00-discovery/tests/*" = [
+  "S101",
+], "platform/18-reporting/tests/*" = [
+  "S101",
+], "platform/20-notifications/tests/*" = [
+  "S101",
+], "platform/00-discovery/discovery/collectors/*" = [
+  # Collectors are deliberately flat data-shaping code. Splitting a single
+  # AWS response mapping across helpers to satisfy a complexity threshold
+  # makes it harder to check against the API documentation, not easier.
+  "C901",
+] }
 
 [tool.bandit]
-exclude_dirs = ["mcp-servers/tests", ".venv"]
+exclude_dirs = ["mcp-servers/tests", "platform/00-discovery/tests", ".venv"]

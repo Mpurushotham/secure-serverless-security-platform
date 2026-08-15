@@ -1,0 +1,13 @@
+version: 2
+
+# Same justification as .gitleaks.toml: AWS's published example credentials,
+# used as fixtures in the suites that prove the redactors catch that pattern.
+# Matched on the exact documented values rather than by exempting test paths —
+# a path exemption would let a real credential through in exactly the files
+# where one is most likely to be committed by accident.
+secret:
+  ignored-matches:
+    - name: AWS documentation example access key (SigV4 docs)
+      match: AKIAIOSFODNN7EXAMPLE
+    - name: AWS documentation example session key (STS docs)
+      match: ASIAY34FZKBOKMUTVV7A

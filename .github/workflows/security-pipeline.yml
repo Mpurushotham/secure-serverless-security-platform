@@ -37,8 +37,8 @@ jobs:
     env:
       MCP_DB_DSN: postgresql://mcp_readonly:harness-only@127.0.0.1:5432/pharmadb
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
       - name: Install
         run: |
           uv venv --python 3.11 .venv
@@ -83,16 +83,54 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0   # gitleaks needs history to scan past commits
-      - uses: astral-sh/setup-uv@v5
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
       - run: |
           uv venv --python 3.11 .venv
           uv pip install -e ".[dev]"
 
+      - name: Discovery — read-only guard, redaction, rules, report
+        # Runs here rather than in `guardrails` because none of it needs
+        # Postgres, and none of it needs AWS credentials: collectors are driven
+        # against moto and a recording stub, and the report renders from a
+        # committed snapshot.
+        #
+        # The load-bearing test is test_no_collector_attempts_an_operation_the_
+        # guard_would_refuse: it drives every collector and asserts not one of
+        # them reaches for data rather than configuration.
+        run: .venv/bin/python -m pytest platform/00-discovery/tests -q
+
+      - name: Discovery — report must regenerate unchanged from its snapshot
+        # Same contract as the guardrail evidence gate above. A report that has
+        # drifted from the snapshot it claims to render is asserting findings
+        # nothing produced.
+        run: |
+          PYTHONPATH=platform/00-discovery .venv/bin/python -m discovery.run \
+            --from-snapshot platform/00-discovery/snapshots/latest.json
+          if ! git diff --quiet platform/00-discovery/report/assessment.md; then
+            echo "::error::assessment.md is stale — run 'make assess-offline'"
+            git diff platform/00-discovery/report/assessment.md
+            exit 1
+          fi
+
+      - name: Posture report must regenerate unchanged
+        # Same staleness contract as the assessment and the guardrail evidence.
+        # A posture report that has drifted from the snapshot it claims to
+        # summarise is asserting metrics nothing produced.
+        run: |
+          PYTHONPATH=platform/18-reporting .venv/bin/python -m reporting
+          if ! git diff --quiet platform/18-reporting/posture.md; then
+            echo "::error::posture.md is stale — run 'make posture'"
+            git diff platform/18-reporting/posture.md
+            exit 1
+          fi
+
       - name: Bandit (Python SAST)
-        run: .venv/bin/python -m bandit -q -c pyproject.toml -r mcp-servers scripts
+        run: |
+          .venv/bin/python -m bandit -q -c pyproject.toml \
+            -r mcp-servers scripts platform/00-discovery/discovery
 
       - name: pip-audit (known vulnerable dependencies)
         # --skip-editable, and deliberately NOT --strict: this project is
@@ -107,7 +145,7 @@ jobs:
         run: .venv/bin/python -m ruff check .
 
       - name: Semgrep
-        uses: semgrep/semgrep-action@v1
+        uses: semgrep/semgrep-action@713efdd345f3035192eaa63f56867b88e63e4e5d # v1
         with:
           config: >-
             p/python
@@ -116,9 +154,15 @@ jobs:
         continue-on-error: true
 
       - name: gitleaks
-        uses: gitleaks/gitleaks-action@v2
+        uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Extends the default rules — nothing is disabled. The allowlist is
+          # two exact AWS-documented example credentials used as fixtures in the
+          # redaction suites, NOT a path exemption: exempting tests/** would let
+          # a real credential through in exactly the files where one is most
+          # likely to be committed by accident. See .gitleaks.toml.
+          GITLEAKS_CONFIG: ${{ github.workspace }}/.gitleaks.toml
 
   iac:
     name: IaC security
@@ -127,24 +171,25 @@ jobs:
       contents: read
       security-events: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: hashicorp/setup-terraform@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd # v3
         with: { terraform_version: "1.9.8" }
 
       - name: terraform fmt & validate
         run: |
           shopt -s nullglob
-          terraform fmt -check -recursive infra/ || {
-            echo "::error::run 'terraform fmt -recursive infra/'"; exit 1; }
-          for d in infra/terraform/modules/*/ infra/terraform/detections/; do
+          terraform fmt -check -recursive infra/ platform/ || {
+            echo "::error::run 'terraform fmt -recursive infra/ platform/'"; exit 1; }
+          for d in infra/terraform/modules/*/ infra/terraform/detections/ \
+                   platform/01-organization/ platform/04-logging/ platform/05-detection/; do
             [ -d "$d" ] || continue
             echo "validating $d"
             terraform -chdir="$d" init -backend=false -input=false >/dev/null
             terraform -chdir="$d" validate
           done
 
-      - name: Checkov
-        uses: bridgecrewio/checkov-action@master
+      - name: Checkov — infra
+        uses: bridgecrewio/checkov-action@1246d92f57abae29d5db5f9aeeed2a9813e52d7d # master
         with:
           directory: infra/
           # cdk.out excluded: cdk-nag is the authority for the CDK app and its
@@ -156,33 +201,158 @@ jobs:
           soft_fail: false
         continue-on-error: true
 
+      - name: Checkov — platform
+        uses: bridgecrewio/checkov-action@1246d92f57abae29d5db5f9aeeed2a9813e52d7d # master
+        with:
+          directory: platform/
+          skip_path: node_modules
+          output_format: cli
+          output_file_path: console
+          soft_fail: false
+        continue-on-error: true
+
+      - name: Checkov must have parsed every file
+        # A parsing error reports "Passed: 0, Failed: 0" and exits clean, so a
+        # file nothing scanned looks exactly like a file with nothing wrong.
+        # Given several -d flags checkov stops reporting parse errors entirely,
+        # which is why each root is scanned separately here and in the Makefile.
+        #
+        # This is not hypothetical: checkov cannot parse a multi-line
+        # parenthesised `a || b` condition that Terraform accepts, and
+        # platform/01-organization/checks.tf was silently unscanned until it was
+        # rewritten with anytrue().
+        run: |
+          pip install --quiet checkov
+          failed=0
+          for root in infra platform; do
+            out=$(checkov -d "$root" --skip-path cdk.out --skip-path node_modules \
+              --compact -o cli 2>&1 || true)
+            if echo "$out" | grep -q '^Error parsing file'; then
+              echo "::error::checkov could not parse these files — they were NOT scanned"
+              echo "$out" | grep '^Error parsing file'
+              failed=1
+            fi
+          done
+          exit $failed
+
       - name: Upload Checkov SARIF
         if: always() && hashFiles('checkov.sarif') != ''
-        uses: github/codeql-action/upload-sarif@v3
+        uses: github/codeql-action/upload-sarif@f3712979fa5f215279b101dd0a2e3bdfb4353324 # v3
         with: { sarif_file: checkov.sarif }
 
-      - uses: actions/setup-node@v4
-        with: { node-version: "22", cache: npm, cache-dependency-path: infra/cdk/package-lock.json }
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with: { node-version: "22", cache: npm, cache-dependency-path: package-lock.json }
 
-      - name: CDK install, type-check, security invariants, synth
+      - name: Install workspaces
+        # npm workspaces: the lockfile and node_modules live at the repo root so
+        # that every CDK app and the shared aspects package resolve to exactly
+        # ONE copy of aws-cdk-lib and constructs. Two copies would make the
+        # aspects' `instanceof` checks silently return false — the controls
+        # would not break, they would evaporate, and synth would stay green.
+        run: npm ci
+
+      - name: Shared aspects — prove each one fires
+        working-directory: platform/lib/cdk-security
+        # These tests build constructs that MUST be rejected and assert the
+        # rejection. They are the regression guard for the packaging hazard
+        # described above: if resolution ever splits, these fail while every
+        # other check stays green.
+        run: |
+          npx tsc --noEmit
+          npx jest --ci
+
+      - name: CDK type-check, security invariants, synth
         working-directory: infra/cdk
         # `cdk synth` here is a security gate, not a build step: the Aspects in
-        # lib/aspects raise ERRORS on wildcard IAM, missing log retention, and
-        # unattached Lambdas, and cdk-nag adds AwsSolutionsChecks on top. A
-        # regression fails synth rather than producing a warning nobody reads.
+        # platform/lib/cdk-security raise ERRORS on wildcard IAM, missing log
+        # retention, and unattached Lambdas, and cdk-nag adds AwsSolutionsChecks
+        # on top. A regression fails synth rather than producing a warning
+        # nobody reads.
         run: |
-          npm ci
           npx tsc --noEmit
           npx jest --ci
           npx cdk synth --quiet
+
+      - name: Synth must not resolve a real account
+        working-directory: infra/cdk
+        # A stack pinned to a concrete account does an availability-zone lookup
+        # at synth time and writes the account ID into cdk.context.json. In a
+        # public repository that is an account-ID disclosure produced by the
+        # ordinary build, and it is invisible unless someone reads the diff.
+        #
+        # The app is environment-agnostic unless SSP_DEPLOY_ACCOUNT or `-c
+        # account=` is set, so this file must come out of synth unchanged.
+        run: |
+          if ! git diff --quiet cdk.context.json; then
+            echo "::error::cdk.context.json changed during synth — the stack resolved a real"
+            echo "::error::environment. Check bin/app.ts: synth must not depend on ambient credentials."
+            git diff cdk.context.json
+            exit 1
+          fi
+
+  vulnerability-gate:
+    name: Vulnerability budget & SLA
+    runs-on: ubuntu-latest
+    needs: [sast, iac]
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86 # v5
+      - run: |
+          uv venv --python 3.11 .venv
+          uv pip install -e ".[dev]" checkov
+
+      - name: Produce SARIF
+        # Regenerated here rather than passed between jobs as an artifact: one
+        # fewer moving part, and the gate is then self-contained enough to run
+        # locally with the same command.
+        run: |
+          # checkov names the file results_sarif.sarif, not results.sarif.
+          .venv/bin/checkov -d infra --skip-path cdk.out \
+            -o sarif --output-file-path . || true
+          mv results_sarif.sarif checkov.sarif
+          .venv/bin/checkov -d platform --skip-path node_modules \
+            -o sarif --output-file-path . || true
+          mv results_sarif.sarif platform.sarif
+
+      - name: Severity budget — is anything bad enough to block the merge now?
+        # Counts findings per severity against a budget. Zero criticals is a
+        # reasonable bar; zero mediums is not, and a gate set to an unreachable
+        # bar gets switched off within a month, which is strictly worse than a
+        # bar that holds.
+        run: .venv/bin/python scripts/severity_gate.py checkov.sarif platform.sarif
+
+      - name: Remediation SLA — has anything been open too long?
+        # A different question from the budget above, which is why it is a
+        # different script. Ages findings against a checked-in first-seen
+        # ledger, because SARIF has no notion of when a finding appeared: with
+        # no ledger, age resets every run and the check passes forever while
+        # measuring nothing.
+        #
+        # --update-ledger only on main. On a pull request the ledger is read
+        # but not written, so a branch cannot reset the clock on a finding by
+        # being the first thing to observe it.
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            .venv/bin/python scripts/vuln_sla.py checkov.sarif platform.sarif --update-ledger
+          else
+            .venv/bin/python scripts/vuln_sla.py checkov.sarif platform.sarif
+          fi
+
+      - name: Upload SLA report
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: vuln-sla-report
+          path: evidence/vuln-sla-report.md
+          if-no-files-found: ignore
 
   supply-chain:
     name: SBOM
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Generate CycloneDX SBOM
-        uses: anchore/sbom-action@v0
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0
         with:
           format: cyclonedx-json
           artifact-name: sbom.cdx.json

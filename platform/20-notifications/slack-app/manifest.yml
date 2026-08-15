@@ -1,0 +1,41 @@
+# Slack app manifest. Create the app from this at https://api.slack.com/apps
+# ("From an app manifest"), then supply the bot token and signing secret at run
+# time — they are never committed.
+#
+# Scopes are minimal on purpose. `chat:write` is all that alerting needs;
+# `channels:manage` is present only because the "Declare SEV" action opens an
+# incident channel, and if you do not want that action, remove both.
+#
+# Note what is NOT requested: no `channels:history`, no `files:read`, no
+# `users:read.email`. An alerting bot that can read your channels is a data
+# exfiltration path wearing a helpful hat.
+display_information:
+  name: Security Alerts
+  description: AWS security posture alerts, redacted to pointers
+  background_color: "#1f2933"
+
+features:
+  bot_user:
+    display_name: security-alerts
+    always_online: false
+  slash_commands:
+    - command: /posture
+      url: https://REPLACE-ME/slack/command
+      description: Current security posture summary
+      should_escape: false
+
+oauth_config:
+  scopes:
+    bot:
+      - chat:write
+      - chat:write.public
+      - commands
+      - channels:manage
+
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: https://REPLACE-ME/slack/interactive
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: true

@@ -1,0 +1,40 @@
+# Routing, not code, decides which channel an alert reaches. Changing the
+# severity of a rule should change where it goes without a code change.
+
+global:
+  resolve_timeout: 5m
+
+route:
+  receiver: security-alerts
+  group_by: [alertname, service]
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 12h
+  routes:
+    - matchers: [severity="critical"]
+      receiver: security-incidents
+      group_wait: 0s
+      repeat_interval: 1h
+
+inhibit_rules:
+  # While posture data is stale, every posture alert derived from it is
+  # unreliable — including the ones that look reassuring. Suppressing them
+  # keeps a stale snapshot from generating confident noise in both directions.
+  - source_matchers: [alertname="PostureDataStale"]
+    target_matchers: [alertname=~"CriticalSecurityFinding|DetectionCoverageIncomplete|RootMfaWeakOrAbsent|AccountPublicAccessBlockOff|AccessKeyAgeExceeded"]
+    equal: [instance]
+
+receivers:
+  - name: security-alerts
+    webhook_configs:
+      # Points at the notifier in platform/20-notifications, which applies the
+      # redaction layer before anything reaches Slack. Alertmanager's own
+      # slack_configs are deliberately NOT used: they would post the raw
+      # annotation text, and an annotation can carry a bucket name or an ARN.
+      - url: http://slack-notifier:9095/alert
+        send_resolved: true
+
+  - name: security-incidents
+    webhook_configs:
+      - url: http://slack-notifier:9095/alert?channel=incidents
+        send_resolved: true

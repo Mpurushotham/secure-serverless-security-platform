@@ -20,7 +20,7 @@ from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from vuln_sla import finding_id, normalise_severity  # noqa: E402
+from vuln_sla import finding_id, is_suppressed, normalise_severity  # noqa: E402
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 
@@ -43,6 +43,7 @@ def main() -> int:
 
     counts: Counter[str] = Counter()
     worst: dict[str, list[str]] = {k: [] for k in budget}
+    suppressed = 0
 
     for path in args.sarif:
         if not path.exists():
@@ -56,11 +57,25 @@ def main() -> int:
         for run in doc.get("runs", []):
             tool = run.get("tool", {}).get("driver", {}).get("name", "unknown")
             for result in run.get("results", []):
+                # Governed by suppression_register.py, which refuses any
+                # suppression without a written justification. Charging the
+                # same accepted risk here as well fails the build on something
+                # a reviewer already approved — and the usual fix for that is
+                # to widen the budget until it stops, which disables the gate
+                # for real findings too.
+                if is_suppressed(result):
+                    suppressed += 1
+                    continue
                 severity = normalise_severity(result)
                 counts[severity] += 1
                 if len(worst[severity]) < 10:
                     worst[severity].append(f"[{tool}] {finding_id(result)}")
 
+    if suppressed:
+        print(
+            f"{suppressed} suppressed finding(s) excluded — see "
+            f"evidence/checkov-suppressions.md for each justification\n"
+        )
     print(f"{'severity':<10} {'found':>6} {'budget':>7}  status")
     print("-" * 42)
     failed = False

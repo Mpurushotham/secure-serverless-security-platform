@@ -17,6 +17,14 @@
 /infra/terraform/modules/github-oidc/        @Mpurushotham
 /infra/cdk/lib/aspects/                      @Mpurushotham
 
+# The shared synth-time Aspects. Every CDK app in the repository enforces these,
+# so a change here changes the controls on all of them at once. The workspace
+# root is listed with it: npm hoisting is what keeps `instanceof` dispatch
+# working, and a change to it can silently disable every Aspect.
+/platform/lib/cdk-security/               @Mpurushotham
+/package.json                             @Mpurushotham
+/package-lock.json                        @Mpurushotham
+
 # The pipeline itself. A change to the gates is a change to every other control.
 /.github/workflows/                      @Mpurushotham
 /.github/rulesets/                        @Mpurushotham

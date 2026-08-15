@@ -1,0 +1,88 @@
+# Local observability stack.
+#
+# Every image is pinned by DIGEST, not tag. A tag is a moving pointer: pulling
+# `prom/prometheus:v3.1.0` today and tomorrow can give different bytes, and the
+# whole argument for SHA-pinning GitHub Actions applies identically here.
+#
+# Everything binds to 127.0.0.1. None of these services authenticate by default,
+# and a Grafana on 0.0.0.0 is a credential-free read of your security posture
+# for anyone on the network.
+
+name: ssp-observability
+
+services:
+  prometheus:
+    image: prom/prometheus@sha256:6559acbd5d770b15bb3c954629ce190ac3cbbdb2b7f1c30f0385c4e05104e218 # v3.1.0
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.retention.time=30d
+      - --web.enable-lifecycle
+    ports: ["127.0.0.1:9090:9090"]
+    volumes:
+      - ../prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ../prometheus/rules:/etc/prometheus/rules:ro
+      - prometheus-data:/prometheus
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+  alertmanager:
+    image: prom/alertmanager@sha256:d5155cfac40a6d9250ffc97c19db2c5e190c7bc57c6b67125c94903358f8c7d8 # v0.28.0
+    command:
+      - --config.file=/etc/alertmanager/alertmanager.yml
+    ports: ["127.0.0.1:9093:9093"]
+    volumes:
+      - ../alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml:ro
+      - alertmanager-data:/alertmanager
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana@sha256:d8ea37798ccc41061a62ab080f2676dda6bf7815558499f901bdb0f533a456fb # 11.4.0
+    ports: ["127.0.0.1:3000:3000"]
+    environment:
+      # No default admin password, and no anonymous access. The .env is
+      # gitignored; compose fails loudly if it is missing rather than falling
+      # back to admin/admin.
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD:?set GRAFANA_ADMIN_PASSWORD in .env}
+      GF_AUTH_ANONYMOUS_ENABLED: "false"
+      GF_USERS_ALLOW_SIGN_UP: "false"
+      GF_ANALYTICS_REPORTING_ENABLED: "false"
+      GF_ANALYTICS_CHECK_FOR_UPDATES: "false"
+      GF_SECURITY_COOKIE_SECURE: "true"
+      GF_SECURITY_CONTENT_SECURITY_POLICY: "true"
+    volumes:
+      - ../grafana/provisioning:/etc/grafana/provisioning:ro
+      - ../grafana/dashboards:/var/lib/grafana/dashboards:ro
+      - grafana-data:/var/lib/grafana
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    depends_on: [prometheus]
+    restart: unless-stopped
+
+  security-posture-exporter:
+    build:
+      context: ../../..
+      dockerfile: platform/19-observability/exporters/Dockerfile
+    command:
+      - --snapshot=/snapshots/latest.json
+      - --port=9877
+      - --interval=300
+    ports: ["127.0.0.1:9877:9877"]
+    volumes:
+      # Read-only, and the COMMITTED snapshot rather than the raw one. The
+      # exporter never needs AWS credentials: it serves what discovery already
+      # recorded, so the stack comes up on a laptop with no account.
+      - ../../00-discovery/snapshots:/snapshots:ro
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  alertmanager-data:
+  grafana-data:

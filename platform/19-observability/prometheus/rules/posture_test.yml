@@ -1,0 +1,119 @@
+# promtool unit tests.
+#
+# `promtool check rules` proves the YAML parses. It says nothing about whether
+# a rule ever fires — and an alert that cannot fire is indistinguishable, on a
+# quiet day, from an estate with no problems. These drive each rule with the
+# series that should trigger it, and with the series that should not.
+rule_files:
+  - posture.yml
+
+evaluation_interval: 1m
+
+tests:
+  - interval: 1m
+    name: stale posture data is detected
+    input_series:
+      # The series reports a refresh at t=0 and never updates. promtool's clock
+      # starts at 0, so the alert can only fire once eval_time exceeds the 1h
+      # threshold plus the 10m `for` — hence 80m rather than something shorter.
+      - series: aws_discovery_last_success_timestamp_seconds
+        values: "0+0x120"
+    alert_rule_test:
+      - eval_time: 80m
+        alertname: PostureDataStale
+        exp_alerts:
+          - exp_labels: { severity: high }
+            exp_annotations:
+              summary: Security posture data has not refreshed for over an hour
+              description: Every other posture alert is now unreliable. They evaluate the last snapshot, which is 1h 20m 0s old. Treat green panels as unknown until this clears.
+              runbook: platform/19-observability/README.md
+      # And must NOT fire while the data is still fresh.
+      - eval_time: 30m
+        alertname: PostureDataStale
+        exp_alerts: []
+
+  - interval: 1m
+    name: a critical finding alerts
+    input_series:
+      - series: 'aws_security_findings{severity="critical"}'
+        values: "1+0x20"
+    alert_rule_test:
+      - eval_time: 10m
+        alertname: CriticalSecurityFinding
+        exp_alerts:
+          - exp_labels: { severity: critical }
+            exp_annotations:
+              summary: 1 critical security finding(s) open
+              runbook: platform/00-discovery/report/assessment.md
+
+  - interval: 1m
+    name: no critical findings does not alert
+    input_series:
+      - series: 'aws_security_findings{severity="critical"}'
+        values: "0+0x20"
+    alert_rule_test:
+      - eval_time: 10m
+        alertname: CriticalSecurityFinding
+        exp_alerts: []
+
+  - interval: 1m
+    name: partial detection coverage alerts, full coverage does not
+    input_series:
+      - series: 'aws_detection_regions_enabled{service="config"}'
+        values: "0+0x60"
+      - series: 'aws_detection_regions_total{service="config"}'
+        values: "17+0x60"
+      - series: 'aws_detection_regions_enabled{service="guardduty"}'
+        values: "17+0x60"
+      - series: 'aws_detection_regions_total{service="guardduty"}'
+        values: "17+0x60"
+    alert_rule_test:
+      - eval_time: 40m
+        alertname: DetectionCoverageIncomplete
+        exp_alerts:
+          - exp_labels: { severity: high, service: config }
+            exp_annotations:
+              summary: config covers only part of the scanned estate
+              description: Enabled in 0% of scanned regions.
+
+  - interval: 1m
+    name: a root access key alerts immediately
+    input_series:
+      - series: aws_root_access_keys
+        values: "1+0x10"
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: RootAccessKeyExists
+        exp_alerts:
+          - exp_labels: { severity: critical }
+            exp_annotations:
+              summary: The root user has programmatic credentials
+              description: There is no supported use case for a root access key.
+
+  - interval: 1m
+    name: an unauthenticated function url alerts
+    input_series:
+      - series: aws_unauthenticated_function_urls
+        values: "2+0x10"
+    alert_rule_test:
+      - eval_time: 1m
+        alertname: UnauthenticatedFunctionUrl
+        exp_alerts:
+          - exp_labels: { severity: critical }
+            exp_annotations:
+              summary: 2 Lambda function URL(s) accept unauthenticated requests
+              description: Public HTTPS endpoints that bypass API Gateway and every control attached to it.
+
+  - interval: 1m
+    name: a denied api call alerts, because the assessment is now partial
+    input_series:
+      - series: 'aws_discovery_api_calls{outcome="denied"}'
+        values: "3+0x30"
+    alert_rule_test:
+      - eval_time: 20m
+        alertname: DiscoveryAccessDenied
+        exp_alerts:
+          - exp_labels: { severity: medium, outcome: denied }
+            exp_annotations:
+              summary: The assessing role is being denied AWS API calls
+              description: SecurityDiscoveryReadOnly lost permissions it previously had, or an SCP now denies them. Controls it can no longer see are reported as not-permitted, never as absent — but they are not being assessed.

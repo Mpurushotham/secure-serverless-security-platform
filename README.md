@@ -45,10 +45,32 @@ builds less.
 | GitHub branch rulesets + CODEOWNERS as code | **Applied artifacts** | `.github/rulesets/` |
 | Pre-commit hooks + IDE protections | **Config in repo** | `.pre-commit-config.yaml`, `.vscode/` |
 | Role readiness (JD matrix, day-one plan, drills, metrics, outcomes) | **Written** | `readiness/` |
+| Shared CDK Aspects package — each one proven to *fire*, not just to pass | **Runs, 8 tests** | `cd platform/lib/cdk-security && npx jest` |
+| AWS discovery: 21 read-only collectors, 41 rules, 25-point baseline | **Runs, 106 tests** | `make assess-offline` |
+| **Assessment of a real AWS Organization** — 17 regions, 812 calls, 29 findings | **Executed under a purpose-built read-only role, 0 denied** | `platform/00-discovery/report/assessment.md` |
+| Baseline IaC answering the assessment: SCPs, RCPs, delegated admin, org trail, detection | **Validated statically, planned live** | `platform/BASELINE.md` |
+| Posture report: 9 metrics computed, 6 declared unmeasurable, delta between snapshots | **Runs, 13 tests** | `make posture` |
+| Golden-path serverless API: Cognito → API GW → Lambda → DynamoDB, CMK, WAF | **Synths clean, 52 tests** | `cd platform/11-serverless && npm test` |
+| Security-e2e suite: IDOR, auth bypass, injection, rate limit, header hygiene | **18 tests, needs a deployed stack** | `npm run test:security` |
+| Observability: posture exporter, 12 alert rules, Grafana dashboard | **Runs** | `make rules-test`, `make obs-up` |
+| Slack redaction layer — alerts carry a pointer, never a payload | **Runs, 25 tests** | `pytest platform/20-notifications` |
+| AWS security platform (`platform/`) — golden path, observability, Slack | **In progress** | `platform/README.md` has the per-domain status |
+| Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |
 
-Nothing here has been deployed to a live AWS account. IaC is validated
-**statically** — that is a deliberate choice, not a limitation: it means anyone
-can clone this and verify every claim without credentials or spend.
+**Nothing here has been deployed to a live AWS account, and nothing here writes
+to one.** IaC is validated **statically** — a deliberate choice, not a
+limitation: it means anyone can clone this and verify every claim without
+credentials or spend.
+
+One row is different and is marked accordingly. The discovery tooling was
+**executed read-only** against the author's own AWS Organization, and
+`platform/00-discovery/report/assessment.md` is the output of that run rather
+than an illustration. Three things keep that from weakening the claim above:
+every call is a `Describe`/`List`/`Get` refused at three layers if it is not
+(see `platform/00-discovery/README.md`); the committed snapshot and report are
+pseudonymised, with raw output gitignored; and `make assess-offline` regenerates
+the report from the committed snapshot with no AWS account at all, which is what
+CI runs.
 
 ---
 
@@ -156,11 +178,19 @@ mcp-servers/
     sql/              roles, RLS, masked views  ← the controls that actually hold
   tests/              conformance · bypass suite · leak assertions
 infra/                Terraform + CDK (static validation only)
+platform/             AWS security platform — org-wide, not agent-specific
+  lib/cdk-security/   synth-time Aspects, shared by every CDK app here
+  docs/               upstream references, responsibility playbooks, case studies
 scripts/              evidence generators
 evidence/             regenerable proof artifacts
 docs/                 threat model, AI secure-coding policy, IR, compliance
 readiness/            role readiness: JD coverage, operating plan, drills
 ```
+
+Node dependencies are an **npm workspace rooted at the repository root** — run `npm ci` there, not
+inside `infra/cdk`. The reason is a security one and is explained in
+`platform/lib/cdk-security/README.md`: two copies of `constructs` would make every Aspect's
+`instanceof` check silently return false, and the controls would evaporate without failing.
 
 **New here?** `docs/07-usage.md` covers running it, wiring the MCP servers into
 an agent, the tech-stack rationale, and the CI pipeline step by step.

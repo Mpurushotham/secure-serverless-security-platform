@@ -1,0 +1,19 @@
+{
+  "name": "@ssp/cdk-security",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CDK Aspects that enforce security invariants at synth time — one copy, shared by every CDK app in this repository",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "build": "tsc --noEmit",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "aws-cdk-lib": "^2.174.0",
+    "constructs": "^10.4.2"
+  }
+}

@@ -1,0 +1,139 @@
+groups:
+  # The staleness rules come FIRST, deliberately.
+  #
+  # Every rule below them reads posture data, and posture data is only as true
+  # as the last refresh. A dashboard showing "0 public buckets" because the
+  # exporter died three days ago is worse than one showing nothing: it is
+  # confidently wrong, and nobody investigates a green panel. So the first
+  # question any posture alert has to answer is "is this data current".
+  - name: exporter-health
+    rules:
+      - alert: PostureDataStale
+        expr: time() - aws_discovery_last_success_timestamp_seconds > 3600
+        for: 10m
+        labels:
+          severity: high
+        annotations:
+          summary: Security posture data has not refreshed for over an hour
+          description: >-
+            Every other posture alert is now unreliable. They evaluate the last
+            snapshot, which is {{ $value | humanizeDuration }} old. Treat green
+            panels as unknown until this clears.
+          runbook: platform/19-observability/README.md
+
+      - alert: DiscoveryCollectorsFailing
+        expr: aws_discovery_collectors_failed > 0
+        for: 15m
+        labels:
+          severity: medium
+        annotations:
+          summary: "{{ $value }} discovery collector(s) are not completing"
+          description: >-
+            Their metrics are absent rather than zero. Any finding those
+            collectors would have raised is currently invisible.
+
+      - alert: DiscoveryAccessDenied
+        expr: aws_discovery_api_calls{outcome="denied"} > 0
+        for: 15m
+        labels:
+          severity: medium
+        annotations:
+          summary: The assessing role is being denied AWS API calls
+          description: >-
+            SecurityDiscoveryReadOnly lost permissions it previously had, or an
+            SCP now denies them. Controls it can no longer see are reported as
+            not-permitted, never as absent — but they are not being assessed.
+
+  - name: posture-regression
+    rules:
+      - alert: CriticalSecurityFinding
+        expr: aws_security_findings{severity="critical"} > 0
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $value }} critical security finding(s) open"
+          runbook: platform/00-discovery/report/assessment.md
+
+      - alert: DetectionCoverageIncomplete
+        # A fraction, never a boolean. "GuardDuty is enabled" is true and
+        # useless if it means one region out of seventeen — an attacker picks
+        # the region without a detector.
+        expr: >-
+          aws_detection_regions_enabled / aws_detection_regions_total < 1
+        for: 30m
+        labels:
+          severity: high
+        annotations:
+          summary: "{{ $labels.service }} covers only part of the scanned estate"
+          description: >-
+            Enabled in {{ $value | humanizePercentage }} of scanned regions.
+
+      - alert: RootAccessKeyExists
+        expr: aws_root_access_keys > 0
+        labels:
+          severity: critical
+        annotations:
+          summary: The root user has programmatic credentials
+          description: There is no supported use case for a root access key.
+
+      - alert: RootMfaWeakOrAbsent
+        expr: aws_root_mfa_enabled == 0 or aws_root_mfa_is_hardware == 0
+        for: 1h
+        labels:
+          severity: high
+        annotations:
+          summary: Root MFA is absent or software-based
+          description: >-
+            For the one identity that can undo every other control, a
+            phishing-resistant hardware key is the appropriate factor.
+
+      - alert: UnauthenticatedFunctionUrl
+        expr: aws_unauthenticated_function_urls > 0
+        labels:
+          severity: critical
+        annotations:
+          summary: "{{ $value }} Lambda function URL(s) accept unauthenticated requests"
+          description: >-
+            Public HTTPS endpoints that bypass API Gateway and every control
+            attached to it.
+
+      - alert: AccountPublicAccessBlockOff
+        expr: aws_s3_account_public_access_blocked == 0
+        for: 15m
+        labels:
+          severity: high
+        annotations:
+          summary: S3 account-level public access block is not fully enabled
+          description: >-
+            Per-bucket settings protect the buckets that exist; the account
+            block protects the ones somebody creates next week.
+
+      - alert: AccessKeyAgeExceeded
+        expr: aws_iam_access_key_age_days > 90
+        labels:
+          severity: medium
+        annotations:
+          summary: "Access key for {{ $labels.user }} is {{ $value }} days old"
+
+  - name: pipeline-health
+    rules:
+      - alert: PipelineNotUsingOidc
+        expr: devsecops_workflows_use_oidc == 0
+        for: 24h
+        labels:
+          severity: medium
+        annotations:
+          summary: CI does not authenticate to AWS via OIDC
+          description: >-
+            Any deployment therefore depends on a stored credential, which is
+            the artefact OIDC exists to remove.
+
+      - alert: ActionsNotPinned
+        expr: devsecops_actions_not_sha_pinned > 0
+        for: 24h
+        labels:
+          severity: medium
+        annotations:
+          summary: "{{ $value }} GitHub Action(s) pinned to a movable tag"
+          description: A tag can be repointed at different code after review.

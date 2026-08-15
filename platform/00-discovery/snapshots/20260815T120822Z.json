@@ -1,0 +1,3957 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-08-15T12:08:22Z",
+  "duration_seconds": 91.4,
+  "assessed_account": "acct_78e004",
+  "assessed_principal": "arn:aws:sts::acct_78e004:assumed-role/role_05e984/botocore-session-1786795701",
+  "assessor_is_privileged": false,
+  "regions_scanned": [
+    "ap-northeast-1",
+    "ap-northeast-2",
+    "ap-northeast-3",
+    "ap-south-1",
+    "ap-southeast-1",
+    "ap-southeast-2",
+    "ca-central-1",
+    "eu-central-1",
+    "eu-north-1",
+    "eu-west-1",
+    "eu-west-2",
+    "eu-west-3",
+    "sa-east-1",
+    "us-east-1",
+    "us-east-2",
+    "us-west-1",
+    "us-west-2"
+  ],
+  "collectors": {
+    "s3": {
+      "domain": "data",
+      "checklist": [
+        13
+      ],
+      "status": "observed",
+      "data": {
+        "buckets": [
+          {
+            "name": "bucket_a08bc0",
+            "region": "us-east-1",
+            "created": "2026-07-27T18:39:58Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "AES256"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          },
+          {
+            "name": "bucket_0a4fc1",
+            "region": "us-east-1",
+            "created": "2026-07-27T18:40:00Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "AES256"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": true
+          },
+          {
+            "name": "bucket_cd97b8",
+            "region": "us-east-1",
+            "created": "2026-07-27T18:41:23Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "AES256"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": true
+          },
+          {
+            "name": "bucket_46d669",
+            "region": "us-east-1",
+            "created": "2026-07-29T17:57:15Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "aws:kms"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          },
+          {
+            "name": "bucket_5e8292",
+            "region": "us-east-1",
+            "created": "2026-07-29T17:57:25Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "aws:kms"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          },
+          {
+            "name": "bucket_e4423a",
+            "region": "us-east-1",
+            "created": "2026-07-29T17:57:20Z",
+            "public_access_block": {
+              "block_public_acls": true,
+              "block_public_policy": true,
+              "ignore_public_acls": true,
+              "restrict_public_buckets": true
+            },
+            "fully_blocked": true,
+            "policy_is_public": false,
+            "encryption_algorithms": [
+              "aws:kms"
+            ],
+            "bucket_key_enabled": true,
+            "versioning": "Enabled",
+            "mfa_delete": "Disabled",
+            "access_logging": false
+          }
+        ],
+        "total": 6,
+        "account_public_access_block": {
+          "block_public_acls": true,
+          "block_public_policy": true,
+          "ignore_public_acls": true,
+          "restrict_public_buckets": true
+        },
+        "account_fully_blocked": true,
+        "buckets_not_fully_blocked": [],
+        "buckets_unencrypted": [],
+        "buckets_public_by_policy": []
+      }
+    },
+    "kms": {
+      "domain": "data",
+      "checklist": [
+        12
+      ],
+      "status": "observed",
+      "data": {
+        "customer_managed_keys": [],
+        "total": 0,
+        "without_rotation": []
+      }
+    },
+    "cloudtrail": {
+      "domain": "logging",
+      "checklist": [
+        8
+      ],
+      "status": "observed",
+      "data": {
+        "trails": [
+          {
+            "name": "trail_69b599",
+            "home_region": "us-east-1",
+            "is_organization_trail": true,
+            "is_multi_region": true,
+            "log_file_validation": true,
+            "kms_key_id": null,
+            "s3_bucket": "bucket_0a4fc1",
+            "cloudwatch_logs_arn": "arn:aws:logs:us-east-1:acct_78e004:log-group:/aws/cloudtrail/trail_69b599:*",
+            "is_logging": true,
+            "latest_delivery_error": null,
+            "data_events_configured": false
+          }
+        ],
+        "has_organization_trail": true,
+        "has_multi_region_trail": true
+      }
+    },
+    "access_analyzer": {
+      "domain": "identity",
+      "checklist": [
+        4,
+        22
+      ],
+      "status": "observed",
+      "data": {
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": false
+          },
+          "ap-northeast-2": {
+            "enabled": false
+          },
+          "ap-northeast-3": {
+            "enabled": false
+          },
+          "ap-south-1": {
+            "enabled": false
+          },
+          "ap-southeast-1": {
+            "enabled": false
+          },
+          "ap-southeast-2": {
+            "enabled": false
+          },
+          "ca-central-1": {
+            "enabled": false
+          },
+          "eu-central-1": {
+            "enabled": false
+          },
+          "eu-north-1": {
+            "enabled": false
+          },
+          "eu-west-1": {
+            "enabled": false
+          },
+          "eu-west-2": {
+            "enabled": false
+          },
+          "eu-west-3": {
+            "enabled": false
+          },
+          "sa-east-1": {
+            "enabled": false
+          },
+          "us-east-1": {
+            "enabled": true,
+            "analyzers": [
+              {
+                "name": "_AccessAnalyzerForSecurityHubV2-ps02ce0107tb",
+                "type": "ACCOUNT_UNUSED_ACCESS",
+                "status": "ACTIVE",
+                "active_findings": 5
+              }
+            ]
+          },
+          "us-east-2": {
+            "enabled": false
+          },
+          "us-west-1": {
+            "enabled": false
+          },
+          "us-west-2": {
+            "enabled": false
+          }
+        },
+        "regions_enabled": [
+          "us-east-1"
+        ],
+        "coverage": "1/17",
+        "analyzer_types_present": [
+          "ACCOUNT_UNUSED_ACCESS"
+        ],
+        "has_unused_access_analyzer": true
+      }
+    },
+    "root_controls": {
+      "domain": "identity",
+      "checklist": [
+        5
+      ],
+      "status": "observed",
+      "data": {
+        "root_mfa_enabled": true,
+        "root_access_keys": 0,
+        "root_signing_certificates": 0,
+        "root_mfa_is_virtual": true,
+        "root_mfa_is_hardware": false,
+        "organization_features_readable": false,
+        "organization_features_enabled": [],
+        "root_credentials_management_enabled": null,
+        "root_sessions_enabled": null
+      }
+    },
+    "third_party": {
+      "domain": "identity",
+      "checklist": [
+        22
+      ],
+      "status": "observed",
+      "data": {
+        "external_trusts": [
+          {
+            "role": "role_73faa0",
+            "external_accounts": [],
+            "vendors": [],
+            "federated_principals": [
+              "arn:aws:iam::acct_78e004:saml-provider/AWSSSO_fe6e535bb174dbfe_DO_NOT_DELETE"
+            ],
+            "has_external_id": false,
+            "has_any_condition": true,
+            "attached_policies": [
+              "AdministratorAccess"
+            ],
+            "grants_admin": true
+          },
+          {
+            "role": "role_0a8ff5",
+            "external_accounts": [],
+            "vendors": [],
+            "federated_principals": [
+              "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+            ],
+            "has_external_id": false,
+            "has_any_condition": true,
+            "attached_policies": [
+              "AdministratorAccess"
+            ],
+            "grants_admin": true
+          },
+          {
+            "role": "role_cae3b2",
+            "external_accounts": [],
+            "vendors": [],
+            "federated_principals": [
+              "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+            ],
+            "has_external_id": false,
+            "has_any_condition": true,
+            "attached_policies": [],
+            "grants_admin": false
+          },
+          {
+            "role": "role_43d0fa",
+            "external_accounts": [],
+            "vendors": [],
+            "federated_principals": [
+              "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+            ],
+            "has_external_id": false,
+            "has_any_condition": true,
+            "attached_policies": [
+              "ReadOnlyAccess"
+            ],
+            "grants_admin": false
+          },
+          {
+            "role": "role_18be4d",
+            "external_accounts": [],
+            "vendors": [],
+            "federated_principals": [
+              "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+            ],
+            "has_external_id": false,
+            "has_any_condition": true,
+            "attached_policies": [
+              "policy_1667a6",
+              "policy_373c7b"
+            ],
+            "grants_admin": false
+          }
+        ],
+        "total": 5,
+        "cross_account_without_external_id": [],
+        "federated_without_conditions": [],
+        "external_granting_admin": [
+          "role_73faa0",
+          "role_0a8ff5"
+        ]
+      }
+    },
+    "guardduty": {
+      "domain": "logging",
+      "checklist": [
+        9
+      ],
+      "status": "observed",
+      "data": {
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-northeast-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-northeast-3": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-south-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-southeast-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ap-southeast-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "ca-central-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-central-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-north-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "ENABLED",
+              "EKS_AUDIT_LOGS": "ENABLED",
+              "EBS_MALWARE_PROTECTION": "ENABLED",
+              "RDS_LOGIN_EVENTS": "ENABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "ENABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EKS_RUNTIME_MONITORING",
+              "RUNTIME_MONITORING"
+            ]
+          },
+          "eu-west-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-west-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "eu-west-3": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "sa-east-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-east-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-east-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-west-1": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          },
+          "us-west-2": {
+            "enabled": true,
+            "finding_publishing_frequency": "SIX_HOURS",
+            "features": {
+              "CLOUD_TRAIL": "ENABLED",
+              "DNS_LOGS": "ENABLED",
+              "FLOW_LOGS": "ENABLED",
+              "S3_DATA_EVENTS": "DISABLED",
+              "EKS_AUDIT_LOGS": "DISABLED",
+              "EBS_MALWARE_PROTECTION": "DISABLED",
+              "RDS_LOGIN_EVENTS": "DISABLED",
+              "AI_PROTECTION": "DISABLED",
+              "AI_ANALYST": "DISABLED",
+              "EKS_RUNTIME_MONITORING": "DISABLED",
+              "LAMBDA_NETWORK_LOGS": "DISABLED",
+              "RUNTIME_MONITORING": "DISABLED"
+            },
+            "features_disabled": [
+              "AI_ANALYST",
+              "AI_PROTECTION",
+              "EBS_MALWARE_PROTECTION",
+              "EKS_AUDIT_LOGS",
+              "EKS_RUNTIME_MONITORING",
+              "LAMBDA_NETWORK_LOGS",
+              "RDS_LOGIN_EVENTS",
+              "RUNTIME_MONITORING",
+              "S3_DATA_EVENTS"
+            ]
+          }
+        },
+        "regions_enabled": [
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ap-south-1",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ca-central-1",
+          "eu-central-1",
+          "eu-north-1",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "sa-east-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
+        ],
+        "regions_not_enabled": [],
+        "coverage": "17/17"
+      }
+    },
+    "securityhub": {
+      "domain": "logging",
+      "checklist": [
+        10
+      ],
+      "status": "observed",
+      "data": {
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:ap-northeast-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "ap-northeast-2": {
+            "enabled": false
+          },
+          "ap-northeast-3": {
+            "enabled": false
+          },
+          "ap-south-1": {
+            "enabled": false
+          },
+          "ap-southeast-1": {
+            "enabled": false
+          },
+          "ap-southeast-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:ap-southeast-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "ca-central-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:ca-central-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-central-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-central-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-north-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "READY"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-north-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "READY"
+              }
+            ]
+          },
+          "eu-west-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-west-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-west-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-west-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "eu-west-3": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:eu-west-3::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "sa-east-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:sa-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-east-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-east-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-east-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-east-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-west-1": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-west-1::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          },
+          "us-west-2": {
+            "enabled": true,
+            "auto_enable_controls": true,
+            "standards": [
+              {
+                "arn": "arn:aws:securityhub:::ruleset/cis-aws-foundations-benchmark/v/1.2.0",
+                "status": "INCOMPLETE"
+              },
+              {
+                "arn": "arn:aws:securityhub:us-west-2::standards/aws-foundational-security-best-practices/v/1.0.0",
+                "status": "INCOMPLETE"
+              }
+            ]
+          }
+        },
+        "regions_enabled": [
+          "ap-northeast-1",
+          "ap-southeast-2",
+          "ca-central-1",
+          "eu-central-1",
+          "eu-north-1",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "sa-east-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
+        ],
+        "regions_not_enabled": [
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ap-south-1",
+          "ap-southeast-1"
+        ],
+        "coverage": "13/17"
+      }
+    },
+    "iam": {
+      "domain": "identity",
+      "checklist": [
+        4,
+        22
+      ],
+      "status": "observed",
+      "data": {
+        "account_summary": {
+          "GroupPolicySizeQuota": 5120,
+          "InstanceProfilesQuota": 1000,
+          "Policies": 7,
+          "GroupsPerUserQuota": 10,
+          "InstanceProfiles": 0,
+          "AttachedPoliciesPerUserQuota": 10,
+          "Users": 1,
+          "PoliciesQuota": 1500,
+          "Providers": 2,
+          "AccountMFAEnabled": 1,
+          "AccessKeysPerUserQuota": 2,
+          "AssumeRolePolicySizeQuota": 2048,
+          "PolicyVersionsInUseQuota": 10000,
+          "GlobalEndpointTokenVersion": 1,
+          "VersionsPerPolicyQuota": 5,
+          "AttachedPoliciesPerGroupQuota": 10,
+          "PolicySizeQuota": 6144,
+          "Groups": 2,
+          "AccountSigningCertificatesPresent": 0,
+          "UsersQuota": 5000,
+          "ServerCertificatesQuota": 20,
+          "MFADevices": 2,
+          "UserPolicySizeQuota": 2048,
+          "PolicyVersionsInUse": 30,
+          "ServerCertificates": 0,
+          "Roles": 31,
+          "RolesQuota": 1000,
+          "SigningCertificatesPerUserQuota": 2,
+          "MFADevicesInUse": 2,
+          "RolePolicySizeQuota": 10240,
+          "AttachedPoliciesPerRoleQuota": 20,
+          "AccountAccessKeysPresent": 0,
+          "AccountPasswordPresent": 1,
+          "GroupsQuota": 300
+        },
+        "password_policy": {
+          "MinimumPasswordLength": 14,
+          "RequireSymbols": true,
+          "RequireNumbers": true,
+          "RequireUppercaseCharacters": true,
+          "RequireLowercaseCharacters": true,
+          "AllowUsersToChangePassword": true,
+          "ExpirePasswords": true,
+          "MaxPasswordAge": 90,
+          "PasswordReusePrevention": 24
+        },
+        "users": [
+          {
+            "name": "user_8e2e61",
+            "arn": "arn:aws:iam::acct_78e004:user/user_8e2e61",
+            "created": "2025-12-10T10:40:05Z",
+            "password_last_used": "2026-08-15T10:06:43Z",
+            "groups": [
+              "group_f12900",
+              "group_466510"
+            ],
+            "attached_policies": [
+              "policy_f83859",
+              "AdministratorAccess",
+              "policy_a88a6a",
+              "policy_b58679"
+            ],
+            "group_policies": [
+              "policy_b9cdb9",
+              "AdministratorAccess"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": true,
+            "admin_via": [
+              "AdministratorAccess"
+            ],
+            "mfa_devices": 1,
+            "access_keys": [
+              {
+                "id_suffix": "WEFH",
+                "status": "Active",
+                "created": "2026-08-13T07:37:32Z",
+                "age_days": 2
+              }
+            ]
+          }
+        ],
+        "roles": [
+          {
+            "name": "role_1d7eb4",
+            "arn": "arn:aws:iam::acct_78e004:role/service-role/role_1d7eb4",
+            "path": "/service-role/",
+            "service_linked": false,
+            "created": "2026-08-13T07:35:41Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "policy_ad9d36"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "access-analyzer.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_fb4f01",
+            "arn": "arn:aws:iam::acct_78e004:role/role_fb4f01",
+            "path": "/",
+            "service_linked": false,
+            "created": "2025-12-10T10:47:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "AdministratorAccess",
+              "policy_7da5c3"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": true,
+            "admin_via": [
+              "AdministratorAccess"
+            ],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "lambda.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_73faa0",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-reserved/sso.amazonaws.com/eu-north-1/role_73faa0",
+            "path": "/aws-reserved/sso.amazonaws.com/eu-north-1/",
+            "service_linked": false,
+            "created": "2026-08-13T08:00:01Z",
+            "last_used": null,
+            "max_session_duration": 43200,
+            "permission_boundary": null,
+            "attached_policies": [
+              "AdministratorAccess"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": true,
+            "admin_via": [
+              "AdministratorAccess"
+            ],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [
+                "arn:aws:iam::acct_78e004:saml-provider/AWSSSO_fe6e535bb174dbfe_DO_NOT_DELETE"
+              ],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_eca755",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/access-analyzer.amazonaws.com/role_eca755",
+            "path": "/aws-service-role/access-analyzer.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:56:24Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "access-analyzer.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_5aa41c",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/guardduty.amazonaws.com/role_5aa41c",
+            "path": "/aws-service-role/guardduty.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:54:58Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "guardduty.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_64c6f0",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/malware-protection.guardduty.amazonaws.com/role_64c6f0",
+            "path": "/aws-service-role/malware-protection.guardduty.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:54:59Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "malware-protection.guardduty.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_b1b697",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/inspector2.amazonaws.com/role_b1b697",
+            "path": "/aws-service-role/inspector2.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:55:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "inspector2.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_79034c",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/agentless.inspector2.amazonaws.com/role_79034c",
+            "path": "/aws-service-role/agentless.inspector2.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:55:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "agentless.inspector2.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_05b050",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/macie.amazonaws.com/role_05b050",
+            "path": "/aws-service-role/macie.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:56:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "macie.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_3240e2",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/ops.apigateway.amazonaws.com/role_3240e2",
+            "path": "/aws-service-role/ops.apigateway.amazonaws.com/",
+            "service_linked": true,
+            "created": "2025-12-10T14:26:41Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "ops.apigateway.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_fce07d",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/cloudtrail.amazonaws.com/role_fce07d",
+            "path": "/aws-service-role/cloudtrail.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-07-27T18:40:04Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "cloudtrail.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_c48579",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/config.amazonaws.com/role_c48579",
+            "path": "/aws-service-role/config.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:56:23Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "config.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_1871d8",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/organizations.amazonaws.com/role_1871d8",
+            "path": "/aws-service-role/organizations.amazonaws.com/",
+            "service_linked": true,
+            "created": "2025-12-10T11:05:21Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "organizations.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_c4cf3d",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/resource-explorer-2.amazonaws.com/role_c4cf3d",
+            "path": "/aws-service-role/resource-explorer-2.amazonaws.com/",
+            "service_linked": true,
+            "created": "2025-12-10T08:22:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "resource-explorer-2.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_721d92",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/securityhub.amazonaws.com/role_721d92",
+            "path": "/aws-service-role/securityhub.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:55:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "securityhub.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_d49d82",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/securityhubv2.amazonaws.com/role_d49d82",
+            "path": "/aws-service-role/securityhubv2.amazonaws.com/",
+            "service_linked": true,
+            "created": "2026-08-13T10:55:52Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "securityhubv2.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_bd95f6",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/sso.amazonaws.com/role_bd95f6",
+            "path": "/aws-service-role/sso.amazonaws.com/",
+            "service_linked": true,
+            "created": "2025-12-10T11:16:01Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "sso.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_4f9913",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/support.amazonaws.com/role_4f9913",
+            "path": "/aws-service-role/support.amazonaws.com/",
+            "service_linked": true,
+            "created": "2018-07-21T23:24:39Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "support.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_9df690",
+            "arn": "arn:aws:iam::acct_78e004:role/aws-service-role/trustedadvisor.amazonaws.com/role_9df690",
+            "path": "/aws-service-role/trustedadvisor.amazonaws.com/",
+            "service_linked": true,
+            "created": "2018-07-25T05:22:32Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "trustedadvisor.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_0a8ff5",
+            "arn": "arn:aws:iam::acct_78e004:role/role_0a8ff5",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:41:22Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "AdministratorAccess"
+            ],
+            "inline_policies": [
+              "policy_54e26c",
+              "policy_7df3e5"
+            ],
+            "has_admin_policy": true,
+            "admin_via": [
+              "AdministratorAccess"
+            ],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [
+                "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+              ],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_cae3b2",
+            "arn": "arn:aws:iam::acct_78e004:role/role_cae3b2",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:41:22Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [
+              "policy_06fd52"
+            ],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [
+                "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+              ],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_4ce2e0",
+            "arn": "arn:aws:iam::acct_78e004:role/role_4ce2e0",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:45:33Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [
+              "policy_6a6a28"
+            ],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "lambda.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": true,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_6b3ce9",
+            "arn": "arn:aws:iam::acct_78e004:role/role_6b3ce9",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-29T17:58:13Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [
+              "role_6b3ce9"
+            ],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "cloudtrail.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_070c09",
+            "arn": "arn:aws:iam::acct_78e004:role/role_070c09",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:43:11Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [],
+            "inline_policies": [
+              "role_070c09"
+            ],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "vpc-flow-logs.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_43d0fa",
+            "arn": "arn:aws:iam::acct_78e004:role/role_43d0fa",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:41:22Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "ReadOnlyAccess"
+            ],
+            "inline_policies": [
+              "policy_f71c55"
+            ],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [
+                "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+              ],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_8cb8f5",
+            "arn": "arn:aws:iam::acct_78e004:role/role_8cb8f5",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:37:42Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "AdministratorAccess"
+            ],
+            "inline_policies": [
+              "policy_758a2f"
+            ],
+            "has_admin_policy": true,
+            "admin_via": [
+              "AdministratorAccess"
+            ],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [
+                "acct_78e004"
+              ],
+              "same_account_trust": true,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_18be4d",
+            "arn": "arn:aws:iam::acct_78e004:role/role_18be4d",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-07-27T18:41:22Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "policy_1667a6",
+              "policy_373c7b"
+            ],
+            "inline_policies": [
+              "policy_3d8729"
+            ],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [
+                "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+              ],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": true
+            }
+          },
+          {
+            "name": "role_469bc6",
+            "arn": "arn:aws:iam::acct_78e004:role/service-role/role_469bc6",
+            "path": "/service-role/",
+            "service_linked": false,
+            "created": "2025-12-10T14:08:23Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "policy_180ea9"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "lambda.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_a84397",
+            "arn": "arn:aws:iam::acct_78e004:role/service-role/role_a84397",
+            "path": "/service-role/",
+            "service_linked": false,
+            "created": "2025-12-10T14:48:35Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "policy_5231db"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "lambda.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_05e984",
+            "arn": "arn:aws:iam::acct_78e004:role/role_05e984",
+            "path": "/",
+            "service_linked": false,
+            "created": "2026-08-15T12:06:54Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "role_05e984"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [
+                "acct_78e004"
+              ],
+              "same_account_trust": true,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          },
+          {
+            "name": "role_bcf90c",
+            "arn": "arn:aws:iam::acct_78e004:role/service-role/role_bcf90c",
+            "path": "/service-role/",
+            "service_linked": false,
+            "created": "2025-12-10T10:53:46Z",
+            "last_used": null,
+            "max_session_duration": 3600,
+            "permission_boundary": null,
+            "attached_policies": [
+              "policy_119f9a"
+            ],
+            "inline_policies": [],
+            "has_admin_policy": false,
+            "admin_via": [],
+            "trust": {
+              "wildcard_principal": false,
+              "wildcard_has_condition": false,
+              "trusted_accounts": [],
+              "same_account_trust": false,
+              "external_accounts": [],
+              "federated_principals": [],
+              "service_principals": [
+                "lambda.amazonaws.com"
+              ],
+              "has_external_id_condition": false,
+              "has_source_arn_condition": false,
+              "has_any_condition": false
+            }
+          }
+        ],
+        "identity_providers": {
+          "saml": [
+            "arn:aws:iam::acct_78e004:saml-provider/AWSSSO_fe6e535bb174dbfe_DO_NOT_DELETE"
+          ],
+          "oidc": [
+            "arn:aws:iam::acct_78e004:oidc-provider/token.actions.githubusercontent.com"
+          ]
+        },
+        "credential_report": {
+          "available": true,
+          "user_count": 2,
+          "root": {
+            "mfa_active": true,
+            "access_key_1_active": false,
+            "access_key_2_active": false,
+            "password_last_used": "2026-08-15T06:22:12Z"
+          },
+          "active_access_keys": [
+            {
+              "user": "user_8e2e61",
+              "age_days": 2
+            }
+          ]
+        },
+        "totals": {
+          "users": 1,
+          "roles": 31,
+          "users_with_admin": 1,
+          "roles_with_admin": 4,
+          "users_with_access_keys": 1,
+          "roles_trusting_external_accounts": 0,
+          "roles_without_permission_boundary": 31
+        }
+      }
+    },
+    "cicd": {
+      "domain": "code",
+      "checklist": [
+        18
+      ],
+      "status": "observed",
+      "data": {
+        "source": "repo",
+        "workflows": [
+          {
+            "file": "security-pipeline.yml",
+            "name": "security-pipeline",
+            "triggers": [
+              "pull_request",
+              "push",
+              "schedule"
+            ],
+            "top_level_permissions": {
+              "contents": "read"
+            },
+            "job_count": 4,
+            "job_names": [
+              "guardrails",
+              "iac",
+              "sast",
+              "supply-chain"
+            ],
+            "uses_aws_oidc": false,
+            "requests_id_token": false,
+            "actions": [
+              "actions/checkout@v4",
+              "actions/setup-node@v4",
+              "anchore/sbom-action@v0",
+              "astral-sh/setup-uv@v5",
+              "bridgecrewio/checkov-action@master",
+              "github/codeql-action/upload-sarif@v3",
+              "gitleaks/gitleaks-action@v2",
+              "hashicorp/setup-terraform@v3",
+              "semgrep/semgrep-action@v1"
+            ],
+            "actions_not_sha_pinned": [
+              "actions/checkout@v4",
+              "actions/setup-node@v4",
+              "anchore/sbom-action@v0",
+              "astral-sh/setup-uv@v5",
+              "bridgecrewio/checkov-action@master",
+              "github/codeql-action/upload-sarif@v3",
+              "gitleaks/gitleaks-action@v2",
+              "hashicorp/setup-terraform@v3",
+              "semgrep/semgrep-action@v1"
+            ]
+          }
+        ],
+        "workflow_count": 1,
+        "any_uses_aws_oidc": false,
+        "total_actions_not_sha_pinned": [
+          "actions/checkout@v4",
+          "actions/setup-node@v4",
+          "anchore/sbom-action@v0",
+          "astral-sh/setup-uv@v5",
+          "bridgecrewio/checkov-action@master",
+          "github/codeql-action/upload-sarif@v3",
+          "gitleaks/gitleaks-action@v2",
+          "hashicorp/setup-terraform@v3",
+          "semgrep/semgrep-action@v1"
+        ],
+        "has_codeowners": true,
+        "has_dependabot": false,
+        "has_branch_rulesets": true,
+        "has_pre_commit": true
+      },
+      "note": "Sourced from the repository, not from AWS"
+    },
+    "iac": {
+      "domain": "code",
+      "checklist": [
+        19
+      ],
+      "status": "observed",
+      "data": {
+        "source": "repo",
+        "terraform_modules": [
+          {
+            "path": "infra/terraform/detections",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 17,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 0
+          },
+          {
+            "path": "infra/terraform/modules/agent-data-access",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 4,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 4
+          },
+          {
+            "path": "infra/terraform/modules/aurora-secure",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 12,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 6
+          },
+          {
+            "path": "infra/terraform/modules/bedrock-guardrails",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 18,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 7
+          },
+          {
+            "path": "infra/terraform/modules/github-oidc",
+            "files": [
+              "main.tf",
+              "outputs.tf",
+              "variables.tf"
+            ],
+            "resource_count": 4,
+            "has_variables": true,
+            "has_outputs": true,
+            "checkov_suppressions": 0
+          }
+        ],
+        "terraform_module_count": 5,
+        "cdk_apps": [
+          "infra/cdk"
+        ],
+        "total_checkov_suppressions": 17,
+        "has_cloudformation": true
+      },
+      "note": "Sourced from the repository, not from AWS"
+    },
+    "config": {
+      "domain": "logging",
+      "checklist": [
+        11
+      ],
+      "status": "observed",
+      "data": {
+        "by_region": {
+          "ap-northeast-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-northeast-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-northeast-3": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-south-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-southeast-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ap-southeast-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "ca-central-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-central-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-north-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 343
+          },
+          "eu-west-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-west-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "eu-west-3": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "sa-east-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-east-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-east-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-west-1": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          },
+          "us-west-2": {
+            "enabled": false,
+            "recording": false,
+            "records_all_resources": false,
+            "includes_global_resources": false,
+            "delivery_channels": 0,
+            "rule_count": 0
+          }
+        },
+        "regions_recording": [],
+        "regions_not_recording": [
+          "ap-northeast-1",
+          "ap-northeast-2",
+          "ap-northeast-3",
+          "ap-south-1",
+          "ap-southeast-1",
+          "ap-southeast-2",
+          "ca-central-1",
+          "eu-central-1",
+          "eu-north-1",
+          "eu-west-1",
+          "eu-west-2",
+          "eu-west-3",
+          "sa-east-1",
+          "us-east-1",
+          "us-east-2",
+          "us-west-1",
+          "us-west-2"
+        ],
+        "coverage": "0/17"
+      }
+    },
+    "secrets": {
+      "domain": "data",
+      "checklist": [
+        17
+      ],
+      "status": "observed",
+      "data": {
+        "secrets": [],
+        "parameters": [
+          {
+            "name": "param_6f1ab2",
+            "region": "eu-north-1",
+            "type": "StringList",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_1c4fa1",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_96fbb1",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_54f879",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_6bd3e7",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_ca0e2b",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_704c6a",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_39e61f",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          },
+          {
+            "name": "param_3e7e9d",
+            "region": "us-east-1",
+            "type": "String",
+            "kms_key_id": null,
+            "tier": "Standard"
+          }
+        ],
+        "secrets_total": 0,
+        "secrets_without_rotation": [],
+        "parameters_total": 9,
+        "plaintext_parameters_with_secret_names": []
+      }
+    },
+    "identity_center": {
+      "domain": "identity",
+      "checklist": [
+        6
+      ],
+      "status": "observed",
+      "data": {
+        "enabled": true,
+        "region": "eu-north-1",
+        "instance_arn": "arn:aws:sso:::instance/ssoins-6508f3eeb926c4ad",
+        "identity_store_id": "d-c3676338e7",
+        "permission_sets": [
+          {
+            "name": "PowerUserAccess",
+            "session_duration": "PT1H",
+            "managed_policies": [
+              "PowerUserAccess"
+            ],
+            "has_permission_boundary": false,
+            "grants_admin": true
+          },
+          {
+            "name": "AdministratorAccess",
+            "session_duration": "PT12H",
+            "managed_policies": [
+              "AdministratorAccess"
+            ],
+            "has_permission_boundary": false,
+            "grants_admin": true
+          }
+        ],
+        "user_count": 1,
+        "group_count": 1,
+        "admin_permission_sets": [
+          "PowerUserAccess",
+          "AdministratorAccess"
+        ]
+      }
+    },
+    "security_groups": {
+      "domain": "infrastructure",
+      "checklist": [
+        15
+      ],
+      "status": "observed",
+      "data": {
+        "total_groups": 22,
+        "internet_open_rules": [
+          {
+            "group_id": "sg_c675cf",
+            "group_name": "sg_0c4114",
+            "region": "us-east-1",
+            "vpc_id": "vpc_c12e1e",
+            "protocol": "tcp",
+            "from_port": 443,
+            "to_port": 443,
+            "open_to": [
+              "0.0.0.0/0"
+            ],
+            "all_ports": false,
+            "sensitive_ports_exposed": []
+          }
+        ],
+        "groups_open_to_internet": [
+          "sg_c675cf"
+        ],
+        "groups_exposing_sensitive_ports": []
+      }
+    },
+    "vulnerability_services": {
+      "domain": "code",
+      "checklist": [
+        20
+      ],
+      "status": "observed",
+      "data": {
+        "inspector": {
+          "ap-northeast-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-northeast-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-northeast-3": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-south-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-southeast-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ap-southeast-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "ca-central-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-central-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-north-1": {
+            "status": "ENABLED",
+            "resources": {
+              "ec2": "ENABLED",
+              "ecr": "ENABLED",
+              "lambda": "ENABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-west-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-west-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "eu-west-3": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "sa-east-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-east-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-east-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-west-1": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          },
+          "us-west-2": {
+            "status": "DISABLED",
+            "resources": {
+              "ec2": "DISABLED",
+              "ecr": "DISABLED",
+              "lambda": "DISABLED",
+              "lambdaCode": "DISABLED"
+            }
+          }
+        },
+        "macie": {
+          "ap-northeast-1": {
+            "status": "DISABLED"
+          },
+          "ap-northeast-2": {
+            "status": "DISABLED"
+          },
+          "ap-northeast-3": {
+            "status": "DISABLED"
+          },
+          "ap-south-1": {
+            "status": "DISABLED"
+          },
+          "ap-southeast-1": {
+            "status": "DISABLED"
+          },
+          "ap-southeast-2": {
+            "status": "DISABLED"
+          },
+          "ca-central-1": {
+            "status": "DISABLED"
+          },
+          "eu-central-1": {
+            "status": "DISABLED"
+          },
+          "eu-north-1": {
+            "status": "ENABLED"
+          },
+          "eu-west-1": {
+            "status": "DISABLED"
+          },
+          "eu-west-2": {
+            "status": "DISABLED"
+          },
+          "eu-west-3": {
+            "status": "DISABLED"
+          },
+          "sa-east-1": {
+            "status": "DISABLED"
+          },
+          "us-east-1": {
+            "status": "DISABLED"
+          },
+          "us-east-2": {
+            "status": "DISABLED"
+          },
+          "us-west-1": {
+            "status": "DISABLED"
+          },
+          "us-west-2": {
+            "status": "DISABLED"
+          }
+        },
+        "inspector_regions_enabled": [
+          "eu-north-1"
+        ],
+        "macie_regions_enabled": [
+          "eu-north-1"
+        ]
+      }
+    },
+    "lambda": {
+      "domain": "code",
+      "checklist": [
+        16
+      ],
+      "status": "observed",
+      "data": {
+        "functions": [
+          {
+            "name": "fn_09b95f",
+            "region": "us-east-1",
+            "runtime": "python3.14",
+            "runtime_deprecated": false,
+            "role": "arn:aws:iam::acct_78e004:role/service-role/role_a84397",
+            "vpc_attached": false,
+            "tracing": "PassThrough",
+            "kms_key_arn": null,
+            "reserved_concurrency": null,
+            "architectures": [
+              "x86_64"
+            ],
+            "timeout": 3,
+            "env_var_names": [],
+            "env_vars_look_secret": [],
+            "env_encrypted_with_cmk": false
+          },
+          {
+            "name": "fn_ed6014",
+            "region": "us-east-1",
+            "runtime": "python3.14",
+            "runtime_deprecated": false,
+            "role": "arn:aws:iam::acct_78e004:role/service-role/role_469bc6",
+            "vpc_attached": false,
+            "tracing": "PassThrough",
+            "kms_key_arn": null,
+            "reserved_concurrency": null,
+            "architectures": [
+              "x86_64"
+            ],
+            "timeout": 3,
+            "env_var_names": [],
+            "env_vars_look_secret": [],
+            "env_encrypted_with_cmk": false
+          },
+          {
+            "name": "fn_fc84c8",
+            "region": "us-east-1",
+            "runtime": "python3.12",
+            "runtime_deprecated": false,
+            "role": "arn:aws:iam::acct_78e004:role/role_4ce2e0",
+            "vpc_attached": false,
+            "tracing": "Active",
+            "kms_key_arn": null,
+            "reserved_concurrency": 5,
+            "architectures": [
+              "arm64"
+            ],
+            "timeout": 10,
+            "env_var_names": [],
+            "env_vars_look_secret": [],
+            "env_encrypted_with_cmk": false
+          }
+        ],
+        "total": 3,
+        "deprecated_runtimes": [],
+        "without_tracing": [
+          "fn_09b95f",
+          "fn_ed6014"
+        ],
+        "with_secret_shaped_env_vars": [],
+        "shared_execution_roles": {}
+      }
+    },
+    "api_gateway": {
+      "domain": "code",
+      "checklist": [
+        16
+      ],
+      "status": "observed",
+      "data": {
+        "stages": [
+          {
+            "api_id": "brpe2epz86",
+            "name": "api_3f2806",
+            "region": "us-east-1",
+            "protocol": "HTTP",
+            "stage": "$default",
+            "authorizers": [],
+            "has_authorizer": false,
+            "web_acl_arn": null,
+            "access_logging": true,
+            "auto_deploy": true
+          },
+          {
+            "api_id": "brpe2epz86",
+            "name": "api_3f2806",
+            "region": "us-east-1",
+            "protocol": "HTTP",
+            "stage": "api-deploy-stage",
+            "authorizers": [],
+            "has_authorizer": false,
+            "web_acl_arn": null,
+            "access_logging": false,
+            "auto_deploy": false
+          }
+        ],
+        "total": 2,
+        "without_authorizer": [
+          "api_3f2806/$default",
+          "api_3f2806/api-deploy-stage"
+        ],
+        "without_access_logging": [
+          "api_3f2806/api-deploy-stage"
+        ],
+        "without_waf": []
+      }
+    },
+    "organizations": {
+      "domain": "identity",
+      "checklist": [
+        1,
+        2,
+        7
+      ],
+      "status": "observed",
+      "data": {
+        "in_organization": true,
+        "organization_id": "org_f233fe",
+        "feature_set": "ALL",
+        "management_account_id": "acct_78e004",
+        "management_account_email": "email_2db95c@redacted.invalid",
+        "policy_types_enabled": [
+          "BEDROCK_POLICY",
+          "RESOURCE_CONTROL_POLICY",
+          "S3_POLICY",
+          "SERVICE_CONTROL_POLICY",
+          "TAG_POLICY"
+        ],
+        "policy_types_disabled": [
+          "AISERVICES_OPT_OUT_POLICY",
+          "BACKUP_POLICY",
+          "CHATBOT_POLICY",
+          "DECLARATIVE_POLICY_EC2"
+        ],
+        "roots": [
+          {
+            "id": "root_38dfab",
+            "name": "Root",
+            "policy_types_enabled": [
+              "BEDROCK_POLICY",
+              "RESOURCE_CONTROL_POLICY",
+              "S3_POLICY",
+              "SERVICE_CONTROL_POLICY",
+              "TAG_POLICY"
+            ],
+            "policy_types_available_but_disabled": [
+              "AISERVICES_OPT_OUT_POLICY",
+              "BACKUP_POLICY",
+              "CHATBOT_POLICY",
+              "DECLARATIVE_POLICY_EC2"
+            ],
+            "account_ids": [
+              "acct_78e004"
+            ],
+            "attached_policy_ids": [
+              "p-RCPFullAWSAccess",
+              "pol_97e7ce",
+              "p-FullAWSAccess",
+              "pol_23a301",
+              "pol_91641b",
+              "pol_ec0406"
+            ],
+            "organizational_units": [
+              {
+                "id": "ou_b4539e",
+                "name": "Workloads",
+                "depth": 0,
+                "account_ids": [],
+                "attached_policy_ids": [
+                  "p-RCPFullAWSAccess",
+                  "pol_7bbb7a",
+                  "p-FullAWSAccess",
+                  "pol_c03ae8"
+                ],
+                "children": [
+                  {
+                    "id": "ou_6298e6",
+                    "name": "ou_90826e",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": [
+                      {
+                        "id": "ou_0b528f",
+                        "name": "dev",
+                        "depth": 2,
+                        "account_ids": [],
+                        "attached_policy_ids": [
+                          "p-RCPFullAWSAccess",
+                          "p-FullAWSAccess"
+                        ],
+                        "children": []
+                      },
+                      {
+                        "id": "ou_a6b02e",
+                        "name": "testing",
+                        "depth": 2,
+                        "account_ids": [],
+                        "attached_policy_ids": [
+                          "p-RCPFullAWSAccess",
+                          "p-FullAWSAccess"
+                        ],
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "id": "ou_1b7ccb",
+                    "name": "Prod",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess",
+                      "pol_30d637"
+                    ],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "ou_d7bc7c",
+                "name": "Core",
+                "depth": 0,
+                "account_ids": [],
+                "attached_policy_ids": [
+                  "p-RCPFullAWSAccess",
+                  "p-FullAWSAccess"
+                ],
+                "children": [
+                  {
+                    "id": "ou_aa6d6f",
+                    "name": "ou_bec0c4",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": "ou_5f02eb",
+                    "name": "audit",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": "ou_6ea1cd",
+                    "name": "security",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "id": "ou_69ccd7",
+                "name": "Sandbox",
+                "depth": 0,
+                "account_ids": [
+                  "acct_1e3fc5"
+                ],
+                "attached_policy_ids": [
+                  "p-RCPFullAWSAccess",
+                  "p-FullAWSAccess"
+                ],
+                "children": []
+              },
+              {
+                "id": "ou_579af2",
+                "name": "Infrastructure",
+                "depth": 0,
+                "account_ids": [],
+                "attached_policy_ids": [
+                  "p-RCPFullAWSAccess",
+                  "p-FullAWSAccess"
+                ],
+                "children": [
+                  {
+                    "id": "ou_27be2a",
+                    "name": "ou_58567f",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": "ou_6e42cc",
+                    "name": "operations",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": []
+                  },
+                  {
+                    "id": "ou_aecaf3",
+                    "name": "network",
+                    "depth": 1,
+                    "account_ids": [],
+                    "attached_policy_ids": [
+                      "p-RCPFullAWSAccess",
+                      "p-FullAWSAccess"
+                    ],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "accounts": [
+          {
+            "id": "acct_78e004",
+            "name": "account_523b47",
+            "email": "email_2db95c@redacted.invalid",
+            "status": "ACTIVE",
+            "joined_method": "INVITED",
+            "is_management_account": true
+          },
+          {
+            "id": "acct_1e3fc5",
+            "name": "account_d0013f",
+            "email": "email_979c14@redacted.invalid",
+            "status": "ACTIVE",
+            "joined_method": "CREATED",
+            "is_management_account": false
+          }
+        ],
+        "policies": {
+          "BEDROCK_POLICY": [
+            {
+              "id": "pol_4d893f",
+              "name": "scp_ac200a",
+              "aws_managed": false,
+              "description": null,
+              "targets": [
+                {
+                  "id": "acct_78e004",
+                  "name": "account_523b47",
+                  "type": "ACCOUNT"
+                }
+              ]
+            }
+          ],
+          "RESOURCE_CONTROL_POLICY": [
+            {
+              "id": "p-RCPFullAWSAccess",
+              "name": "RCPFullAWSAccess",
+              "aws_managed": true,
+              "description": "Allows access to every resource",
+              "targets": [
+                {
+                  "id": "ou_0b528f",
+                  "name": "dev",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_b4539e",
+                  "name": "Workloads",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_a6b02e",
+                  "name": "testing",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_aa6d6f",
+                  "name": "ou_bec0c4",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "acct_1e3fc5",
+                  "name": "account_d0013f",
+                  "type": "ACCOUNT"
+                },
+                {
+                  "id": "ou_6298e6",
+                  "name": "ou_90826e",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_69ccd7",
+                  "name": "Sandbox",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_27be2a",
+                  "name": "ou_58567f",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_aecaf3",
+                  "name": "network",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_579af2",
+                  "name": "Infrastructure",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_6e42cc",
+                  "name": "operations",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_5f02eb",
+                  "name": "audit",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_d7bc7c",
+                  "name": "Core",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_6ea1cd",
+                  "name": "security",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "root_38dfab",
+                  "name": "Root",
+                  "type": "ROOT"
+                },
+                {
+                  "id": "acct_78e004",
+                  "name": "account_523b47",
+                  "type": "ACCOUNT"
+                },
+                {
+                  "id": "ou_1b7ccb",
+                  "name": "Prod",
+                  "type": "ORGANIZATIONAL_UNIT"
+                }
+              ]
+            }
+          ],
+          "S3_POLICY": [
+            {
+              "id": "pol_561066",
+              "name": "scp_eca460",
+              "aws_managed": false,
+              "description": null,
+              "targets": [
+                {
+                  "id": "acct_78e004",
+                  "name": "account_523b47",
+                  "type": "ACCOUNT"
+                }
+              ]
+            }
+          ],
+          "SERVICE_CONTROL_POLICY": [
+            {
+              "id": "pol_7bbb7a",
+              "name": "scp_358d7f",
+              "aws_managed": false,
+              "description": "Require encryption at rest for S3, EBS and RDS",
+              "targets": [
+                {
+                  "id": "ou_b4539e",
+                  "name": "Workloads",
+                  "type": "ORGANIZATIONAL_UNIT"
+                }
+              ]
+            },
+            {
+              "id": "pol_97e7ce",
+              "name": "scp_cd17f1",
+              "aws_managed": false,
+              "description": "Prevent buckets and objects from being made public",
+              "targets": [
+                {
+                  "id": "root_38dfab",
+                  "name": "Root",
+                  "type": "ROOT"
+                }
+              ]
+            },
+            {
+              "id": "p-FullAWSAccess",
+              "name": "FullAWSAccess",
+              "aws_managed": true,
+              "description": "Allows access to every operation",
+              "targets": [
+                {
+                  "id": "ou_0b528f",
+                  "name": "dev",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_b4539e",
+                  "name": "Workloads",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_a6b02e",
+                  "name": "testing",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_aa6d6f",
+                  "name": "ou_bec0c4",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "acct_1e3fc5",
+                  "name": "account_d0013f",
+                  "type": "ACCOUNT"
+                },
+                {
+                  "id": "ou_6298e6",
+                  "name": "ou_90826e",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_69ccd7",
+                  "name": "Sandbox",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_27be2a",
+                  "name": "ou_58567f",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_aecaf3",
+                  "name": "network",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_579af2",
+                  "name": "Infrastructure",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_6e42cc",
+                  "name": "operations",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_5f02eb",
+                  "name": "audit",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_d7bc7c",
+                  "name": "Core",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "ou_6ea1cd",
+                  "name": "security",
+                  "type": "ORGANIZATIONAL_UNIT"
+                },
+                {
+                  "id": "root_38dfab",
+                  "name": "Root",
+                  "type": "ROOT"
+                },
+                {
+                  "id": "acct_78e004",
+                  "name": "account_523b47",
+                  "type": "ACCOUNT"
+                },
+                {
+                  "id": "ou_1b7ccb",
+                  "name": "Prod",
+                  "type": "ORGANIZATIONAL_UNIT"
+                }
+              ]
+            },
+            {
+              "id": "pol_30d637",
+              "name": "scp_9e797a",
+              "aws_managed": false,
+              "description": "Require MFA for all non-automation API calls",
+              "targets": [
+                {
+                  "id": "ou_1b7ccb",
+                  "name": "Prod",
+                  "type": "ORGANIZATIONAL_UNIT"
+                }
+              ]
+            },
+            {
+              "id": "pol_c03ae8",
+              "name": "scp_8b115f",
+              "aws_managed": false,
+              "description": "Confine workloads to approved regions",
+              "targets": [
+                {
+                  "id": "ou_b4539e",
+                  "name": "Workloads",
+                  "type": "ORGANIZATIONAL_UNIT"
+                }
+              ]
+            },
+            {
+              "id": "pol_23a301",
+              "name": "scp_bd397c",
+              "aws_managed": false,
+              "description": "Prevent tampering with the audit trail",
+              "targets": [
+                {
+                  "id": "root_38dfab",
+                  "name": "Root",
+                  "type": "ROOT"
+                }
+              ]
+            },
+            {
+              "id": "pol_91641b",
+              "name": "scp_4aad35",
+              "aws_managed": false,
+              "description": "Prevent threat detection from being switched off",
+              "targets": [
+                {
+                  "id": "root_38dfab",
+                  "name": "Root",
+                  "type": "ROOT"
+                }
+              ]
+            },
+            {
+              "id": "pol_ec0406",
+              "name": "scp_ed4250",
+              "aws_managed": false,
+              "description": "Block all API activity performed by an account root user",
+              "targets": [
+                {
+                  "id": "root_38dfab",
+                  "name": "Root",
+                  "type": "ROOT"
+                }
+              ]
+            }
+          ],
+          "TAG_POLICY": []
+        },
+        "delegated_administrators": [],
+        "security_services_without_delegated_admin": [
+          "access-analyzer.amazonaws.com",
+          "auditmanager.amazonaws.com",
+          "config.amazonaws.com",
+          "detective.amazonaws.com",
+          "guardduty.amazonaws.com",
+          "inspector2.amazonaws.com",
+          "macie.amazonaws.com",
+          "securityhub.amazonaws.com"
+        ]
+      }
+    },
+    "vpc": {
+      "domain": "infrastructure",
+      "checklist": [
+        14
+      ],
+      "status": "observed",
+      "data": {
+        "vpcs": [
+          {
+            "vpc_id": "vpc_c11a9b",
+            "region": "ap-northeast-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_d658ac",
+              "subnet_f06b86",
+              "subnet_639d75"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_98cc4f",
+            "region": "ap-northeast-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 4,
+            "public_subnets": [
+              "subnet_c33d88",
+              "subnet_a31df7",
+              "subnet_c1ddc9",
+              "subnet_c426d8"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_48c3b4",
+            "region": "ap-northeast-3",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_594714",
+              "subnet_fc1ef8",
+              "subnet_16eae4"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_fc75a8",
+            "region": "ap-south-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_53eaa4",
+              "subnet_301035",
+              "subnet_f019e8"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_c00621",
+            "region": "ap-southeast-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_0a7c41",
+              "subnet_10c633",
+              "subnet_d9608f"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_288aba",
+            "region": "ap-southeast-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_487dce",
+              "subnet_457c62",
+              "subnet_bae005"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_0a2744",
+            "region": "ca-central-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_40ef04",
+              "subnet_9f70dd",
+              "subnet_17f820"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_32d49c",
+            "region": "eu-central-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_db50eb",
+              "subnet_7cf9fc",
+              "subnet_5e610b"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_b36013",
+            "region": "eu-north-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_ea3431",
+              "subnet_4a8482",
+              "subnet_8842b3"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_e92a4c",
+            "region": "eu-west-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_ac17c8",
+              "subnet_707f86",
+              "subnet_69368a"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_51f941",
+            "region": "eu-west-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_abf20e",
+              "subnet_48937c",
+              "subnet_a00df5"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_620e78",
+            "region": "eu-west-3",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_f36e3a",
+              "subnet_2c4533",
+              "subnet_779f56"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_1bada7",
+            "region": "sa-east-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_11c284",
+              "subnet_ccc112",
+              "subnet_64b86f"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_c12e1e",
+            "region": "us-east-1",
+            "cidr": "10.10.0.0/16",
+            "is_default": false,
+            "flow_logs_enabled": true,
+            "subnet_count": 6,
+            "public_subnets": [],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 2,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_6672fb",
+            "region": "us-east-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 6,
+            "public_subnets": [
+              "subnet_5697d9",
+              "subnet_c02dfe",
+              "subnet_40caf8",
+              "subnet_6ca4a2",
+              "subnet_c4b6dd",
+              "subnet_f06edf"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_fb0f9d",
+            "region": "us-east-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 3,
+            "public_subnets": [
+              "subnet_8ca7e5",
+              "subnet_4b5a9a",
+              "subnet_c329b5"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_274626",
+            "region": "us-west-1",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 2,
+            "public_subnets": [
+              "subnet_6b4861",
+              "subnet_8fedd3"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          },
+          {
+            "vpc_id": "vpc_af0bb7",
+            "region": "us-west-2",
+            "cidr": "172.31.0.0/16",
+            "is_default": true,
+            "flow_logs_enabled": false,
+            "subnet_count": 4,
+            "public_subnets": [
+              "subnet_42135f",
+              "subnet_56f2f0",
+              "subnet_8faa56",
+              "subnet_5829c6"
+            ],
+            "nat_gateways": 0,
+            "internet_gateways": 1,
+            "vpc_endpoints": 0,
+            "peering_connections": 0
+          }
+        ],
+        "total": 18,
+        "without_flow_logs": [
+          "ap-northeast-1/vpc_c11a9b",
+          "ap-northeast-2/vpc_98cc4f",
+          "ap-northeast-3/vpc_48c3b4",
+          "ap-south-1/vpc_fc75a8",
+          "ap-southeast-1/vpc_c00621",
+          "ap-southeast-2/vpc_288aba",
+          "ca-central-1/vpc_0a2744",
+          "eu-central-1/vpc_32d49c",
+          "eu-north-1/vpc_b36013",
+          "eu-west-1/vpc_e92a4c",
+          "eu-west-2/vpc_51f941",
+          "eu-west-3/vpc_620e78",
+          "sa-east-1/vpc_1bada7",
+          "us-east-1/vpc_6672fb",
+          "us-east-2/vpc_fb0f9d",
+          "us-west-1/vpc_274626",
+          "us-west-2/vpc_af0bb7"
+        ],
+        "default_vpcs": [
+          "ap-northeast-1/vpc_c11a9b",
+          "ap-northeast-2/vpc_98cc4f",
+          "ap-northeast-3/vpc_48c3b4",
+          "ap-south-1/vpc_fc75a8",
+          "ap-southeast-1/vpc_c00621",
+          "ap-southeast-2/vpc_288aba",
+          "ca-central-1/vpc_0a2744",
+          "eu-central-1/vpc_32d49c",
+          "eu-north-1/vpc_b36013",
+          "eu-west-1/vpc_e92a4c",
+          "eu-west-2/vpc_51f941",
+          "eu-west-3/vpc_620e78",
+          "sa-east-1/vpc_1bada7",
+          "us-east-1/vpc_6672fb",
+          "us-east-2/vpc_fb0f9d",
+          "us-west-1/vpc_274626",
+          "us-west-2/vpc_af0bb7"
+        ]
+      }
+    },
+    "exposure": {
+      "domain": "infrastructure",
+      "checklist": [
+        3
+      ],
+      "status": "observed",
+      "data": {
+        "load_balancers": [],
+        "elastic_ips": [],
+        "public_instances": [],
+        "public_databases": [],
+        "api_gateways": [
+          {
+            "id": "brpe2epz86",
+            "name": "api_3f2806",
+            "region": "us-east-1",
+            "protocol": "HTTP",
+            "endpoint": "https://brpe2epz86.execute-api.us-east-1.amazonaws.com"
+          }
+        ],
+        "lambda_function_urls": [],
+        "cloudfront_distributions": [],
+        "total_internet_facing": 1,
+        "unauthenticated_function_urls": [],
+        "cloudfront_without_waf": []
+      }
+    }
+  },
+  "api_calls": {
+    "total": 812,
+    "by_outcome": {
+      "absent": 12,
+      "denied": 16,
+      "ok": 783,
+      "unsupported": 1
+    },
+    "denied": [
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session",
+      "macie2:get_macie_session"
+    ],
+    "errors": []
+  }
+}

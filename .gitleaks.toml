@@ -1,0 +1,27 @@
+# Extends the default gitleaks rules. Nothing is disabled.
+[extend]
+useDefault = true
+
+[allowlist]
+description = """
+AWS's own published example credentials, used as test fixtures.
+
+These appear in the redaction and leak-assertion suites, which exist to prove
+the redactors catch AKIA/ASIA-shaped strings. Testing that detection requires an
+AKIA-shaped string — replacing the fixture with something that does not match
+the pattern would leave the detector untested, which is the opposite of the
+intent.
+
+The allowlist is deliberately the two EXACT documented values, not the test
+paths. Exempting `tests/**` would mean a real credential committed to a test
+file passes both scanners, and test files are exactly where a real credential
+gets committed by accident.
+
+Sources:
+  AKIAIOSFODNN7EXAMPLE  — AWS Signature v4 signing documentation
+  ASIAY34FZKBOKMUTVV7A  — AWS STS temporary credentials documentation
+"""
+regexes = [
+  '''AKIAIOSFODNN7EXAMPLE''',
+  '''ASIAY34FZKBOKMUTVV7A''',
+]
