@@ -157,6 +157,12 @@ jobs:
         uses: gitleaks/gitleaks-action@ff98106e4c7b2bc287b24eaf42907196329070c7 # v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Extends the default rules — nothing is disabled. The allowlist is
+          # two exact AWS-documented example credentials used as fixtures in the
+          # redaction suites, NOT a path exemption: exempting tests/** would let
+          # a real credential through in exactly the files where one is most
+          # likely to be committed by accident. See .gitleaks.toml.
+          GITLEAKS_CONFIG: ${{ github.workspace }}/.gitleaks.toml
 
   iac:
     name: IaC security
