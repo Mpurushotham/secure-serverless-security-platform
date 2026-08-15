@@ -10,7 +10,14 @@ SQL_DIR   := mcp-servers/rds_readonly_mcp/sql
 RO_PASS   ?= harness-only
 export MCP_DB_DSN ?= postgresql://mcp_readonly:$(RO_PASS)@127.0.0.1:$(PG_PORT)/pharmadb
 
-.PHONY: help setup cdk-setup db-up db-down db-reset test mcp-demo evidence scan validate clean all
+DISCOVERY := PYTHONPATH=platform/00-discovery $(PY) -m discovery.run
+SNAPSHOTS := platform/00-discovery/snapshots
+# Which AWS profile `make assess` points at. Override per run:
+#   make assess AWS_PROFILE=some-other-profile
+AWS_PROFILE ?= cap-lab
+
+.PHONY: help setup cdk-setup db-up db-down db-reset test mcp-demo evidence scan \
+        validate clean all assess assess-offline report
 
 help: ## Show this help
 	@grep -hE '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) \
@@ -62,6 +69,17 @@ evidence: ## Regenerate every artifact under evidence/
 	-./scripts/cdk_evidence.sh > evidence/cdk-synth.txt 2>&1
 	$(PY) scripts/suppression_register.py
 	@echo "✔ evidence regenerated"
+
+assess: ## Read-only AWS discovery against a live account (needs credentials)
+	@echo "  profile: $(AWS_PROFILE) — read-only Describe/List/Get only"
+	$(DISCOVERY) --profile $(AWS_PROFILE) --out $(SNAPSHOTS)
+	@echo "✔ assessment complete — platform/00-discovery/report/assessment.md"
+
+assess-offline: ## Re-render the report from the committed snapshot — no AWS, no credentials
+	$(DISCOVERY) --from-snapshot $(SNAPSHOTS)/latest.json
+	@echo "✔ report regenerated from the committed snapshot"
+
+report: assess-offline ## Alias for assess-offline
 
 scan: ## SAST, dependency audit, and secret scanning
 	-$(PY) -m bandit -q -c pyproject.toml -r mcp-servers -f txt -o evidence/bandit.txt

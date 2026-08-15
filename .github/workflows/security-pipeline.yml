@@ -91,8 +91,34 @@ jobs:
           uv venv --python 3.11 .venv
           uv pip install -e ".[dev]"
 
+      - name: Discovery — read-only guard, redaction, rules, report
+        # Runs here rather than in `guardrails` because none of it needs
+        # Postgres, and none of it needs AWS credentials: collectors are driven
+        # against moto and a recording stub, and the report renders from a
+        # committed snapshot.
+        #
+        # The load-bearing test is test_no_collector_attempts_an_operation_the_
+        # guard_would_refuse: it drives every collector and asserts not one of
+        # them reaches for data rather than configuration.
+        run: .venv/bin/python -m pytest platform/00-discovery/tests -q
+
+      - name: Discovery — report must regenerate unchanged from its snapshot
+        # Same contract as the guardrail evidence gate above. A report that has
+        # drifted from the snapshot it claims to render is asserting findings
+        # nothing produced.
+        run: |
+          PYTHONPATH=platform/00-discovery .venv/bin/python -m discovery.run \
+            --from-snapshot platform/00-discovery/snapshots/latest.json
+          if ! git diff --quiet platform/00-discovery/report/assessment.md; then
+            echo "::error::assessment.md is stale — run 'make assess-offline'"
+            git diff platform/00-discovery/report/assessment.md
+            exit 1
+          fi
+
       - name: Bandit (Python SAST)
-        run: .venv/bin/python -m bandit -q -c pyproject.toml -r mcp-servers scripts
+        run: |
+          .venv/bin/python -m bandit -q -c pyproject.toml \
+            -r mcp-servers scripts platform/00-discovery/discovery
 
       - name: pip-audit (known vulnerable dependencies)
         # --skip-editable, and deliberately NOT --strict: this project is

@@ -17,7 +17,7 @@ updated in the same change that makes something real, never after.
 |---|---|
 | `lib/cdk-security/` — shared synth-time Aspects | **Runs** — 8 tests, each proving an Aspect fires |
 | `docs/references.md` — what was studied upstream | **Written** |
-| `00-discovery/` — inventory + live assessment | Not yet built |
+| `00-discovery/` — inventory + live assessment | **Runs against a real AWS Organization** — 21 collectors, 41 rules, 96 tests. See [`00-discovery/report/assessment.md`](00-discovery/report/assessment.md) |
 | `01-organization/` — OUs, SCPs, RCPs, delegated admin | Not yet built |
 | `04-logging/` — org CloudTrail, log archive | Not yet built |
 | `05-detection/` — GuardDuty, Security Hub, Config, Access Analyzer | Not yet built |

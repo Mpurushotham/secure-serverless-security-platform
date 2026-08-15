@@ -46,12 +46,25 @@ builds less.
 | Pre-commit hooks + IDE protections | **Config in repo** | `.pre-commit-config.yaml`, `.vscode/` |
 | Role readiness (JD matrix, day-one plan, drills, metrics, outcomes) | **Written** | `readiness/` |
 | Shared CDK Aspects package — each one proven to *fire*, not just to pass | **Runs, 8 tests** | `cd platform/lib/cdk-security && npx jest` |
-| AWS security platform (`platform/`) — discovery, baseline, golden path, observability | **In progress** | `platform/README.md` has the per-domain status |
+| AWS discovery: 21 read-only collectors, 41 rules, 25-point baseline | **Runs, 96 tests** | `make assess-offline` |
+| **Assessment of a real AWS Organization** — 2 accounts, 14 OUs, 29 findings | **Executed** | `platform/00-discovery/report/assessment.md` |
+| AWS security platform (`platform/`) — baseline IaC, golden path, observability | **In progress** | `platform/README.md` has the per-domain status |
 | Upstream AWS samples: what was studied, taken, and refused | **Written** | `platform/docs/references.md` |
 
-Nothing here has been deployed to a live AWS account. IaC is validated
-**statically** — that is a deliberate choice, not a limitation: it means anyone
-can clone this and verify every claim without credentials or spend.
+**Nothing here has been deployed to a live AWS account, and nothing here writes
+to one.** IaC is validated **statically** — a deliberate choice, not a
+limitation: it means anyone can clone this and verify every claim without
+credentials or spend.
+
+One row is different and is marked accordingly. The discovery tooling was
+**executed read-only** against the author's own AWS Organization, and
+`platform/00-discovery/report/assessment.md` is the output of that run rather
+than an illustration. Three things keep that from weakening the claim above:
+every call is a `Describe`/`List`/`Get` refused at three layers if it is not
+(see `platform/00-discovery/README.md`); the committed snapshot and report are
+pseudonymised, with raw output gitignored; and `make assess-offline` regenerates
+the report from the committed snapshot with no AWS account at all, which is what
+CI runs.
 
 ---
 
