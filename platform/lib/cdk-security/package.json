@@ -13,7 +13,7 @@
     "test": "jest"
   },
   "peerDependencies": {
-    "aws-cdk-lib": "^2.174.0",
+    "aws-cdk-lib": "^2.266.0",
     "constructs": "^10.4.2"
   }
 }

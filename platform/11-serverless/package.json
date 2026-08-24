@@ -12,8 +12,8 @@
   },
   "dependencies": {
     "@ssp/cdk-security": "*",
-    "aws-cdk-lib": "^2.174.0",
-    "cdk-nag": "^2.34.0",
+    "aws-cdk-lib": "^2.266.0",
+    "cdk-nag": "^3.0.2",
     "constructs": "^10.4.2"
   },
   "devDependencies": {
