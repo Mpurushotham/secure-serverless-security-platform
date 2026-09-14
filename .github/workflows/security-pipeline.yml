@@ -189,7 +189,7 @@ jobs:
           done
 
       - name: Checkov — infra
-        uses: bridgecrewio/checkov-action@1246d92f57abae29d5db5f9aeeed2a9813e52d7d # master
+        uses: bridgecrewio/checkov-action@a8664e3a0549367977f0cda990a34311835c87c0 # master
         with:
           directory: infra/
           # cdk.out excluded: cdk-nag is the authority for the CDK app and its
@@ -202,7 +202,7 @@ jobs:
         continue-on-error: true
 
       - name: Checkov — platform
-        uses: bridgecrewio/checkov-action@1246d92f57abae29d5db5f9aeeed2a9813e52d7d # master
+        uses: bridgecrewio/checkov-action@a8664e3a0549367977f0cda990a34311835c87c0 # master
         with:
           directory: platform/
           skip_path: node_modules
